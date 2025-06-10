@@ -1,24 +1,31 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// ========================
+// USER-SIDE PUBLIC ROUTES
+// ========================
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Homepage
+Route::view('/', 'home')->name('home');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+// About Us
+Route::view('/about', 'about')->name('about');
 
-Route::middleware(['auth'])->prefix('admin')->group(function () {
-    Route::view('/', 'admin.dashboard')->name('admin.dashboard');
-});
+// Services
+Route::view('/services', 'services')->name('services');
 
-require __DIR__.'/auth.php';
+// Gallery
+Route::view('/gallery', 'gallery')->name('gallery');
+
+// Our Clients
+Route::view('/clients', 'clients')->name('clients');
+
+// Available Slot
+Route::view('/slots', 'slots')->name('slots');
+
+// Contact Us
+Route::view('/contact', 'contact')->name('contact');
+
+// Book Appointment
+Route::view('/book', 'book')->name('book');

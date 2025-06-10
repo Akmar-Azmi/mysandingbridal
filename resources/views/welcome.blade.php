@@ -1,22 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Welcome to MySanding Bridal</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
-<body class="bg-[#FFFCEB] min-h-screen flex items-center justify-center text-center px-4">
+<?php
 
-    <div class="bg-white p-10 rounded-xl shadow-lg max-w-lg w-full">
-        <h1 class="text-3xl font-bold text-yellow-700 mb-4">Welcome to MySanding Bridal</h1>
-        <p class="text-gray-600 mb-6">We curate elegant and flawless wedding moments just for you.</p>
+use Illuminate\Support\Facades\Route;
 
-        <a href="{{ route('login') }}"
-           class="inline-block bg-yellow-500 hover:bg-yellow-600 text-white font-semibold px-6 py-2 rounded-full">
-            Admin Login
-        </a>
-    </div>
+// ===================
+// USER-SIDE PUBLIC PAGES (No Auth)
+// ===================
 
-</body>
-</html>
+// Home Page
+Route::view('/', 'home')->name('home');
+
+// About Us Page
+Route::view('/about', 'about')->name('about');
+
+// Services Page
+Route::view('/services', 'services')->name('services');
+
+// Gallery Page
+Route::view('/gallery', 'gallery')->name('gallery');
+
+// Our Clients Page
+Route::view('/clients', 'clients')->name('clients');
+
+// Available Slot Page
+Route::view('/slots', 'slots')->name('slots');
+
+// Contact Us Page
+Route::view('/contact', 'contact')->name('contact');
+
+// Book Appointment (optional)
+Route::view('/book', 'book')->name('book');
