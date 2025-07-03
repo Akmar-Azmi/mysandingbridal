@@ -9,14 +9,24 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    // database/migrations/xxxx_xx_xx_create_appointments_table.php
     public function up(): void
     {
         Schema::create('appointments', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id');
             $table->string('title');
-            $table->dateTime('start');
-            $table->dateTime('end')->nullable();
+            $table->string('full_name');
+            $table->integer('age');
+            $table->string('phone');
+            $table->string('email');
+            $table->text('address');
+            $table->string('city');
+            $table->string('postcode');
+            $table->string('state');
+            $table->string('wedding_package');
+            $table->date('date');
+            $table->time('time');
+            $table->timestamp('start_time');
+            $table->timestamp('end_time');
             $table->timestamps();
         });
     }

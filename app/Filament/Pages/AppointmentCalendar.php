@@ -10,6 +10,8 @@ use Saade\FilamentFullCalendar\FullCalendarPlugin;
 class AppointmentCalendarWidget extends FullCalendarWidget
 {
     protected static ?string $heading = 'Appointment Calendar';
+    
+
 
     public function getEvents(): array
     {
