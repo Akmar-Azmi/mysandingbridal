@@ -11,6 +11,9 @@ Route::get('/dashboard', function () {
     return redirect()->route('filament.admin.pages.dashboard');
 })->name('dashboard');
 
+Route::get('/about', function () {
+    return redirect()->route('filament.admin.pages.about');
+})->name('about');
 
 // ========================
 // USER-SIDE PUBLIC ROUTES
