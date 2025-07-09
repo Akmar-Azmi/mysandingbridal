@@ -3,6 +3,12 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AppointmentController;
 
+
+// ========================
+// ADMIN ROUTES
+// ========================
+
+
 Route::get('/book', fn() => view('book'))->name('book');
 Route::post('/book', [AppointmentController::class, 'submit'])->name('appointment.submit');
 
@@ -16,7 +22,7 @@ Route::get('/about', function () {
 })->name('about');
 
 Route::get('/admin/team/form', function () {
-    return view('team.form'); // this is your form page
+    return view('team-form'); // this is your form page
 })->name('team.form');
 
 
