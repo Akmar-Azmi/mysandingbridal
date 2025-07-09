@@ -14,7 +14,7 @@
         </div>
 
         <nav class="space-y-3">
-            <a href="{{ route('admin.dashboard') }}" class="block font-semibold hover:text-white">🏠 Dashboard</a>
+            <a href="{{ route('admin-dashboard') }}" class="block font-semibold hover:text-white">🏠 Dashboard</a>
             <a href="#" class="block hover:text-white">ℹ️ About Us</a>
             <a href="#" class="block hover:text-white">💼 Services</a>
             <a href="#" class="block hover:text-white">🖼️ Gallery</a>

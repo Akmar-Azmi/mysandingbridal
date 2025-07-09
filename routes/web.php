@@ -15,6 +15,11 @@ Route::get('/about', function () {
     return redirect()->route('filament.admin.pages.about');
 })->name('about');
 
+Route::get('/admin/team/form', function () {
+    return view('team.form'); // this is your form page
+})->name('team.form');
+
+
 // ========================
 // USER-SIDE PUBLIC ROUTES
 // ========================
