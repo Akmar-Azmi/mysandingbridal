@@ -92,7 +92,7 @@
 <div>
     <div class="flex justify-between items-center mb-4">
         <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Teams</h3>
-        <a href="/team/update" class="custom-btn inline-flex items-center gap-1">
+        <a href="{{ route('team.form') }}" class="custom-btn inline-flex items-center gap-1">
             Add Team
             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2"
                  viewBox="0 0 24 24">
@@ -119,7 +119,7 @@
                     </svg>
                 </button>
                 {{-- Edit --}}
-                <a href="/team/update" class="custom-btn inline-flex items-center gap-1">
+                <a href="{{ route('team.form') }}" class="custom-btn inline-flex items-center gap-1">
                     Edit
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2"
                          viewBox="0 0 24 24">
@@ -143,7 +143,7 @@
                               d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </button>
-                <a href="/team/update" class="custom-btn inline-flex items-center gap-1">
+                <a href="{{ route('team.form') }}" class="custom-btn inline-flex items-center gap-1">
                     Edit
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2"
                          viewBox="0 0 24 24">
