@@ -9,7 +9,7 @@ class AdminDashboardController extends Controller
 {
     public function index()
     {
-        return view('admin.dashboard'); // Make sure this Blade file exists
+        return view('admin-dashboard'); // Make sure this Blade file exists
     }
 }
 
