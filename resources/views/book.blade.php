@@ -4,42 +4,47 @@
 
 @section('content')
 <div x-data="{ showModal: true, step: 1 }" class="relative">
-    <!-- Booking Modal -->
+    <!-- Popup Modal Overlay -->
     <div x-show="showModal"
-         x-transition
-         class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60"
+         x-transition:enter
+         class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60 backdrop-blur-sm"
          x-cloak>
-        <div class="bg-white w-full max-w-2xl rounded-lg shadow-lg p-8 relative">
+        <!-- Modal Box -->
+        <div class="bg-white w-full max-w-xl rounded-2xl shadow-lg p-8 relative">
             <!-- Header -->
             <div class="mb-6 text-center">
-                <h2 class="text-2xl font-bold text-gray-800">Booking Appointment</h2>
+                <h2 class="text-3xl font-bold text-gray-800">Booking Appointment</h2>
                 <p class="text-sm text-gray-500">Please complete your booking in two simple steps</p>
             </div>
 
-            <!-- Step 1: Date and Time -->
+            <!-- Step 1: Date & Time -->
             <div x-show="step === 1">
                 <label class="block mb-4">
                     <span class="text-gray-700 font-medium">Select Date</span>
                     <input type="date" x-model="selectedDate"
-                        class="mt-1 block w-full rounded border-gray-300 shadow-sm">
+                        class="mt-1 block w-full rounded border-gray-300 shadow-sm px-4 py-2">
                 </label>
 
                 <label class="block mb-6">
                     <span class="text-gray-700 font-medium">Select Time</span>
                     <input type="time" x-model="selectedTime"
-                        class="mt-1 block w-full rounded border-gray-300 shadow-sm">
+                        class="mt-1 block w-full rounded border-gray-300 shadow-sm px-4 py-2">
                 </label>
 
-                <div class="flex justify-between">
-                    <a href="{{ route('home') }}" class="text-sm text-red-500 underline">Cancel</a>
+                <div class="flex justify-end gap-4">
+                    <!-- Cancel beside Next -->
+                    <a href="{{ route('home') }}"
+                       class="bg-[#FFF2D9] text-black font-medium px-6 py-2 rounded-full hover:bg-[#ffe3ad] transition">
+                        Cancel
+                    </a>
                     <button @click="step = 2"
-                        class="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold px-6 py-2 rounded">
+                        class="bg-yellow-400 hover:bg-yellow-500 text-black font-medium px-6 py-2 rounded-full">
                         Next
                     </button>
                 </div>
             </div>
 
-            <!-- Step 2: Details -->
+            <!-- Step 2: User Details -->
             <div x-show="step === 2" x-cloak>
                 <form id="bookingForm">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -62,8 +67,7 @@
                     </div>
 
                     <div class="mt-4">
-                        <select name="package" required
-                            class="w-full border rounded px-4 py-2">
+                        <select name="package" required class="w-full border rounded px-4 py-2">
                             <option disabled selected>Select Wedding Package</option>
                             <option value="Basic">Basic</option>
                             <option value="Premium">Premium</option>
@@ -71,12 +75,14 @@
                         </select>
                     </div>
 
-                    <div class="mt-6 flex justify-between">
-                        <button @click="step = 1"
-                            type="button"
-                            class="text-sm text-yellow-600 underline">Back</button>
+                    <div class="mt-6 flex justify-end gap-4">
+                        <!-- Back and Submit -->
+                        <button @click="step = 1" type="button"
+                            class="bg-[#FFF2D9] text-black font-medium px-6 py-2 rounded-full hover:bg-[#ffe3ad] transition">
+                            Back
+                        </button>
                         <button type="submit"
-                            class="bg-green-500 hover:bg-green-600 text-white font-semibold px-6 py-2 rounded">
+                            class="bg-green-500 hover:bg-green-600 text-white font-semibold px-6 py-2 rounded-full">
                             Submit
                         </button>
                     </div>
@@ -89,20 +95,13 @@
 
 @push('scripts')
 <script>
-    document.addEventListener('alpine:init', () => {
-        Alpine.data('booking', () => ({
-            step: 1,
-            showModal: true,
-            selectedDate: '',
-            selectedTime: '',
-        }));
-    });
-
     document.getElementById('bookingForm')?.addEventListener('submit', function (e) {
         e.preventDefault();
 
-        const formData = new FormData(this);
-        const details = {
+        const form = e.target;
+        const formData = new FormData(form);
+
+        const payload = {
             name: formData.get('name'),
             age: formData.get('age'),
             phone: formData.get('phone'),
@@ -112,20 +111,27 @@
             postcode: formData.get('postcode'),
             state: formData.get('state'),
             package: formData.get('package'),
+            date: document.querySelector('[x-model="selectedDate"]').value,
+            time: document.querySelector('[x-model="selectedTime"]').value,
         };
 
-        const selectedDate = document.querySelector('[x-model="selectedDate"]').value;
-        const selectedTime = document.querySelector('[x-model="selectedTime"]').value;
-
-        const message = `*Booking Appointment Details:*\n\n` +
-            `📅 Date: ${selectedDate}\n🕒 Time: ${selectedTime}\n` +
-            `👤 Name: ${details.name}\n🎂 Age: ${details.age}\n📞 Phone: ${details.phone}\n📧 Email: ${details.email}\n` +
-            `🏡 Address: ${details.address}, ${details.city}, ${details.postcode}, ${details.state}\n` +
-            `💍 Wedding Package: ${details.package}`;
-
-        const encodedMessage = encodeURIComponent(message);
-        const whatsappURL = `https://wa.me/60123456789?text=${encodedMessage}`;
-        window.open(whatsappURL, '_blank');
+        fetch('{{ route('appointment.store') }}', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            body: JSON.stringify(payload),
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert('Success! Appointment saved.');
+            window.open(`https://wa.me/60194248847?text=Hi! I have booked:\n${JSON.stringify(payload, null, 2)}`, '_blank');
+        })
+        .catch(error => {
+            console.error(error);
+            alert('Something went wrong!');
+        });
     });
 </script>
 @endpush

@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Appointment extends Model
 {
-    protected $fillable = ['title', 'start_time', 'end_time'];
+    protected $fillable = [
+    'name', 'age', 'phone', 'email',
+    'address', 'city', 'postcode', 'state',
+    'package', 'date', 'time'
+];
+
 }
 

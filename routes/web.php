@@ -3,18 +3,24 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AppointmentController;
 
+//appointment 
+Route::post('/appointment', [AppointmentController::class, 'store'])->name('appointment.store');
+
+//Booking appointment
 Route::get('/book', fn() => view('book'))->name('book');
 Route::post('/book', [AppointmentController::class, 'submit'])->name('appointment.submit');
 
-
+//dashboard admin
 Route::get('/dashboard', function () {
     return redirect()->route('filament.admin.pages.dashboard');
 })->name('dashboard');
 
+// Admin Profile
 Route::get('/about', function () {
     return redirect()->route('filament.admin.pages.about');
 })->name('about');
 
+//admin team form
 Route::get('/admin/team/form', function () {
     return view('team.form'); // this is your form page
 })->name('team.form');
