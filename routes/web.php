@@ -22,7 +22,7 @@ Route::get('/about', function () {
 
 //admin team form
 Route::get('/admin/team/form', function () {
-    return view('team.form'); // this is your form page
+    return view('team-form'); // this is your form page
 })->name('team.form');
 
 
