@@ -180,7 +180,7 @@
                             `💍 Package: ${this.form.package}\n📅 Date: ${this.form.date}\n🕒 Time: ${this.form.time}\n` +
                             (this.form.notes ? `📝 Notes: ${this.form.notes}\n` : '');
                         const encoded = encodeURIComponent(msg);
-                        window.open(`https://wa.me/60123456789?text=${encoded}`, '_blank');
+                        window.open(`https://wa.me/60194248847?text=${encoded}`, '_blank');
                         alert("Redirecting to WhatsApp. Thank you!");
                         this.step = 1;
                         this.openBooking = false;

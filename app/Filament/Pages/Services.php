@@ -7,10 +7,11 @@ use Filament\Pages\Page;
 class Services extends Page
 {
     protected static ?string $navigationIcon = 'heroicon-o-briefcase';
-
+    protected static ?string $navigationLabel = 'Wedding Services';
+    protected static ?string $navigationGroup = 'Services';
     protected static string $view = 'filament.pages.services';
+    protected static ?int $navigationSort = -3;
 
-    protected static ?int $navigationSort = 3;
 
     // ✅ Add this method to pass $services to Blade
    protected function getViewData(): array
