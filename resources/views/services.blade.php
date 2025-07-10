@@ -4,28 +4,30 @@
 <style>
     .wedding-grid {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(3, 200px); /* fixed size for consistent spacing */
         gap: 25px;
-        max-width: 900px;
-        margin: 0 auto;
-        padding: 50px 20px;
+        justify-content: center;  /* center horizontally */
+        align-items: center;      /* center vertically */
         text-align: center;
+        min-height: 100vh;        /* full screen height */
+        padding: 50px 20px;
+        margin: 0 auto;
     }
 
     .service-text-box {
         background-color: #fddc9a;
-        padding: 30px 15px;
         font-weight: 600;
         font-size: 18px;
         display: flex;
         align-items: center;
         justify-content: center;
-        height: 100%;
+        aspect-ratio: 1 / 1;
+        width: 100%;
     }
 
     .service-img {
         width: 100%;
-        height: 160px;
+        aspect-ratio: 1 / 1;
         object-fit: cover;
     }
 
@@ -34,10 +36,14 @@
         font-weight: bold;
         padding: 40px 0;
         grid-column: 2;
+
+        
     }
 </style>
 
 <div class="container">
+
+    <div style="display:flex; align-items:center; justify-content:center; min-height:100vh;">
 
     {{-- Wedding Services Grid --}}
     <div class="wedding-grid">
