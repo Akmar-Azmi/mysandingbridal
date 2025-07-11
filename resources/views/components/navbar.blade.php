@@ -1,14 +1,4 @@
-<<<<<<< Updated upstream
-
 <header class="bg-white shadow-md sticky top-0 z-50" x-data="{ navOpen: false }">
-
-<header class="bg-white shadow-md sticky top-0 z-50" style="background-color: #ffffff;">
-
-<header class="bg-white shadow-md sticky top-0 z-50" style="background-color: #ffffff;">
-
-=======
-<header class="bg-white shadow-md sticky top-0 z-50" x-data="{ navOpen: false }">
->>>>>>> Stashed changes
     <div class="container mx-auto px-6 py-4 flex items-center justify-between">
         <!-- Logo -->
         <div class="text-2xl font-serif font-extrabold text-[#000000] tracking-wide">
@@ -36,8 +26,8 @@
             <a href="{{ route('services') }}" class="hover:text-[#000000]">Services</a>
             <a href="{{ route('gallery') }}" class="hover:text-[#000000]">Gallery</a>
             <a href="{{ route('clients') }}" class="hover:text-[#000000]">Our Clients</a>
-            <a href="{{ route('slots') }}" class="hover:text-[#000000]">Available Slot</a>
-            <a href="{{ route('contact') }}" class="hover:text-[#000000]">Contact Us</a>
+            <a href="{{ route('slots') }}" class="hover:text-[#050301]">Available Slot</a>
+            <a href="{{ route('contact') }}" class="hover:text-[#050301]">Contact Us</a>
         </nav>
     </div>
 
@@ -48,25 +38,6 @@
          x-transition:leave="transition ease-in duration-150"
          x-transition:leave-start="opacity-100 translate-y-0"
          x-transition:leave-end="opacity-0 -translate-y-2"
-<<<<<<< Updated upstream
-         class="md:hidden px-6 pb-4 bg-white border-t border-gray-200 text-[#5c4430] font-medium">
-        <a href="{{ route('home') }}" class="block py-2 hover:text-[#c8a97e]">Home</a>
-        <a href="{{ route('about') }}" class="block py-2 hover:text-[#c8a97e]">About Us</a>
-        <a href="{{ route('services') }}" class="block py-2 hover:text-[#c8a97e]">Services</a>
-        <a href="{{ route('gallery') }}" class="block py-2 hover:text-[#c8a97e]">Gallery</a>
-        <a href="{{ route('clients') }}" class="block py-2 hover:text-[#c8a97e]">Our Clients</a>
-        <a href="{{ route('slots') }}" class="block py-2 hover:text-[#c8a97e]">Available Slot</a>
-        <a href="{{ route('contact') }}" class="block py-2 hover:text-[#c8a97e]">Contact Us</a>
-
-    <div x-show="navOpen" x-transition class="md:hidden px-6 pb-4 bg-white border-t border-gray-200 text-[#000000] font-medium">
-        <a href="{{ route('home') }}" class="block py-2 transition-all duration-300 hover:text-[#B68C44] hover:underline underline-offset-4">Home</a>
-        <a href="{{ route('about') }}" class="block py-2 transition-all duration-300 hover:text-[#B68C44] hover:underline underline-offset-4">About Us</a>
-        <a href="{{ route('services') }}" class="block py-2 transition-all duration-300 hover:text-[#B68C44] hover:underline underline-offset-4">Services</a>
-        <a href="{{ route('gallery') }}" class="block py-2 transition-all duration-300 hover:text-[#B68C44] hover:underline underline-offset-4">Gallery</a>
-        <a href="{{ route('clients') }}" class="block py-2 transition-all duration-300 hover:text-[#B68C44] hover:underline underline-offset-4">Our Clients</a>
-        <a href="{{ route('slots') }}" class="block py-2 transition-all duration-300 hover:text-[#B68C44] hover:underline underline-offset-4">Available Slot</a>
-        <a href="{{ route('contact') }}" class="block py-2 transition-all duration-300 hover:text-[#B68C44] hover:underline underline-offset-4">Contact Us</a>
-=======
          class="md:hidden px-6 pb-4 bg-white border-t border-gray-200 text-[#000000] font-medium">
         <a href="{{ route('home') }}" class="block py-2 hover:text-[#000000]">Home</a>
         <a href="{{ route('about') }}" class="block py-2 hover:text-[#000000]">About Us</a>
@@ -75,6 +46,5 @@
         <a href="{{ route('clients') }}" class="block py-2 hover:text-[#000000]">Our Clients</a>
         <a href="{{ route('slots') }}" class="block py-2 hover:text-[#000000]">Available Slot</a>
         <a href="{{ route('contact') }}" class="block py-2 hover:text-[#000000]">Contact Us</a>
->>>>>>> Stashed changes
     </div>
 </header>
