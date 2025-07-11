@@ -2,7 +2,7 @@
     <div class="container mx-auto px-6 py-4 flex items-center justify-between">
         <!-- Logo -->
         <div class="text-2xl font-serif font-extrabold text-[#000000] tracking-wide">
-            MYSANDING
+            MY SANDING
         </div>
 
         <!-- Hamburger Button (Mobile) -->
