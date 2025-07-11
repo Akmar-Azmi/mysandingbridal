@@ -1,12 +1,17 @@
+<<<<<<< Updated upstream
 <header class="bg-white shadow-md sticky top-0 z-50" x-data="{ navOpen: false }">
+=======
+<header class="bg-white shadow-md sticky top-0 z-50" style="background-color: #ffffff;">
+>>>>>>> Stashed changes
     <div class="container mx-auto px-6 py-4 flex items-center justify-between">
+
         <!-- Logo -->
-        <div class="text-2xl font-serif font-extrabold text-[#5c4430] tracking-wide">
-            MySanding Bridal
+        <div class="text-2xl font-serif font-extrabold text-[#000000] tracking-wide">
+            MYSANDING
         </div>
 
         <!-- Hamburger Button (Mobile) -->
-        <button @click="navOpen = !navOpen" class="md:hidden text-[#5c4430] focus:outline-none">
+        <button @click="navOpen = !navOpen" class="md:hidden text-[#000000] focus:outline-none transition-transform duration-300 ease-in-out hover:scale-110">
             <svg x-show="!navOpen" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
                 viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -20,18 +25,19 @@
         </button>
 
         <!-- Desktop Nav -->
-        <nav class="hidden md:flex space-x-6 text-sm font-medium text-[#5c4430]">
-            <a href="{{ route('home') }}" class="hover:text-[#c8a97e]">Home</a>
-            <a href="{{ route('about') }}" class="hover:text-[#c8a97e]">About Us</a>
-            <a href="{{ route('services') }}" class="hover:text-[#c8a97e]">Services</a>
-            <a href="{{ route('gallery') }}" class="hover:text-[#c8a97e]">Gallery</a>
-            <a href="{{ route('clients') }}" class="hover:text-[#c8a97e]">Our Clients</a>
-            <a href="{{ route('slots') }}" class="hover:text-[#c8a97e]">Available Slot</a>
-            <a href="{{ route('contact') }}" class="hover:text-[#c8a97e]">Contact Us</a>
+        <nav class="hidden md:flex space-x-6 text-sm font-medium text-[#000000]">
+            <a href="{{ route('home') }}" class="transition-colors duration-300 hover:text-[#B68C44] hover:underline underline-offset-4">Home</a>
+            <a href="{{ route('about') }}" class="transition-colors duration-300 hover:text-[#B68C44] hover:underline underline-offset-4">About Us</a>
+            <a href="{{ route('services') }}" class="transition-colors duration-300 hover:text-[#B68C44] hover:underline underline-offset-4">Services</a>
+            <a href="{{ route('gallery') }}" class="transition-colors duration-300 hover:text-[#B68C44] hover:underline underline-offset-4">Gallery</a>
+            <a href="{{ route('clients') }}" class="transition-colors duration-300 hover:text-[#B68C44] hover:underline underline-offset-4">Our Clients</a>
+            <a href="{{ route('slots') }}" class="transition-colors duration-300 hover:text-[#B68C44] hover:underline underline-offset-4">Available Slot</a>
+            <a href="{{ route('contact') }}" class="transition-colors duration-300 hover:text-[#B68C44] hover:underline underline-offset-4">Contact Us</a>
         </nav>
     </div>
 
     <!-- Mobile Nav -->
+<<<<<<< Updated upstream
     <div x-show="navOpen" x-transition:enter="transition ease-out duration-200"
          x-transition:enter-start="opacity-0 -translate-y-2"
          x-transition:enter-end="opacity-100 translate-y-0"
@@ -46,5 +52,15 @@
         <a href="{{ route('clients') }}" class="block py-2 hover:text-[#c8a97e]">Our Clients</a>
         <a href="{{ route('slots') }}" class="block py-2 hover:text-[#c8a97e]">Available Slot</a>
         <a href="{{ route('contact') }}" class="block py-2 hover:text-[#c8a97e]">Contact Us</a>
+=======
+    <div x-show="navOpen" x-transition class="md:hidden px-6 pb-4 bg-white border-t border-gray-200 text-[#000000] font-medium">
+        <a href="{{ route('home') }}" class="block py-2 transition-all duration-300 hover:text-[#B68C44] hover:underline underline-offset-4">Home</a>
+        <a href="{{ route('about') }}" class="block py-2 transition-all duration-300 hover:text-[#B68C44] hover:underline underline-offset-4">About Us</a>
+        <a href="{{ route('services') }}" class="block py-2 transition-all duration-300 hover:text-[#B68C44] hover:underline underline-offset-4">Services</a>
+        <a href="{{ route('gallery') }}" class="block py-2 transition-all duration-300 hover:text-[#B68C44] hover:underline underline-offset-4">Gallery</a>
+        <a href="{{ route('clients') }}" class="block py-2 transition-all duration-300 hover:text-[#B68C44] hover:underline underline-offset-4">Our Clients</a>
+        <a href="{{ route('slots') }}" class="block py-2 transition-all duration-300 hover:text-[#B68C44] hover:underline underline-offset-4">Available Slot</a>
+        <a href="{{ route('contact') }}" class="block py-2 transition-all duration-300 hover:text-[#B68C44] hover:underline underline-offset-4">Contact Us</a>
+>>>>>>> Stashed changes
     </div>
 </header>
