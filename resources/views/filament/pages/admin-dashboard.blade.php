@@ -1,5 +1,5 @@
 <x-filament::page>
-    <!-- ✨ Fancy Appointment Summary Cards Row -->
+    <!-- ✨ Fancy Appointment Summary Cards -->
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-8">
         <!-- Total Appointments -->
         <div class="bg-gradient-to-br from-[#f6d365] to-[#fda085] rounded-xl shadow-lg p-6 text-black">
