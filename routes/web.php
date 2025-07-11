@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\Admin\WeddingServiceController;
+use App\Http\Controllers\TeamController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,9 @@ Route::get('/about', fn () => redirect()->route('filament.admin.pages.about'))->
 // Admin Team Form
 Route::get('/admin/team/form', fn () => view('team-form'))->name('team.form');
 
+//Appointments
+Route::post('/appointment', [AppointmentController::class, 'store'])->name('appointment.store');
+
 // Admin Wedding Services (CRUD)
 Route::prefix('admin/services')->name('admin.services.')->group(function () {
     Route::get('/wedding-services', [WeddingServiceController::class, 'index'])->name('wedding-services.index');
@@ -31,6 +35,12 @@ Route::prefix('admin/services')->name('admin.services.')->group(function () {
     Route::put('/wedding-services/{id}', [WeddingServiceController::class, 'update'])->name('wedding-services.update');
     Route::delete('/wedding-services/{id}', [WeddingServiceController::class, 'destroy'])->name('wedding-services.destroy');
 });
+
+//Admin/Team
+// Admin/Team routes
+Route::post('/admin/teams', [TeamController::class, 'store'])->name('teams.store');
+Route::put('/admin/teams/{id}', [TeamController::class, 'update'])->name('teams.update');
+Route::delete('/admin/teams/{id}', [TeamController::class, 'destroy'])->name('teams.destroy');
 
 
 /*
