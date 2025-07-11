@@ -69,14 +69,20 @@
 
     {{-- Teams Section --}}
     <section class="bg-[#D8B57F] py-16 text-center">
-        <h2 class="text-3xl font-bold mb-8">Teams</h2>
-        <div class="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-6">
-            @foreach([1, 2, 3] as $i)
-                <div class="rounded-md shadow over-flow-hidden">
-                    <img src="https://placehold.co/300x256?text=Team+Member+{{ $i }}" alt="Team Member {{ $i }}" class="w-full h-64 object-cover rounded-t-md"/>
+    <h2 class="text-3xl font-bold mb-8">Teams</h2>
+
+    <div class="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-6">
+        @foreach($teams as $member)
+            <div class="rounded-md shadow overflow-hidden bg-white">
+                <img src="{{ $member->photo }}" alt="{{ $member->name }}" class="w-full h-64 object-cover">
+
+                <div class="p-4">
+                    <h3 class="text-lg font-semibold">{{ $member->name }}</h3>
+                    <p class="text-gray-500">{{ $member->role }}</p>
                 </div>
-            @endforeach
-        </div>
-    </section>
+            </div>
+        @endforeach
+    </div>
+</section>
 
 @endsection

@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\Admin\WeddingServiceController;
 use App\Http\Controllers\TeamController;
+use App\Http\Controllers\PageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +41,12 @@ Route::prefix('admin/services')->name('admin.services.')->group(function () {
 Route::post('/admin/teams', [TeamController::class, 'store'])->name('teams.store');
 Route::put('/admin/teams/{id}', [TeamController::class, 'update'])->name('teams.update');
 Route::delete('/admin/teams/{id}', [TeamController::class, 'destroy'])->name('teams.destroy');
+Route::get('/admin/teams', function () {$teams = \App\Models\Team::all();return view('admin.teams.index', compact('teams'));})->name('teams.index');
+
+
+
+
+Route::get('/about', [PageController::class, 'about'])->name('about');
 
 
 /*
@@ -62,7 +69,7 @@ Route::post('/book', [AppointmentController::class, 'submit'])->name('appointmen
 */
 
 Route::view('/', 'home')->name('home');
-Route::view('/about', 'about')->name('about');
+
 Route::view('/services', 'services')->name('services');
 Route::view('/gallery', 'gallery')->name('gallery');
 Route::view('/clients', 'clients')->name('clients');

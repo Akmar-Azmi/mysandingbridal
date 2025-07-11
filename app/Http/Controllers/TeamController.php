@@ -58,4 +58,18 @@ class TeamController extends Controller
         $team->delete();
         return redirect()->back()->with('success', 'Team member deleted!');
     }
+
+    public function index()
+    {
+        $teams = Team::all();
+        return view('admin.teams.index', compact('teams'));
+
+    }
+
+    public function about()
+    {
+        $teams = Team::all(); // fetch all team members
+        return view('about', compact('teams')); // pass it to the view
+    }
+
 }

@@ -31,8 +31,10 @@
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
     @stack('scripts')
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
     <script src="{{ asset('js/event-modal.js') }}"></script>
     <script src="{{ asset('js/service-modal.js') }}"></script>
+    
     <!-- AOS Animation Script -->
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
