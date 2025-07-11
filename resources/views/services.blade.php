@@ -2,6 +2,12 @@
 
 @section('content')
 <style>
+    body {
+        scroll-behavior: smooth;
+        background-color: #FFFFFF; /* Bright white */
+        color: #1E1E1E; /* Neutral dark for text */
+    }
+
     .wedding-wrapper {
         min-height: 100vh;
         display: flex;
@@ -24,7 +30,8 @@
     }
 
     .service-text-box {
-        background-color: #fddc9a;
+        background-color: #F7E7EB; /* Soft pastel blush */
+        color: #1E1E1E;
         font-weight: 600;
         font-size: 18px;
         display: flex;
@@ -32,12 +39,15 @@
         justify-content: center;
         aspect-ratio: 1 / 1;
         width: 100%;
+        border: 2px solid #D4E6D2; /* soft greenery outline */
     }
 
     .service-img {
         width: 100%;
         aspect-ratio: 1 / 1;
         object-fit: cover;
+        border: 3px solid #FFFFFF;
+        border-radius: 4px;
     }
 
     .wedding-center-text {
@@ -46,23 +56,27 @@
         padding: 40px 0;
         grid-column: 2;
         font-family: 'Jacques Francois', serif;
+        color: #1E1E1E;
     }
 
     .section-divider {
-        height: 60px;
-        background-color: #e4c392;
-        width: 105%;
+        height: 50px;
+        background-color: #D6AFA3; /* muted pastel divider */
+        width: 100%;
+        margin: 60px 0;
     }
 
     .other-services {
         padding: 60px 20px;
         text-align: center;
+        background-color: #FFFFFF;
     }
 
     .other-services h2 {
         font-size: 30px;
         margin-bottom: 40px;
         font-family: 'Jacques Francois', serif;
+        color: #1E1E1E;
     }
 
     .other-grid {
@@ -77,16 +91,15 @@
         width: 100%;
         object-fit: cover;
         height: 150px;
+        border: 3px solid #D4E6D2; /* green border for floral touch */
+        border-radius: 6px;
     }
 
     .other-item div {
         margin-top: 10px;
         font-weight: 600;
         font-family: 'Jacques Francois', serif;
-    }
-
-    body {
-        scroll-behavior: smooth;
+        color: #1E1E1E;
     }
 </style>
 
@@ -105,7 +118,7 @@
 
 <div class="container">
 
-    {{-- Centered Wedding Services --}}
+    {{-- Wedding Services --}}
     <div class="wedding-wrapper">
         <div class="wedding-grid-container">
             <div class="wedding-grid" data-aos="fade-up">
@@ -124,10 +137,10 @@
         </div>
     </div>
 
-    {{-- Divider between sections --}}
+    {{-- Soft divider --}}
     <div class="section-divider" data-aos="zoom-in"></div>
 
-    {{-- Other Services Section --}}
+    {{-- Other Services --}}
     <div class="other-services" data-aos="fade-up">
         <h2>Other Services</h2>
         <div class="other-grid">
