@@ -11,10 +11,7 @@ class AdminDashboard extends Page
     protected static ?string $navigationIcon = 'heroicon-o-home';
     protected static ?string $navigationLabel = 'Dashboard';
     protected static ?int $navigationSort = 1;
-
-    // ✅ This is the route slug (important!)
     protected static ?string $slug = 'admin-dashboard';
-
-    // ✅ This is the Blade file
     protected static string $view = 'filament.pages.admin-dashboard';
 }
+

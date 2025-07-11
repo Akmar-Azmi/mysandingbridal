@@ -23,6 +23,9 @@ Route::get('/about', fn () => redirect()->route('filament.admin.pages.about'))->
 // Admin Team Form
 Route::get('/admin/team/form', fn () => view('team-form'))->name('team.form');
 
+//Appointments
+Route::post('/appointment', [AppointmentController::class, 'store'])->name('appointment.store');
+
 // Admin Wedding Services (CRUD)
 Route::prefix('admin/services')->name('admin.services.')->group(function () {
     Route::get('/wedding-services', [WeddingServiceController::class, 'index'])->name('wedding-services.index');

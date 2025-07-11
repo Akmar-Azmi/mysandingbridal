@@ -18,7 +18,6 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Saade\FilamentFullCalendar\FilamentFullCalendarPlugin;
-use Saade\FilamentFullCalendar\Widgets\FullCalendarWidget;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -43,8 +42,10 @@ class AdminPanelProvider extends PanelProvider
             ->widgets([
                 Widgets\AccountWidget::class,
                 Widgets\FilamentInfoWidget::class,
-                \App\Filament\Widgets\TotalAppointmentsWidget::class,
-                FullCalendarWidget::class,
+                \App\Filament\Widgets\TodayAppointmentsStat::class,
+                \App\Filament\Widgets\UpcomingAppointmentsStat::class,
+                \App\Filament\Widgets\TotalAppointmentsStat::class,
+                \App\Filament\Widgets\AppointmentCalendarWidget::class,
             ])
             ->plugins([
                 FilamentFullCalendarPlugin::make(),

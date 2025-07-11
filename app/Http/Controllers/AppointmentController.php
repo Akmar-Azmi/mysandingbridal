@@ -2,42 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Appointment;
+use Illuminate\Http\Request;
 
 class AppointmentController extends Controller
 {
-    public function submit(Request $request)
+    public function store(Request $request)
     {
-        $validated = $request->validate([
-            'name' => 'required',
-            'age' => 'required|integer',
-            'phone' => 'required',
-            'email' => 'required|email',
-            'address' => 'required',
-            'city' => 'required',
-            'postcode' => 'required',
-            'state' => 'required',
-            'package' => 'required',
-            'date' => 'required|date',
-            'time' => 'required',
-        ]);
-
+        // Store form data into DB
         Appointment::create([
-            'name' => $validated['name'],
-            'age' => $validated['age'],
-            'phone' => $validated['phone'],
-            'email' => $validated['email'],
-            'address' => $validated['address'],
-            'city' => $validated['city'],
-            'postcode' => $validated['postcode'],
-            'state' => $validated['state'],
-            'package' => $validated['package'],
-            'start_time' => $validated['date'] . ' ' . $validated['time'],
-            'end_time' => $validated['date'] . ' ' . $validated['time'], // can adjust if needed
-            'title' => $validated['name'],
+            'name' => $request->name,
+            'phone' => $request->phone,
+            'email' => $request->email,
+            'event_type' => $request->eventType,
+            'budget' => $request->budget,
+            'appointment_date' => $request->date,
+            'appointment_time' => $request->time,
+            'notes' => $request->notes,
         ]);
 
-        return response()->json(['message' => 'Appointment saved successfully!']);
+        return response()->json(['success' => true]);
     }
 }

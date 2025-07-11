@@ -10,18 +10,14 @@ return new class extends Migration {
         Schema::create('appointments', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('age');
             $table->string('phone');
             $table->string('email');
-            $table->text('address');
-            $table->string('city');
-            $table->string('postcode');
-            $table->string('state');
-            $table->string('package');
-            $table->dateTime('start_time');
-            $table->dateTime('end_time');
-            $table->string('title')->nullable();
-            $table->timestamps();
+            $table->string('event_type');
+            $table->integer('budget');
+            $table->date('appointment_date');
+            $table->time('appointment_time');
+            $table->text('notes')->nullable();
+            $table->timestamps(); // for created_at, updated_at
         });
     }
 
