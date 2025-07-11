@@ -51,16 +51,27 @@
     </section>
 
     {{-- Services --}}
-    <section class="bg-[#f0e5dc] py-16" data-aos="fade-up">
+    <section class="bg-[#fdf6f2] py-16" data-aos="fade-up">
         <h2 class="text-center text-2xl font-semibold mb-8 text-[#000000]">Our Services</h2>
+        @php
+        $services = [
+            ['name' => 'Wedding', 'image' => 'bridal.jpg'],
+            ['name' => 'Catering', 'image' => 'catering.jpg'],
+            ['name' => 'Decoration', 'image' => 'deco.jpg'],
+            ['name' => 'Other event', 'image' => 'entertainment.jpg'],
+        ];
+        @endphp
+
         <div class="container mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 px-6">
-            @foreach(['services1.jpg', 'services2.jpg', 'services3.jpg', 'services4.jpg'] as $img)
+            @foreach ($services as $service)
                 <div class="text-center">
-                    <img src="https://placehold.co/400x192?text=Service+{{ $img }}" class="rounded shadow mb-2 w-full h-48 object-cover" alt="Service {{ $img }}">
-                    <div class="text-xl text-[#5d3c33] font-medium">Service Name</div>
+                    <img src="{{ asset('images/services/' . $service['image']) }}"
+                        class="rounded shadow mb-2 w-full h-48 object-cover"
+                        alt="{{ $service['name'] }}">
+                    <div class="text-xl text-[#5d3c33] font-medium">{{ $service['name'] }}</div>
                 </div>
             @endforeach
-        </div>
+         </div>
     </section>
 
     {{-- Stats --}}
