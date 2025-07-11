@@ -9,33 +9,52 @@
             <p class="text-xs text-[#6c5f5b] leading-relaxed max-w-xs mx-auto md:mx-0">
                 We create unforgettable memories with elegance and love.
             </p>
-            <div class="flex justify-center md:justify-start space-x-4 text-xl text-[#da4a80]">
-                <a href="#"><i class="fa-brands fa-instagram hover:text-[#c5c4cc]"></i></a>
-                <a href="#"><i class="fa-brands fa-tiktok hover:text-[#c5c4cc]"></i></a>
-                <a href="#"><i class="fa-brands fa-facebook hover:text-[#c5c4cc]"></i></a>
+            <div class="flex justify-center md:justify-start space-x-4 text-xl text-[#000000]">
+                <a href="https://www.instagram.com/mysanding_bridal?igsh=MXc1amp2anNrNmxlcg==" target="_blank" aria-label="Instagram">
+                    <i class="fa-brands fa-instagram hover:text-[#c5c4cc]"></i>
+                </a>
+                <a href="https://www.tiktok.com/@mysandingbridal?_t=ZS-8xwZHUPSw5v&_r=1" target="_blank" aria-label="TikTok">
+                    <i class="fa-brands fa-tiktok hover:text-[#c5c4cc]"></i>
+                </a>
+                <a href="https://www.facebook.com/share/19epKZj2Gz/?mibextid=wwXIfr" target="_blank" aria-label="Facebook">
+                    <i class="fa-brands fa-facebook hover:text-[#c5c4cc]"></i>
+                </a>
             </div>
         </div>
 
         <!-- Quick Links -->
         <div>
-            <h4 class="font-semibold text-[#da4a80] mb-3 tracking-wide">Quick Links</h4>
-            <ul class="space-y-2">
-                <li><a href="{{ route('home') }}" class="hover:text-[#c5c4cc]">Home</a></li>
-                <li><a href="{{ route('about') }}" class="hover:text-[#c5c4cc]">About Us</a></li>
-                <li><a href="{{ route('services') }}" class="hover:text-[#c5c4cc]">Services</a></li>
-                <li><a href="{{ route('gallery') }}" class="hover:text-[#c5c4cc]">Gallery</a></li>
-                <li><a href="{{ route('clients') }}" class="hover:text-[#c5c4cc]">Our Clients</a></li>
-                <li><a href="{{ route('contact') }}" class="hover:text-[#c5c4cc]">Contact Us</a></li>
-            </ul>
+            <h4 class="font-semibold text-[#5c4430] mb-3 tracking-wide">Quick Links</h4>
+                        <div class="grid grid-cols-2 gap-x-5">
+                <ul class="space-y-4">
+                    <li><a href="{{ route('home') }}" class="hover:underline">Home</a></li>
+                    <li><a href="{{ route('about') }}" class="hover:underline">About Us</a></li>
+                    <li><a href="{{ route('services') }}" class="hover:underline">Services</a></li>
+                </ul>
+                <ul class="space-y-4">
+                    <li><a href="{{ route('clients') }}" class="hover:underline">Our Clients</a></li>
+                    <li><a href="{{ route('gallery') }}" class="hover:underline">Gallery</a></li>
+                    <li><a href="{{ route('contact') }}" class="hover:underline">Contact Us</a></li>
+                </ul>
+            </div>
         </div>
 
         <!-- Contact Info -->
         <div>
-            <h4 class="font-semibold text-[#da4a80] mb-3 tracking-wide">Contact Us</h4>
-            <ul class="space-y-2 text-[#6c5f5b] text-[15px]">
-                <li><i class="fa-solid fa-phone text-[#da4a80] mr-2"></i> +60 1946445 (Kak Lina)</li>
-                <li><i class="fa-solid fa-envelope text-[#da4a80] mr-2"></i> alyaa.irdina@example.com</li>
-                <li><i class="fa-solid fa-location-dot text-[#da4a80] mr-2"></i> Terengganu, Malaysia</li>
+            <h4 class="font-semibold text-[#5c4430] mb-3 tracking-wide">Contact Us</h4>
+            <ul class="space-y-3 text-gray-700">
+                <li class="flex items-center gap-2">
+                    <i class="fab fa-whatsapp text-green-600"></i>
+                    <a href="https://wa.me/60198446545" target="_blank">+60 19-8446545 (Lina)</a>
+                </li>
+                <li class="flex items-center gap-2">
+                    <i class="fas fa-envelope"></i>
+                    <a href="mailto:info@example.com">linamysanding@gmail.com</a>
+                </li>
+                <li class="flex items-center gap-2">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <a href="https://www.google.com/maps?q=your+company+location" target="_blank">23B Jalan Perdana 6<br>Pusat Perniagaan Slim Perdana<br>Slim River, Perak</a>
+                </li>
             </ul>
         </div>
     </div>
