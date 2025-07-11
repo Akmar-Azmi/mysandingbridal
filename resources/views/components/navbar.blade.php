@@ -1,4 +1,4 @@
-<header class="bg-white shadow-md sticky top-0 z-50">
+<header class="bg-white shadow-md sticky top-0 z-50" x-data="{ navOpen: false }">
     <div class="container mx-auto px-6 py-4 flex items-center justify-between">
         <!-- Logo -->
         <div class="text-2xl font-serif font-extrabold text-[#5c4430] tracking-wide">
@@ -32,7 +32,13 @@
     </div>
 
     <!-- Mobile Nav -->
-    <div x-show="navOpen" x-transition class="md:hidden px-6 pb-4 bg-white border-t border-gray-200 text-[#5c4430] font-medium">
+    <div x-show="navOpen" x-transition:enter="transition ease-out duration-200"
+         x-transition:enter-start="opacity-0 -translate-y-2"
+         x-transition:enter-end="opacity-100 translate-y-0"
+         x-transition:leave="transition ease-in duration-150"
+         x-transition:leave-start="opacity-100 translate-y-0"
+         x-transition:leave-end="opacity-0 -translate-y-2"
+         class="md:hidden px-6 pb-4 bg-white border-t border-gray-200 text-[#5c4430] font-medium">
         <a href="{{ route('home') }}" class="block py-2 hover:text-[#c8a97e]">Home</a>
         <a href="{{ route('about') }}" class="block py-2 hover:text-[#c8a97e]">About Us</a>
         <a href="{{ route('services') }}" class="block py-2 hover:text-[#c8a97e]">Services</a>
