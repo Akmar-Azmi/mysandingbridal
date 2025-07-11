@@ -1,12 +1,10 @@
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
+
 <header class="bg-white shadow-md sticky top-0 z-50" x-data="{ navOpen: false }">
-=======
+
 <header class="bg-white shadow-md sticky top-0 z-50" style="background-color: #ffffff;">
->>>>>>> Stashed changes
-=======
+
 <header class="bg-white shadow-md sticky top-0 z-50" style="background-color: #ffffff;">
->>>>>>> Stashed changes
+
     <div class="container mx-auto px-6 py-4 flex items-center justify-between">
 
         <!-- Logo -->
@@ -41,8 +39,6 @@
     </div>
 
     <!-- Mobile Nav -->
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
     <div x-show="navOpen" x-transition:enter="transition ease-out duration-200"
          x-transition:enter-start="opacity-0 -translate-y-2"
          x-transition:enter-end="opacity-100 translate-y-0"
@@ -57,9 +53,7 @@
         <a href="{{ route('clients') }}" class="block py-2 hover:text-[#c8a97e]">Our Clients</a>
         <a href="{{ route('slots') }}" class="block py-2 hover:text-[#c8a97e]">Available Slot</a>
         <a href="{{ route('contact') }}" class="block py-2 hover:text-[#c8a97e]">Contact Us</a>
-=======
-=======
->>>>>>> Stashed changes
+
     <div x-show="navOpen" x-transition class="md:hidden px-6 pb-4 bg-white border-t border-gray-200 text-[#000000] font-medium">
         <a href="{{ route('home') }}" class="block py-2 transition-all duration-300 hover:text-[#B68C44] hover:underline underline-offset-4">Home</a>
         <a href="{{ route('about') }}" class="block py-2 transition-all duration-300 hover:text-[#B68C44] hover:underline underline-offset-4">About Us</a>
@@ -68,9 +62,5 @@
         <a href="{{ route('clients') }}" class="block py-2 transition-all duration-300 hover:text-[#B68C44] hover:underline underline-offset-4">Our Clients</a>
         <a href="{{ route('slots') }}" class="block py-2 transition-all duration-300 hover:text-[#B68C44] hover:underline underline-offset-4">Available Slot</a>
         <a href="{{ route('contact') }}" class="block py-2 transition-all duration-300 hover:text-[#B68C44] hover:underline underline-offset-4">Contact Us</a>
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
     </div>
 </header>
