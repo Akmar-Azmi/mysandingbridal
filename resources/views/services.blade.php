@@ -121,19 +121,35 @@
     {{-- Wedding Services --}}
     <div class="wedding-wrapper">
         <div class="wedding-grid-container">
-            <div class="wedding-grid" data-aos="fade-up">
-                <div class="service-text-box">Wedding Packages</div>
-                <img src="https://placehold.co/600x600/png" class="service-img" alt="Venue">
-                <div class="service-text-box">Catering Packages</div>
 
+            <div class="wedding-grid" data-aos="fade-up">
+                <div class="service-text-box service-trigger cursor-pointer"
+                    data-title="Wedding Packages"
+                    data-description="Complete wedding packages with decoration, coordination, and photography."
+                    data-img="https://placehold.co/600x600/png">Wedding Packages</div>
+                <img src="https://placehold.co/600x600/png" class="service-img" alt="Venue">
+
+                <div class="service-text-box service-trigger cursor-pointer"
+                    data-title="Catering Packages"
+                    data-description="Buffet & fine dining options tailored for all wedding sizes."
+                    data-img="https://placehold.co/600x600/png">Catering Packages</div>
                 <img src="https://placehold.co/600x600/png" class="service-img" alt="Wedding Couple">
+
                 <div class="wedding-center-text">Wedding Services</div>
                 <img src="https://placehold.co/600x600/png" class="service-img" alt="Catering">
 
-                <div class="service-text-box">Wedding Attire</div>
+                <div class="service-text-box service-trigger cursor-pointer"
+                    data-title="Wedding Attire"
+                    data-description="Modern and traditional bridal outfits available for rental and custom order."
+                    data-img="https://placehold.co/600x600/png">Wedding Attire</div>
                 <img src="https://placehold.co/600x600/png" class="service-img" alt="Emcee">
-                <div class="service-text-box">Emcee & Entertainment</div>
+
+                <div class="service-text-box service-trigger cursor-pointer"
+                    data-title="Emcee & Entertainment"
+                    data-description="Professional emcees, live bands, DJs, and cultural performers for your event."
+                    data-img="https://placehold.co/600x600/png">Emcee & Entertainment</div>
             </div>
+
         </div>
     </div>
     
@@ -165,4 +181,16 @@
     </div>
 
 </div>
+
+<!-- Modal -->
+<div id="service-modal" class="fixed inset-0 bg-black/60 flex items-center justify-center z-50 hidden">
+    <div class="bg-white rounded-lg p-6 max-w-md w-full relative shadow-xl">
+        <button id="service-close" class="absolute top-2 right-2 text-gray-500 hover:text-red-500 text-2xl">&times;</button>
+        <img id="service-modal-image" src="" class="w-full h-48 object-cover rounded mb-4" />
+        <h2 id="service-modal-title" class="text-xl font-bold mb-2"></h2>
+        <p id="service-modal-desc" class="text-gray-700 text-sm leading-relaxed"></p>
+    </div>
+</div>
+
+
 @endsection
