@@ -59,45 +59,42 @@
                 @endforeach
             </div>
 
-<!-- Updated Contact Info - Icons on Top, No Box -->
-<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6 text-center">
-    
-    <!-- Location -->
-    <div class="flex flex-col items-center space-y-2">
-        <div class="bg-[#ffde72] p-4 rounded-full text-orange-500">
-            <i class="fas fa-map-marker-alt text-xl"></i>
+            <!-- Updated Contact Info - Icons on Top, No Box -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6 text-center">
+                <!-- Location -->
+                <div class="flex flex-col items-center space-y-2">
+                    <div class="bg-[#FFEFE6] p-4 rounded-full text-orange-500">
+                        <i class="fas fa-map-marker-alt text-xl"></i>
+                    </div>
+                        <p class="text-sm font-bold text-gray-800">Location</p>
+                        <p class="text-sm text-gray-700 leading-tight">
+                            23B Jalan Perdana 6,<br>
+                            Pusat Perniagaan Slim Perdana,<br>
+                            Slim River, PERAK
+                        </p>
+                </div>
+
+                <!-- Email -->
+                <div class="flex flex-col items-center space-y-2">
+                    <div class="bg-[#FFEFE6] p-4 rounded-full text-orange-500">
+                        <i class="fas fa-envelope text-xl"></i>
+                    </div>
+                        <p class="text-sm font-bold text-gray-800">Email Address</p>
+                        <p class="text-sm text-gray-700">linamysanding@gmail.com</p>
+                </div>
+
+                <!-- Phone -->
+                <div class="flex flex-col items-center space-y-2">
+                    <div class="bg-[#FFEFE6] p-4 rounded-full text-orange-500">
+                        <i class="fas fa-phone-alt text-xl"></i>
+                    </div>
+                        <p class="text-sm font-bold text-gray-800">Phone Number</p>
+                        <p class="text-sm text-gray-700">
+                            +60 17-5771004<br>+60 11-3903 3522
+                    </p>
+                </div>
+            </div>
         </div>
-        <p class="text-sm font-bold text-gray-800">Location</p>
-        <p class="text-sm text-gray-700 leading-tight">
-            23B Jalan Perdana 6,<br>
-            Pusat Perniagaan Slim Perdana,<br>
-            Slim River, PERAK
-        </p>
-    </div>
-
-    <!-- Email -->
-    <div class="flex flex-col items-center space-y-2">
-        <div class="bg-[#FFEFE6] p-4 rounded-full text-orange-500">
-            <i class="fas fa-envelope text-xl"></i>
-        </div>
-        <p class="text-sm font-bold text-gray-800">Email Address</p>
-        <p class="text-sm text-gray-700">linamysanding@gmail.com</p>
-    </div>
-
-    <!-- Phone -->
-    <div class="flex flex-col items-center space-y-2">
-        <div class="bg-[#FFEFE6] p-4 rounded-full text-orange-500">
-            <i class="fas fa-phone-alt text-xl"></i>
-        </div>
-        <p class="text-sm font-bold text-gray-800">Phone Number</p>
-        <p class="text-sm text-gray-700">
-            +60 17-5771004<br>+60 11-3903 3522
-        </p>
-    </div>
-</div>
-
-</div>
-
     </div>
 </div>
 @endsection

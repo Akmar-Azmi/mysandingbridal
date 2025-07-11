@@ -11,8 +11,8 @@
         
         <div class="absolute inset-0 bg-[#da4a80]/40 flex justify-center items-center text-white text-center">
             <div class ="space-y-4 animate-fade-in">
-                <h1 class="text-4xl md:text-5xl font-bold">MySanding Bridal</h1>
-                <p class="text-lg">Curating Elegant Moments, Flawless!</p>
+                <h1 class="text-4xl md:text-5xl font-bold">MY SANDING </h1>
+                <p class="text-lg">Wedding Planner | Deco | Catering</p>
                 <button @click="openBooking = true"
                     class="bg-white text-[#da4a80] font-semibold px-6 py-2 rounded-full border border-[#da4a80] hover:bg-[#da4a80] hover:text-white transition duration-300">                    
                     Book Appointment

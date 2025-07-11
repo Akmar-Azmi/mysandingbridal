@@ -21,13 +21,13 @@
                     <img src="https://placehold.co/200x300" class="w-full h-full object-cover rounded-xl shadow-md" >
                 </div>
                 <div class="swiper-slide !w-auto">
-                    <img src="https://placehold.co/200x350" class="w-full h-full object-cover rounded-xl shadow-md">
+                    <img src="https://placehold.co/200x300" class="w-full h-full object-cover rounded-xl shadow-md">
                 </div>
                 <div class="swiper-slide !w-auto">
-                    <img src="https://placehold.co/200x400" class="w-full h-full object-cover rounded-xl shadow-md">
+                    <img src="https://placehold.co/200x300" class="w-full h-full object-cover rounded-xl shadow-md">
                 </div>
                 <div class="swiper-slide !w-auto">
-                    <img src="https://placehold.co/200x350" class="w-full h-full object-cover rounded-xl shadow-md">
+                    <img src="https://placehold.co/200x300" class="w-full h-full object-cover rounded-xl shadow-md">
                 </div>
                 <div class="swiper-slide !w-auto">
                     <img src="https://placehold.co/200x300" class="w-full h-full object-cover rounded-xl shadow-md">
