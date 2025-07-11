@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AppointmentController;
+use Illuminate\Support\Facades\Redirect;
+
 
 //appointment 
 Route::post('/appointment', [AppointmentController::class, 'store'])->name('appointment.store');
@@ -24,6 +26,10 @@ Route::get('/about', function () {
 Route::get('/admin/team/form', function () {
     return view('team-form'); // this is your form page
 })->name('team.form');
+
+// Redirect /admin to custom calendar dashboard
+Route::redirect('/admin', '/admin/admin-dashboard');
+
 
 
 // ========================

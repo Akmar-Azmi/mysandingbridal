@@ -1,9 +1,11 @@
 <?php
 
+namespace App\Filament\Widgets;
+
 use Saade\FilamentFullCalendar\Widgets\FullCalendarWidget as BaseFullCalendarWidget;
 use App\Models\Appointment;
 
-class MyFullCalendarWidget extends BaseFullCalendarWidget
+class FullCalendarWidget extends BaseFullCalendarWidget
 {
     protected function getEvents(): array
     {
@@ -15,4 +17,3 @@ class MyFullCalendarWidget extends BaseFullCalendarWidget
         ])->toArray();
     }
 }
-
