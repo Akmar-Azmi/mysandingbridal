@@ -12,9 +12,10 @@
 
 <!-- Gallery Grid Section -->
 <div class="bg-[#f9f6f2] py-12 px-6">
-    <div class="max-w-7xl mx-auto">
-        <div class="swiper myGallerySwiper px-6">
-            <div class="swiper-wrapper items-end">
+    <div class="max-w-7xl mx-auto justify-center">
+        <div class="w-full">
+        <div class="grid grid-cols-5 gap-6 max-w-[1200px] mx-auto scale-[0.85] md:scale-[0.9] lg:scale-[0.95] px-2">
+
                 <!-- Example Image Blocks -->
                 <div class="swiper-slide !w-auto">
                     <img src="https://placehold.co/200x300" class="w-full h-full object-cover rounded-xl shadow-md" >

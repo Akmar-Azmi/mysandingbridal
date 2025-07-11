@@ -17,10 +17,27 @@
         <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-start">
             {{-- Images Grid --}}
             <div class="grid grid-cols-2 gap-4">
-                @foreach(['a1.jpg', 'a2.jpg', 'a3.jpg', 'a4.jpg', 'a5.jpg'] as $img)
-                    <img src="{{ asset('images/about/' . $img) }}" alt="About image" class="rounded shadow">
-                @endforeach
-            </div>
+                {{-- Placeholder for large image spanning two rows --}}
+                {{-- Large top image spanning both columns --}}
+                <div class="row-span-2 ">
+                    <img src="https://placehold.co/200x200" alt="About image" class="rounded shadow w-full object-cover" />
+                </div>
+
+                <div class="row-span-1 col-span-1">
+                    <img src="https://placehold.co/300x200" alt="About image" class="rounded shadow w-full object-cover" />
+                </div>
+
+                <div class="start-row-2 start-cols-1 row-span-2 col-span-1">
+                    <img src="https://placehold.co/200x200" alt="About image" class="rounded shadow w-full object-cover" />
+                </div>
+            
+                 <div class="row-span-1 col-span-1">
+                    <img src="https://placehold.co/300x200" alt="About image" class="rounded shadow w-full object-cover" />
+                </div>
+                
+            
+            
+                </div>
 
             {{-- Text Content --}}
             <div class="text-black space-y-6">
@@ -30,9 +47,22 @@
                 </p>
 
                 {{-- Optional CTA Placeholder or Logo --}}
-                <div class="h-10 w-40 bg-gray-300 rounded-full"></div>
+                    <br>
+                    <a href="/services">
+                        <button class="h-10 w-40 bg-gray-300 hover:bg-gray-400 text-black font-semibold rounded-full">
+                            View Our Services
+                        </button>
+                    </a>
+                
 
-                <p class="text-xl text-black mt-6">history mysanding</p>
+                <p class="text-3xl font-bold text-black mt-6">History MySanding</p>
+                <p class="text-gray-700 leading-relaxed">
+                    Established in 2023, MySanding Bridal Services was born out of a passion for creating unforgettable bridal experiences. Our founder, with over a decade of experience in the bridal industry, envisioned a service that combines personalized attention with high-quality offerings.
+                    <br><br>
+                    From our humble beginnings, we have grown into a trusted name in bridal services, known for our attention to detail and commitment to excellence. We believe that every bride deserves a unique and memorable experience, and we strive to make that a reality with each consultation and fitting.
+                </p>    
+
+            
             </div>
         </div>
     </section>
@@ -42,7 +72,9 @@
         <h2 class="text-3xl font-bold mb-8">Teams</h2>
         <div class="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-6">
             @foreach([1, 2, 3] as $i)
-                <div class="bg-[#EDD5A0] h-64 rounded-md shadow"></div>
+                <div class="rounded-md shadow over-flow-hidden">
+                    <img src="https://placehold.co/300x256?text=Team+Member+{{ $i }}" alt="Team Member {{ $i }}" class="w-full h-64 object-cover rounded-t-md"/>
+                </div>
             @endforeach
         </div>
     </section>

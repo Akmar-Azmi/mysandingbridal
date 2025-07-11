@@ -30,7 +30,7 @@
 
         <!-- Image -->
         <div>
-            <img src="https://via.placeholder.com/600x400?text=Client+Image+1" alt="Client Image 1"
+            <img src="https://placehold.co/400x200?text=Client+Image+1" alt="Client Image 1"
                 class="rounded-xl shadow-lg w-full object-cover">
         </div>
     </div>
@@ -39,7 +39,7 @@
     <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-start text-left">
         <!-- Image -->
         <div>
-            <img src="https://via.placeholder.com/600x400?text=Client+Image+2" alt="Client Image 2"
+            <img src="https://placehold.co/400x200?text=Client+Image+2" alt="Client Image 2"
                 class="rounded-xl shadow-lg w-full object-cover">
         </div>
 
