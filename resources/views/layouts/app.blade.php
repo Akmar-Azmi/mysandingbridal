@@ -13,6 +13,19 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
+        <!-- Google Font: Inria Serif -->
+        <link href="https://fonts.googleapis.com/css2?family=Inria+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+        <!-- Custom Font: Bauer Bodoni Condensed (Assuming hosted locally) -->
+        <style>
+        @font-face {
+            font-family: 'Bauer Bodoni Condensed';
+            src: url('{{ asset('fonts/BauerBodoniCondensed.woff2') }}') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+        </style>
+        
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>

@@ -60,35 +60,36 @@
             </div>
 
             <!-- Updated Contact Info - Icons on Top, No Box -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6 text-center">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-4 text-center">
                 <!-- Location -->
                 <div class="flex flex-col items-center space-y-2">
-                    <div class="bg-[#FFEFE6] p-4 rounded-full text-orange-500">
-                        <i class="fas fa-map-marker-alt text-xl"></i>
-                    </div>
-                        <p class="text-sm font-bold text-gray-800">Location</p>
-                        <p class="text-sm text-gray-700 leading-tight">
-                            23B Jalan Perdana 6,<br>
+                    <a href="https://maps.app.goo.gl/Yzbv63efhfx4Tjf16"target="_blank"
+                        class="bg-[#FFF4E0] p-4 rounded-full text-orange-500 shadow-md hover:bg-orange-100 transition duration-300">
+                            <i class="fas fa-map-marker-alt text-2xl"></i>
+                    </a>
+                        <h3 class="text-sm font-bold">Location</h3>
+                          <p class="text-sm text-gray-800">23B Jalan Perdana 6,
                             Pusat Perniagaan Slim Perdana,<br>
-                            Slim River, PERAK
-                        </p>
+                            Slim River, PERAK</p>
                 </div>
 
                 <!-- Email -->
                 <div class="flex flex-col items-center space-y-2">
-                    <div class="bg-[#FFEFE6] p-4 rounded-full text-orange-500">
-                        <i class="fas fa-envelope text-xl"></i>
-                    </div>
-                        <p class="text-sm font-bold text-gray-800">Email Address</p>
+                    <a href="mailto:linamysanding@gmail.com"
+                        class="bg-[#FFF4E0] p-4 rounded-full text-orange-500 shadow-md hover:bg-orange-100 transition duration-300">
+                        <i class="fas fa-envelope text-2xl"></i>    
+                    </a>
+                         <p class="text-base font-bold text-gray-800 mt-1">Email Address</p>
                         <p class="text-sm text-gray-700">linamysanding@gmail.com</p>
                 </div>
 
                 <!-- Phone -->
                 <div class="flex flex-col items-center space-y-2">
-                    <div class="bg-[#FFEFE6] p-4 rounded-full text-orange-500">
-                        <i class="fas fa-phone-alt text-xl"></i>
-                    </div>
-                        <p class="text-sm font-bold text-gray-800">Phone Number</p>
+                    <a href="https://wa.me/60175771004" target="_blank"
+                        class="bg-[#FFF4E0] p-4 rounded-full text-orange-500 shadow-md hover:bg-orange-100 transition duration-300">
+                        <i class="fab fa-whatsapp text-2xl"></i>
+                    </a>
+                        <p class="text-base font-bold text-gray-800">Phone Number</p>
                         <p class="text-sm text-gray-700">
                             +60 17-5771004<br>+60 11-3903 3522
                     </p>

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\Admin\WeddingServiceController;
+use App\Http\Controllers\TeamController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +35,11 @@ Route::prefix('admin/services')->name('admin.services.')->group(function () {
     Route::put('/wedding-services/{id}', [WeddingServiceController::class, 'update'])->name('wedding-services.update');
     Route::delete('/wedding-services/{id}', [WeddingServiceController::class, 'destroy'])->name('wedding-services.destroy');
 });
+
+//Admin/Team
+Route::post('/admin/teams', [TeamController::class, 'store'])->name('teams.store');
+Route::put('/admin/teams/{id}', [TeamController::class, 'update'])->name('teams.update');
+Route::delete('/admin/teams/{id}', [TeamController::class, 'destroy'])->name('teams.destroy');
 
 
 /*
