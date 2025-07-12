@@ -12,6 +12,7 @@ class GalleryPhoto extends Page
     protected static string $view = 'filament.pages.galleryphoto';
 
     protected static ?int $navigationSort = 4;
+    protected static ?string $navigationGroup = 'Gallery';
 
     public $images;
 
@@ -26,9 +27,6 @@ class GalleryPhoto extends Page
             'images' => $this->images,
         ];
     }
-    protected static ?int $navigationSort = 1;
-    protected static ?string $navigationGroup = 'Gallery';
-    protected static ?string $navigationLabel = 'Gallery Photo';
 
 }
 
