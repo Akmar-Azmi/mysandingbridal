@@ -5,13 +5,13 @@
         class="bg-white rounded-xl shadow-2xl w-full max-w-lg mt-10 animate-fade-in">
 
         <!-- Header -->
-        <div class="bg-gradient-to-r from-[#f1e7e5] to-[#eaa1ac] text-[#4d3a4c] py-5 px-6 text-center">
+        <div class="bg-gradient-to-r from-[#f1e7e5] to-[#ebd2b0] text-[#4d3a4c] py-5 px-6 text-center">
             <h2 class="text-xl font-bold tracking-wide">Book Your Wedding Appointment</h2>
             <div class="mt-4 flex justify-center gap-3">
                 <template x-for="i in 4">
                     <div :class="{
-                        'bg-white text-[#da4a80] ring-2 ring-[#da4a80]': step === i,
-                        'bg-[#eaa1ac] text-white': step !== i
+                        'bg-white text-[#80725d] ring-2 ring-[#80725d]': step === i,
+                        'bg-[#80725d] text-white': step !== i
                     }"
                         class="w-8 h-8 rounded-full flex items-center justify-center font-semibold text-sm transition">
                         <span x-text="i"></span>
@@ -25,17 +25,17 @@
             <!-- Step 1: Contact -->
             <div x-show="step === 1">
                 <div class="text-center mb-4">
-                    <div class="text-[#da4a80] text-3xl mb-1">👤</div>
+                    <div class="text-[#80725d] text-3xl mb-1">👤</div>
                     <h3 class="font-semibold text-lg text-[#4d3a4c]">Personal Details</h3>
                     <p class="text-sm text-gray-500">Fill in your contact info</p>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
                     <input type="text" x-model="form.name" placeholder="Full Name *"
-                        class="w-full px-5 py-2.5 rounded-full border border-[#c5c4cc] bg-[#f6f5f0] placeholder-gray-500 text-sm focus:outline-none focus:ring-2 focus:ring-[#da4a80]">
+                        class="w-full px-5 py-2.5 rounded-full border border-[#c5c4cc] bg-[#f6f5f0] placeholder-gray-500 text-sm focus:outline-none focus:ring-2 focus:ring-[#80725d]">
                     <input type="tel" x-model="form.phone" placeholder="Phone Number *"
-                        class="w-full px-5 py-2.5 rounded-full border border-[#c5c4cc] bg-[#f6f5f0] placeholder-gray-500 text-sm focus:outline-none focus:ring-2 focus:ring-[#da4a80]">
+                        class="w-full px-5 py-2.5 rounded-full border border-[#c5c4cc] bg-[#f6f5f0] placeholder-gray-500 text-sm focus:outline-none focus:ring-2 focus:ring-[#80725d]">
                     <input type="email" x-model="form.email" placeholder="Email Address *"
-                        class="w-full mt-2 px-5 py-2.5 rounded-full border border-[#c5c4cc] bg-[#f6f5f0] placeholder-gray-500 text-sm focus:outline-none focus:ring-2 focus:ring-[#da4a80]">
+                        class="w-full mt-2 px-5 py-2.5 rounded-full border border-[#c5c4cc] bg-[#f6f5f0] placeholder-gray-500 text-sm focus:outline-none focus:ring-2 focus:ring-[#80725d]">
                 </div>
             </div>
 
@@ -58,7 +58,7 @@
                 <!-- Event Type Select -->
                 <div class="mb-5">
                     <select x-model="form.eventType"
-                        class="w-full px-4 py-3 rounded-full border border-[#c5c4cc] bg-[#f6f5f0] placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#da4a80] transition">
+                        class="w-full px-4 py-3 rounded-full border border-[#c5c4cc] bg-[#f6f5f0] placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#80725d] transition">
                         <option value="">Select Event Type</option>
                         <option value="Wedding">Wedding</option>
                         <option value="Engagement">Engagement</option>
@@ -73,7 +73,7 @@
                     <label class="text-sm text-[#4d3a4c] font-medium block mb-1">Estimated Budget: RM <span
                             x-text="form.budget"></span></label>
                     <input type="range" min="3000" max="200000" step="100" x-model="form.budget"
-                        class="w-full accent-[#da4a80] rounded-full overflow-hidden appearance-none h-2 bg-[#e9e9ec]">
+                        class="w-full accent-[#80725d] rounded-full overflow-hidden appearance-none h-2 bg-[#e9e9ec]">
                 </div>
             </div>
 
@@ -81,7 +81,7 @@
             <!-- Step 3: Schedule -->
             <div x-show="step === 3">
                 <div class="text-center mb-4">
-                    <div class="text-[#da4a80] text-3xl mb-1">📅</div>
+                    <div class="text-[#80725d] text-3xl mb-1">📅</div>
                     <h3 class="font-semibold text-lg text-[#4d3a4c]">Select Date & Time</h3>
                     <p class="text-sm text-gray-500">Pick your appointment slot</p>
                 </div>
@@ -109,11 +109,11 @@
             <!-- Step 4: Confirmation -->
             <div x-show="step === 4">
                 <div class="text-center mb-4">
-                    <div class="text-[#da4a80] text-3xl mb-1">✅</div>
+                    <div class="text-[#80725d] text-3xl mb-1">✅</div>
                     <h3 class="font-semibold text-lg text-[#4d3a4c]">Confirm Booking</h3>
                     <p class="text-sm text-gray-500">Review your details before sending</p>
                 </div>
-                <div class="bg-[#fef8f8] border border-[#da4a80] rounded-md p-4 text-sm space-y-2">
+                <div class="bg-[#f5f1f0] border border-[#80725d] rounded-md p-4 text-sm space-y-2">
                     <div><strong>Name:</strong> <span x-text="form.name"></span></div>
                     <div><strong>Phone:</strong> <span x-text="form.phone"></span></div>
                     <div><strong>Event:</strong> <span x-text="form.eventType"></span></div>
@@ -140,7 +140,7 @@
                     Back
                 </button>
                 <button x-show="step < 4" @click="validateAndNext"
-                    class="bg-[#da4a80] text-white px-6 py-2 rounded-md hover:bg-[#c8406e] transition ml-auto">
+                    class="bg-[#80725d] text-white px-6 py-2 rounded-md hover:bg-[#bea687] transition ml-auto">
                     Next
                 </button>
                 <button x-show="step === 4" @click="submit"
@@ -155,7 +155,7 @@
 @push('styles')
     <style>
         .modern-field {
-            @apply w-full px-5 py-2.5 rounded-full border border-[#c5c4cc] bg-[#f6f5f0] placeholder-gray-500 text-sm focus:outline-none focus:ring-2 focus:ring-[#da4a80] transition;
+            @apply w-full px-5 py-2.5 rounded-full border border-[#c5c4cc] bg-[#f6f5f0] placeholder-gray-500 text-sm focus:outline-none focus:ring-2 focus:ring-[#80725d] transition;
         }
 
         textarea.modern-field {
@@ -176,7 +176,7 @@
             -webkit-appearance: none;
             height: 16px;
             width: 16px;
-            background-color: #da4a80;
+            background-color: #80725d;
             border-radius: 9999px;
             border: 2px solid white;
             margin-top: -7px;
@@ -193,7 +193,7 @@
         input[type="range"]::-moz-range-thumb {
             height: 16px;
             width: 16px;
-            background-color: #da4a80;
+            background-color: #80725d;
             border-radius: 9999px;
             border: 2px solid white;
             cursor: pointer;

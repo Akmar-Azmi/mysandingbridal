@@ -17,7 +17,7 @@
     }
 
     .calendar-day:hover {
-        background-color: #FFF7EB;
+        background-color: #da9837;
         transform: scale(1.02);
         cursor: pointer;
     }
@@ -34,15 +34,22 @@
     }
 
     .fc-button {
-        background-color: #FCD34D !important;
+        background-color: #80725d !important;
         border: none !important;
-        color: #4B3E2E !important;
+        color: #ffffff !important;
         font-weight: 600;
     }
 
     .fc-button:hover {
-        background-color: #FBBF24 !important;
+        background-color: #bea687 !important;
     }
+
+    .fc-daygrid-day:hover {
+    background-color: #e4d4c0 !important; /* soft blush from hero palette */
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    }
+
 
     .fc {
         font-family: 'Poppins', sans-serif;
@@ -87,7 +94,7 @@
         </div>
 
         <!-- Calendar -->
-        <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-6xl mx-auto transition duration-700 ease-in-out transform fade-in">
+        <div class="bg-gradient-to-l from-[#fffcf3] to-[#fffcf3] p-6 rounded-lg shadow-lg w-full max-w-6xl mx-auto transition duration-700 ease-in-out transform fade-in">
             <div id="calendar"></div>
         </div>
 
