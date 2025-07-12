@@ -6,8 +6,10 @@ use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\Admin\WeddingServiceController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\PublicClientController;
+
 
 
 /*
@@ -67,6 +69,24 @@ Route::get('/clients', [PublicClientController::class, 'index'])->name('clients'
 
 //Admin About (TEAM) 
 Route::get('/about', [PageController::class, 'about'])->name('about');
+
+
+// Admin Gallery (Events)
+// Admin Gallery (Events)
+Route::get('/', [EventController::class, 'index' ])->name('events. index');
+Route::post('/', [EventController::class, 'store'])->name('events.store');
+Route::delete('/{id}', [EventController::class, 'destroy'])->name('events.destroy');
+Route::get('/{id}/edit', [EventController::class, 'edit'])->name('events.edit');
+Route::put('/{id}',[EventController::class, 'update'])->name('events. update');
+
+
+
+Route::prefix('admin/gallery')->group(function () {
+    Route::put('/{id}', [EventController::class, 'update'])->name('events.update');
+});
+
+
+
 
 
 /*

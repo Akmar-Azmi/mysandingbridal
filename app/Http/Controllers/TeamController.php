@@ -39,13 +39,19 @@ class TeamController extends Controller
             $uploadedFile = $request->file('photo');
             $cloudinaryUpload = Cloudinary::upload($uploadedFile->getRealPath())->getSecurePath();
             $data['photo'] = $cloudinaryUpload;
+            // Delete old photo if exists
+            if ($team->photo) {
+                Storage::disk('public')->delete($team->photo);
+            }
+
+    
+        // Store new photo
+            $data['photo'] = $request->file('photo')->store('team_photos', 'public');
         }
 
         $team->update($data);
         return back()->with('success', 'Team updated!');
     }
-
-
     public function destroy($id)
     {
         $team = Team::findOrFail($id);

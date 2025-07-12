@@ -6,12 +6,14 @@ use Filament\Pages\Page;
 use App\Models\Event;
 
 
-class Gallery extends Page
+class PastEvent extends Page
 {
     protected static ?string $navigationIcon = 'heroicon-o-photo';
-    protected static string $view = 'filament.pages.gallery';
+
+    protected static string $view = 'filament.pages.pastevent';
+
     protected static ?int $navigationSort = 4;
-    
+
     protected function getViewData(): array
     {
         return [

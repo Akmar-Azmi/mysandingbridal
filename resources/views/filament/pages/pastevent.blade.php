@@ -39,31 +39,6 @@
 </style>
 
 
-{{-- Gallery Photos --}}
-<h3 class="text-lg font-semibold mb-3 text-gray-900 dark:text-white">Photos</h3>
-<br>
-<div class="flex flex-wrap gap-6">
-    {{-- Static Gallery Items --}}
-    <div class="w-32 h-32 rounded-2xl overflow-hidden">
-        <img src="https://placehold.co/200x200" alt="Gallery" class="w-full h-full object-cover">
-    </div>
-    <div class="w-32 h-32 rounded-2xl overflow-hidden">
-        <img src="https://placehold.co/200x200" alt="Gallery" class="w-full h-full object-cover">
-    </div>
-    <div class="w-32 h-32 rounded-2xl overflow-hidden">
-        <img src="https://placehold.co/200x200" alt="Gallery" class="w-full h-full object-cover">
-    </div>
-
-    {{-- Add Image Button --}}
-    <button class="w-32 h-32 bg-gray-300 rounded-2xl flex items-center justify-center text-4xl text-gray-600 hover:bg-gray-400">
-        +
-    </button>
-</div>
-<br>
-<br>
-<br>
-
-
         {{-- Past Events Section --}}
          <div class="space-y-4">
             <div class="mb-4 flex items-center justify-between">
@@ -99,8 +74,9 @@
                 </form>
             </div>
 
-            <!-- Edit Form -->
-<div id="editForm" class="hidden bg-yellow-50 p-4 rounded-lg">
+
+<!-- Edit Form -->
+<div id="editForm" class="hidden bg-gray-100 p-4 rounded-lg">
     <form id="editEventForm" method="POST" action="" enctype="multipart/form-data" class="space-y-4">
         @csrf
         @method('PUT')
@@ -110,24 +86,32 @@
             <label class="block font-semibold mb-1">Title</label>
             <input type="text" name="title" id="edit-title" class="w-full border rounded px-3 py-2" required>
         </div>
+
         <div>
             <label class="block font-semibold mb-1">Current Image</label>
-            <img id="edit-current-image" src="" class="w-32 h-20 object-cover mb-2 rounded">
+            <img id="edit-current-image" src="#" alt="Current Image" class="mt-2 w-32 h-24 object-cover rounded shadow" />
         </div>
+
         <div>
             <label class="block font-semibold mb-1">Change Image</label>
-            <input type="file" name="image" class="w-full border rounded px-3 py-2">
+            <img id="preview-edit-image" src="#" alt="Preview Image" class="mt-2 w-32 h-24 object-cover rounded shadow hidden" />
+            <input type="file" name="image" id="edit-image" class="w-full border rounded px-3 py-2">
         </div>
+
         <div>
             <label class="block font-semibold mb-1">Description</label>
             <textarea name="description" id="edit-description" rows="4" class="w-full border rounded px-3 py-2" required></textarea>
         </div>
+
         <div class="flex justify-end gap-2">
-            <button onclick="document.getElementById('editForm').classList.add('hidden')" type="button" class="bg-gray-300 px-4 py-2 rounded">Cancel</button>
-            <button type="submit" class="custom-btn bg-yellow-500">Update</button>
+            <button type="button"
+                onclick="document.getElementById('editForm').classList.add('hidden')"
+                class="bg-gray-300 px-4 py-2 rounded">Cancel</button>
+            <button type="submit" class="custom-btn">Update</button>
         </div>
     </form>
 </div>
+
 
 
 <!-- Past Event Table -->
@@ -159,16 +143,18 @@
                     </td>
                     <td class="px-4 py-3 border border-gray-300 text-center">
                         <div class="inline-flex gap-2">
-                            <button
-                                class="custom-btn bg-yellow-500"
-                                onclick="openEditForm({{ $gallery['id'] }}, '{{ addslashes($gallery['title']) }}', '{{ addslashes($gallery['description']) }}', '{{ $imageUrl }}')">
-                                Update
-                            </button>
+                          <button
+                            type="button"
+                            class="custom-btn bg-yellow-500"
+                            onclick="openEditForm({{ $gallery['id'] }}, '{{ addslashes($gallery['title']) }}', '{{ addslashes($gallery['description']) }}', '{{ $imageUrl }}')">
+                            Update
+                        </button>
 
-                            <form method="POST" action="{{ route('events.destroy', $gallery['id']) }}" onsubmit="return confirm('Are you sure?')">
+                                <form method="POST" action="{{ route('events.destroy', $gallery->id) }}">
                                 @csrf
                                 @method('DELETE')
-                                <button class="delete-btn">Delete</button>
+                                <button type="submit" class="delete-btn">Delete</button>
+                    </form>
                             </form>
                         </div>
                     </td>
@@ -180,42 +166,32 @@
 
 
 <script>
-function openEditForm(id, title, description, imageUrl) {
-    document.getElementById('edit-id').value = id;
-    document.getElementById('edit-title').value = title;
-    document.getElementById('edit-description').value = description;
+    function openEditForm(id, title, description, imageUrl) {
+        document.getElementById('edit-id').value = id;
+        document.getElementById('edit-title').value = title;
+        document.getElementById('edit-description').value = description;
+        document.getElementById('edit-current-image').src = imageUrl;
+        document.getElementById('edit-current-image').classList.remove('hidden');
+        document.getElementById('editForm').classList.remove('hidden');
+        document.getElementById('editEventForm').action = `/admin/gallery/${id}`;
+        document.getElementById('preview-edit-image').classList.add('hidden');
+        document.getElementById('edit-image').value = ''; // reset file input
+    }
 
-    const imageSrc = imageUrl.startsWith('http') 
-        ? imageUrl 
-        : `/storage/${imageUrl}`;
-
-    document.getElementById('edit-current-image').src = imageSrc;
-
-    const form = document.getElementById('editEventForm');
-    form.action = `/admin/gallery/event/${id}`;
-
-    document.getElementById('editForm').classList.remove('hidden');
-}
-
-    document.getElementById('add-image').addEventListener('change', function (event) {
-        const preview = document.getElementById('preview-add-image');
+    // Optional preview for changed image
+    document.getElementById('edit-image').addEventListener('change', function (event) {
         const file = event.target.files[0];
-
+        const preview = document.getElementById('preview-edit-image');
         if (file) {
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                preview.src = e.target.result;
-                preview.classList.remove('hidden');
-            };
-            reader.readAsDataURL(file);
+            preview.src = URL.createObjectURL(file);
+            preview.classList.remove('hidden');
+        } else {
+            preview.src = '#';
+            preview.classList.add('hidden');
         }
     });
-
 </script>
-
 </script>
-
-
 
     </div>
 </x-filament-panels::page>
