@@ -17,7 +17,11 @@ class AuthenticatedSessionController extends Controller
     public function create(): View
     {
         return view('auth.login');
+
+        Auth::login($user);
+        $user->update(['last_login_at' => now()]);
     }
+
 
     /**
      * Handle an incoming authentication request.
