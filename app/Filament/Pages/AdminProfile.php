@@ -5,8 +5,11 @@ namespace App\Filament\Pages;
 use Filament\Pages\Page;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use Filament\Forms;
 use Filament\Forms\Components\{TextInput, Section, Placeholder};
+use Filament\Actions\Action;
+use Filament\Notifications\Notification;
 
 class AdminProfile extends Page implements Forms\Contracts\HasForms
 {
@@ -21,6 +24,7 @@ class AdminProfile extends Page implements Forms\Contracts\HasForms
     public $email;
     public $password;
     public $password_confirmation;
+    public $old_password;
 
     public function mount(): void
     {
@@ -48,23 +52,31 @@ class AdminProfile extends Page implements Forms\Contracts\HasForms
 
                     Placeholder::make('created_at')
                         ->label('Account Created')
-                        ->content(fn() => Auth::user()->created_at->format('F j, Y, g:i a')),
+                        ->content(fn () => Auth::user()->created_at->format('F j, Y, g:i a')),
 
                     Placeholder::make('last_login')
                         ->label('Last Login')
-                        ->content(fn() => optional(Auth::user()->last_login_at)?->diffForHumans() ?? 'Never'),
+                        ->content(fn () => optional(Auth::user()->last_login_at)?->diffForHumans() ?? 'Never'),
                 ])
                 ->columns(2),
 
             Section::make('Change Password')
                 ->schema([
+                    TextInput::make('old_password')
+                        ->label('Old Password')
+                        ->password()
+                        ->required()
+                        ->revealable()
+                        ->helperText('Enter your current password to confirm identity.')
+                        ->dehydrated(false),
+
                     TextInput::make('password')
                         ->label('New Password')
                         ->password()
                         ->revealable()
-                        ->helperText('Minimum 6 characters. Leave blank to keep current password.') // ✅ now appears below the label
+                        ->helperText('Minimum 6 characters. Leave blank to keep current password.')
                         ->minLength(6)
-                        ->dehydrated(fn($state) => filled($state))
+                        ->dehydrated(fn ($state) => filled($state))
                         ->required(false),
 
                     TextInput::make('password_confirmation')
@@ -76,7 +88,6 @@ class AdminProfile extends Page implements Forms\Contracts\HasForms
                         ->helperText('Must match the new password'),
                 ])
                 ->columns(2),
-
         ];
     }
 
@@ -84,25 +95,85 @@ class AdminProfile extends Page implements Forms\Contracts\HasForms
     {
         $data = $this->form->getState();
 
+        if (!Hash::check($data['old_password'] ?? '', Auth::user()->password)) {
+            Notification::make()
+                ->title('Old password is incorrect.')
+                ->danger()
+                ->send();
+            return;
+        }
+
         $user = Auth::user();
-        $user->name = $data['name'];
-        $user->email = $data['email'];
+        $isSensitiveChange = false;
+
+        if ($data['email'] !== $user->email) {
+            $user->email = $data['email'];
+            $isSensitiveChange = true;
+        }
 
         if (!empty($data['password'])) {
             $user->password = Hash::make($data['password']);
+            $isSensitiveChange = true;
         }
 
+        $user->name = $data['name'];
         $user->save();
 
-        $this->notify('success', 'Profile updated successfully.');
+        if ($isSensitiveChange) {
+            Auth::logout();
+            session()->invalidate();
+            session()->regenerateToken();
+
+            Session::flash('message', 'You have been logged out due to profile changes. Please log in again.');
+
+            return redirect('/login');
+        }
+
+        Notification::make()
+            ->title('Profile updated successfully.')
+            ->success()
+            ->send();
+    }
+
+    public function deleteAccount()
+    {
+        Auth::user()->delete();
+        Auth::logout();
+        session()->invalidate();
+        session()->regenerateToken();
+
+        return redirect('/');
     }
 
     protected function getFormActions(): array
     {
         return [
-            Forms\Components\Actions\Action::make('save')
+            Action::make('save')
                 ->label('Save Changes')
-                ->submit('submit'),
+                ->submit('submit')
+                ->requiresConfirmation()
+                ->modalHeading('Confirm Changes')
+                ->modalSubheading('Are you sure you want to update your profile information?')
+                ->modalButton('Yes, Save'),
+
+            Action::make('cancel')
+                ->label('Cancel')
+                ->color('gray')
+                ->requiresConfirmation()
+                ->modalHeading('Cancel Changes')
+                ->modalSubheading('Are you sure you want to cancel? Unsaved changes will be lost.')
+                ->modalButton('Yes, Cancel')
+                ->url(route('filament.admin.pages.admin-profile')),
+
+            // ✅ FIXED: comma above!
+            Action::make('delete')
+                ->label('Delete Account')
+                ->color('danger')
+                ->requiresConfirmation()
+                ->modalHeading('Delete Account Permanently')
+                ->modalSubheading('Are you sure? This action is irreversible!')
+                ->modalButton('Yes, Delete')
+                ->action(fn () => $this->deleteAccount()),
         ];
     }
 }
