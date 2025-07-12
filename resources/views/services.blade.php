@@ -24,30 +24,42 @@
 
     .wedding-grid {
         display: grid;
-        grid-template-columns: repeat(3, 200px);
-        gap: 25px;
-        text-align: center;
-    }
-
-    .service-text-box {
-        background-color: #F7E7EB; /* Soft pastel blush */
-        color: #1E1E1E;
-        font-weight: 600;
-        font-size: 18px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        aspect-ratio: 1 / 1;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Bigger columns */
+        gap: 30px;
         width: 100%;
-        border: 2px solid #D4E6D2; /* soft greenery outline */
+        text-align: center;
+        padding: 0 20px;
     }
 
+.service-text-box {
+    background-color: #bea687;
+    color: #1E1E1E;
+    font-weight: 600;
+    font-size: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1 / 1;
+    width: 100%;
+    border: 2px solid #D4E6D2;
+    font-family: 'Jacques Francois', serif;
+    padding: 10px;
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+    /* 👇 Hover Effect */
+    .service-text-box:hover {
+        transform: scale(1.05);
+        background-color: #d8c4a5; /* lighter shade */
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
     .service-img {
         width: 100%;
         aspect-ratio: 1 / 1;
         object-fit: cover;
         border: 3px solid #FFFFFF;
-        border-radius: 4px;
+        border-radius: 8px;
     }
 
     .wedding-center-text {
@@ -69,7 +81,7 @@
     .other-services {
         padding: 60px 20px;
         text-align: center;
-        background-color: #FFFFFF;
+        background-color: #fffcf3;
     }
 
     .other-services h2 {
@@ -123,13 +135,13 @@
         <div class="wedding-grid-container">
 
             <div class="wedding-grid" data-aos="fade-up">
-                <div class="service-text-box service-trigger cursor-pointer"
+                <div class="service-text-box font-jacques service-trigger cursor-pointer"
                     data-title="Wedding Packages"
                     data-description="Complete wedding packages with decoration, coordination, and photography."
                     data-img="https://placehold.co/600x600/png">Wedding Packages</div>
                 <img src="https://placehold.co/600x600/png" class="service-img" alt="Venue">
 
-                <div class="service-text-box service-trigger cursor-pointer"
+                <div class="service-text-box font-jacques service-trigger cursor-pointer"
                     data-title="Catering Packages"
                     data-description="Buffet & fine dining options tailored for all wedding sizes."
                     data-img="https://placehold.co/600x600/png">Catering Packages</div>
@@ -138,13 +150,13 @@
                 <div class="wedding-center-text">Wedding Services</div>
                 <img src="https://placehold.co/600x600/png" class="service-img" alt="Catering">
 
-                <div class="service-text-box service-trigger cursor-pointer"
+                <div class="service-text-box font-jacques service-trigger cursor-pointer"
                     data-title="Wedding Attire"
                     data-description="Modern and traditional bridal outfits available for rental and custom order."
                     data-img="https://placehold.co/600x600/png">Wedding Attire</div>
                 <img src="https://placehold.co/600x600/png" class="service-img" alt="Emcee">
 
-                <div class="service-text-box service-trigger cursor-pointer"
+                <div class="service-text-box font-jacques service-trigger cursor-pointer"
                     data-title="Emcee & Entertainment"
                     data-description="Professional emcees, live bands, DJs, and cultural performers for your event."
                     data-img="https://placehold.co/600x600/png">Emcee & Entertainment</div>
