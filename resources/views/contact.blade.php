@@ -78,11 +78,6 @@
                         <h3 class="text-sm font-bold">Location</h3>
                           <p class="text-sm text-gray-800">{{ $contact->address }}</p>
 
-                        <h3 class="text-base font-jacques font-bold">Location</h3>
-                          <p class="text-[#b98421] mb-1">23B Jalan Perdana 6,
-                            Pusat Perniagaan<br>
-                            Slim Perdana,<br>
-                            Slim River, PERAK</p>
                 </div>
 
                 <!-- Email -->

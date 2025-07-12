@@ -73,6 +73,9 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::post('/contact', [ContactController::class, 'update'])->name('admin.contact.update');
 });
 
+
+
+
 //declare in contact
 Route::get('/admin/contact', Contact::class)->name('filament.admin.pages.contact');
 
