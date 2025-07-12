@@ -78,6 +78,8 @@
                         <h3 class="text-sm font-bold">Location</h3>
                           <p class="text-sm text-gray-800">{{ $contact->address }}</p>
 
+                          <p class="text-sm text-gray-800">{{ $contact->address }}</p>
+
                 </div>
 
                 <!-- Email -->
