@@ -37,12 +37,17 @@ Route::prefix('admin/services')->name('admin.services.')->group(function () {
     Route::delete('/wedding-services/{id}', [WeddingServiceController::class, 'destroy'])->name('wedding-services.destroy');
 });
 
-//Admin/Team
+// Admin/Team routes
 Route::post('/admin/teams', [TeamController::class, 'store'])->name('teams.store');
 Route::put('/admin/teams/{id}', [TeamController::class, 'update'])->name('teams.update');
 Route::delete('/admin/teams/{id}', [TeamController::class, 'destroy'])->name('teams.destroy');
 Route::get('/admin/teams', function () {$teams = \App\Models\Team::all();return view('admin.teams.index', compact('teams'));})->name('teams.index');
 
+//Admin Profile 
+Route::middleware(['auth'])->group(function () {
+    Route::get('/admin/profile', [App\Http\Controllers\AdminProfileController::class, 'edit'])->name('admin.profile');
+    Route::post('/admin/profile', [App\Http\Controllers\AdminProfileController::class, 'update'])->name('admin.profile.update');
+});
 
 
 

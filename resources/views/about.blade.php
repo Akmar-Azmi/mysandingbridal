@@ -74,7 +74,12 @@
     <div class="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-6">
         @foreach($teams as $member)
             <div class="rounded-md shadow overflow-hidden bg-white">
-                <img src="{{ $member->photo }}" alt="{{ $member->name }}" class="w-full h-64 object-cover">
+                @if ($member->photo)
+                    <img src="{{ asset('storage/' . $member->photo) }}" alt="{{ $member->name }}" class="w-full h-64 object-cover">
+                @else
+                    <img src="https://via.placeholder.com/300x300?text=No+Photo" alt="No Image" class="w-full h-64 object-cover">
+                @endif
+
 
                 <div class="p-4">
                     <h3 class="text-lg font-semibold">{{ $member->name }}</h3>

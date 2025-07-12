@@ -16,8 +16,10 @@ class TeamController extends Controller
             'photo' => 'nullable|image|max:2048',
         ]);
 
+        // For store()
         if ($request->hasFile('photo')) {
-            $data['photo'] = $request->file('photo')->store('team_photos', 'public');
+            $path = $request->file('photo')->store('team_photos', 'public');
+            $data['photo'] = $path; // only store the path!
         }
 
         Team::create($data);
@@ -34,14 +36,14 @@ class TeamController extends Controller
             'photo' => 'nullable|image|max:2048',
         ]);
 
+        // For update()
         if ($request->hasFile('photo')) {
-            // Delete old photo if exists
             if ($team->photo) {
                 Storage::disk('public')->delete($team->photo);
             }
 
-            // Store new photo
-            $data['photo'] = $request->file('photo')->store('team_photos', 'public');
+            $path = $request->file('photo')->store('team_photos', 'public');
+            $data['photo'] = $path; // only store the path
         }
 
         $team->update($data);
@@ -52,9 +54,6 @@ class TeamController extends Controller
     public function destroy($id)
     {
         $team = Team::findOrFail($id);
-        if ($team->photo) {
-            Storage::disk('public')->delete($team->photo);
-        }
         $team->delete();
         return redirect()->back()->with('success', 'Team member deleted!');
     }
@@ -63,13 +62,11 @@ class TeamController extends Controller
     {
         $teams = Team::all();
         return view('admin.teams.index', compact('teams'));
-
     }
 
     public function about()
     {
-        $teams = Team::all(); // fetch all team members
-        return view('about', compact('teams')); // pass it to the view
+        $teams = Team::all(); 
+        return view('about', compact('teams')); 
     }
-
 }
