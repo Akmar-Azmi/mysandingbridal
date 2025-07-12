@@ -1,85 +1,177 @@
 <x-filament-panels::page>
-    <div class="px-10 py-8 space-y-6">
+    
+   
 
 
-        {{-- WhatsApp & Email --}}
-        <div class="flex flex-col md:flex-row gap-4">
-            <div class="flex items-center gap-2 w-full md:w-1/2">
-                <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" class="w-6 h-6" alt="WhatsApp">
-                <div class="flex gap-2 w-full">
-                    <select class="border rounded bg-gray-100 px-2 py-1">
-                        <option>+60</option>
-                        <option>+65</option>
-                        <option>+62</option>
-                    </select>
-                    <input type="text" placeholder="12345678" class="flex-1 p-2 border rounded bg-gray-100">
+    <form method="POST" action="{{ route('admin.contact.update') }}">
+        @csrf
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+            <!-- Header -->
+            <div class="mb-8">
+                <p class="text-gray-600">Update your contact details and business information</p> <Br>
+            </div>
+
+            @if(session('success'))
+                <div class="bg-green-100 text-green-800 p-3 rounded mb-6">
+                    {{ session('success') }}
+                </div>
+            @endif
+
+            <!-- Main Content Grid -->
+            <div class="grid grid-cols-1 xl:grid-cols-2 gap-8">
+                <!-- Left Column -->
+                <div class="space-y-6">
+                    <!-- Contact Details Section -->
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                        <h2 class="text-lg font-semibold text-gray-900 mb-6 flex items-center gap-2">
+                            <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M3 8l7.89 7.89a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                            </svg> 
+                            Contact Details <Br>
+                        </h2>
+
+                        <!-- WhatsApp & Email -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                            <!-- WhatsApp -->
+                            <div class="space-y-2">
+                                <label class="block text-sm font-medium text-gray-700">WhatsApp Number</label>
+                                <div class="flex items-center gap-3">
+                                    <div class="flex items-center justify-center w-10 h-10 bg-green-100 rounded-lg flex-shrink-0">
+                                        <svg class="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="..."/>
+                                        </svg>
+                                    </div>
+                                    <div class="flex flex-1 gap-2">
+                                        <select name="whatsapp_code" class="w-20 px-3 py-2.5 border border-gray-300 rounded-lg bg-white text-sm">
+                                            @foreach(['+60', '+65', '+62', '+1', '+44'] as $code)
+                                                <option value="{{ $code }}" @selected(old('whatsapp_code', $contact->whatsapp_code ?? '+60') === $code)>
+                                                    {{ $code }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        <input type="text" name="whatsapp_number"
+                                               value="{{ old('whatsapp_number', $contact->whatsapp_number ?? '') }}"
+                                               placeholder="12345678"
+                                               class="...">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Email -->
+                            <div class="space-y-2">
+                                <label class="block text-sm font-medium text-gray-700">Email Address</label>
+                                <div class="flex items-center gap-3">
+                                    <div class="flex items-center justify-center w-10 h-10 bg-red-100 rounded-lg flex-shrink-0">
+                                        <svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                  d="M3 8l7.89 7.89a2 2 0 002.22 0L21 8..."/>
+                                        </svg>
+                                    </div>
+                                    <input type="email" name="email"
+                                           value="{{ old('email', $contact->email ?? '') }}"
+                                           placeholder="kaklina@gmail.com"
+                                           class="...">
+                                </div>
+                            </div>
+                        </div>
+                        <Br>
+                        <!-- Address -->
+                        <div class="space-y-2">
+                            <label class="block text-sm font-medium text-gray-700">Business Address</label>
+                            <input type="text" name="address"
+                                   value="{{ old('address', $contact->address ?? '') }}"
+                                   placeholder="Share your address"
+                                   class="...">
+                        </div>
+                    </div>
+
+                    <!-- Business Hours Section -->
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                        <h2 class="text-lg font-semibold text-gray-900 mb-6 flex items-center gap-2">
+                            <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                            Opening Hours <Br>
+                        </h2>
+
+                        <div class="space-y-4">
+                            <div class="flex flex-wrap items-center gap-2 sm:gap-3">
+                                <span class="text-sm font-medium text-gray-700 min-w-[60px]">Open:</span>
+
+                                <!-- Start Time -->
+                                <input type="text" name="open_time"
+                                       value="{{ old('open_time', $contact->open_time ?? '08:00 AM') }}"
+                                       placeholder="08:00 AM"
+                                       class="...">
+
+                                <span class="text-gray-400 font-medium">to</span>
+
+                                <!-- End Time -->
+                                <input type="text" name="close_time"
+                                       value="{{ old('close_time', $contact->close_time ?? '06:00 PM') }}"
+                                       placeholder="06:00 PM"
+                                       class="...">
+                            </div>
+
+                            <div class="text-xs text-gray-500 bg-gray-50 p-3 rounded-lg">
+                                <span class="font-medium">Note:</span> These hours will be displayed to your customers
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column -->
+                <div class="space-y-6">
+                    <!-- Location Section -->
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                        <h2 class="text-lg font-semibold text-gray-900 mb-6 flex items-center gap-2">
+                            <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618..."/>
+                            </svg>
+                            Set Location
+                        </h2>
+
+                        <div class="space-y-4">
+                            <div class="w-full">
+                                <div class="relative overflow-hidden rounded-xl border border-gray-200 shadow-sm">
+                                    <div class="aspect-[4/3] bg-gray-100">
+                                        <iframe
+                                            class="..."
+                                            src="{{ old('location_embed', $contact->location_embed ?? 'https://www.google.com/maps?q=4.2105,101.9758&hl=es;z=14&output=embed') }}"
+                                            loading="lazy"
+                                            style="border: 0;"></iframe>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <label class="block text-sm font-medium text-gray-700">Location Embed Link</label>
+                            <textarea name="location_embed"
+                                      rows="2"
+                                      class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm">{{ old('location_embed', $contact->location_embed ?? '') }}</textarea>
+
+                            <div class="text-xs text-gray-500 bg-blue-50 p-3 rounded-lg">
+                                <span class="font-medium">Tip:</span> Use an iframe embed URL from Google Maps
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="flex flex-col sm:flex-row gap-3 sm:justify-end">
+                        <a href="{{ url()->previous() }}"
+                           class="w-full sm:w-auto px-6 py-3 border border-gray-300 text-gray-700 rounded-lg font-medium hover:bg-gray-50 text-center">
+                            Cancel
+                        </a>
+                        <button type="submit"
+                           class="w-full sm:w-auto px-6 py-3 border border-gray-300 text-gray-700 rounded-lg font-medium hover:bg-gray-50 text-center">
+                            Save Changes
+                        </button>
+                    </div>
                 </div>
             </div>
-
-            <div class="flex items-center gap-2 w-full md:w-1/2">
-                <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" class="w-6 h-6" alt="Email">
-                <input type="email" placeholder="kaklina@gmail.com" class="w-full p-2 border rounded bg-gray-100" />
-            </div>
         </div>
-
-        {{-- Address --}}
-        <div>
-            <label class="block font-semibold">Address</label>
-            <input type="text" placeholder="Share your address" class="w-full mt-1 p-2 border rounded bg-gray-100" />
-        </div>
-
-        {{-- Opening Hours --}}
-        <div>
-            <label class="block font-semibold">Opening Hours</label>
-            <div class="flex gap-2 items-center">
-                <!-- Start Time -->
-                <select class="border rounded px-2 py-1 bg-gray-100">
-                    @for ($i = 1; $i <= 12; $i++) <option>{{ $i }}</option> @endfor
-                </select>
-                <select class="border rounded px-2 py-1 bg-gray-100">
-                    @for ($i = 0; $i < 60; $i += 15) <option>{{ sprintf("%02d", $i) }}</option> @endfor
-                </select>
-                <select class="border rounded px-2 py-1 bg-gray-100">
-                    <option>AM</option>
-                    <option>PM</option>
-                </select>
-
-                <span class="px-2">-</span>
-
-                <!-- End Time -->
-                <select class="border rounded px-2 py-1 bg-gray-100">
-                    @for ($i = 1; $i <= 12; $i++) <option>{{ $i }}</option> @endfor
-                </select>
-                <select class="border rounded px-2 py-1 bg-gray-100">
-                    @for ($i = 0; $i < 60; $i += 15) <option>{{ sprintf("%02d", $i) }}</option> @endfor
-                </select>
-                <select class="border rounded px-2 py-1 bg-gray-100">
-                    <option>AM</option>
-                    <option>PM</option>
-                </select>
-            </div>
-        </div>
-
-        {{-- Set Location --}}
-        <div>
-            <label class="block font-semibold mb-2">Set Location</label>
-            <div class="w-40 h-40 border rounded overflow-hidden">
-                <iframe
-                    class="w-full h-full"
-                    src="https://www.google.com/maps?q=4.2105,101.9758&hl=es;z=14&output=embed"
-                    loading="lazy"
-                ></iframe>
-            </div>
-        </div>
-
-        {{-- Edit Button --}}
-        <div class="text-right">
-            <button class="bg-green-600 text-white px-4 py-2 rounded-full text-sm hover:bg-green-700 flex items-center gap-2">
-                Edit <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M15.232 5.232l3.536 3.536M9 13l6-6 3 3-6 6H9v-3z" />
-                </svg>
-            </button>
-        </div>
-    </div>
+    </form>
 </x-filament-panels::page>

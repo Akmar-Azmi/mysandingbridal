@@ -9,7 +9,11 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\PublicClientController;
+use App\Http\Controllers\UserGalleryController;
+use App\Http\Controllers\AdminGalleryController;
 
+use App\Http\Controllers\ContactController;
+USE App\Filament\Pages\Contact;
 
 
 /*
@@ -22,11 +26,12 @@ use App\Http\Controllers\PublicClientController;
 Route::redirect('/admin', '/admin/admin-dashboard');
 
 // Dashboard
-Route::get('/dashboard', fn () => redirect()->route('filament.admin.pages.dashboard'))->name('dashboard');
+Route::get('/dashboard', fn () => redirect()->route('filament.admin.admin.dashboard'))->name('dashboard');
 
 // Admin Profile
-Route::get('/about', fn () => redirect()->route('filament.admin.pages.about'))->name('about');
+Route::get('/about', fn () => redirect()->route('filament.admin.admin.about'))->name('about');
 
+Route::get('/contact', fn () => redirect()->route('filament.admin.contact'))->name('contact');
 // Admin Team Form
 Route::get('/admin/team/form', fn () => view('team-form'))->name('team.form');
 
@@ -62,6 +67,17 @@ Route::get('/admin/clients/{client}/edit', [ClientController::class, 'edit'])->n
 Route::put('/admin/clients/{client}', [ClientController::class, 'update'])->name('clients.update');
 Route::delete('/admin/clients/{client}', [ClientController::class, 'destroy'])->name('clients.destroy');
 
+//admin contact
+Route::prefix('admin')->middleware(['auth'])->group(function () {
+    Route::get('/contact', [ContactController::class, 'edit'])->name('admin.contact.edit');
+    Route::post('/contact', [ContactController::class, 'update'])->name('admin.contact.update');
+});
+
+//declare in contact
+Route::get('/admin/contact', Contact::class)->name('filament.admin.pages.contact');
+
+//admin side contact to user side
+Route::get('/contact', [ContactController::class, 'showUserContact'])->name('contact');
 //client (admin to user side)
 Route::get('/clients', [PublicClientController::class, 'index'])->name('clients');
 
@@ -85,6 +101,14 @@ Route::prefix('admin/gallery')->group(function () {
     Route::put('/{id}', [EventController::class, 'update'])->name('events.update');
 });
 
+// Admin GalleryPhotos
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/galleryphoto', [AdminGalleryController::class, 'index'])->name('gallery.index');
+    Route::post('/galleryphoto', [AdminGalleryController::class, 'store'])->name('gallery.store');
+    Route::delete('/galleryphoto/{gallery}', [AdminGalleryController::class, 'destroy'])->name('gallery.destroy');  
+});
+Route::delete('/admin/gallery-photo/{id}', [AdminGalleryController::class, 'destroy'])->name('admin.gallery.destroy');
+
 
 
 
@@ -104,7 +128,7 @@ Route::post('/book', [AppointmentController::class, 'submit'])->name('appointmen
 
 /*
 |--------------------------------------------------------------------------
-| USER-SIDE PUBLIC PAGES
+| USER-SIDE PUBLIC admin
 |--------------------------------------------------------------------------
 */
 
@@ -114,4 +138,11 @@ Route::view('/services', 'services')->name('services');
 Route::view('/gallery', 'gallery')->name('gallery');
 
 Route::view('/slots', 'slots')->name('slots');
-Route::view('/contact', 'contact')->name('contact');
+Route::get('/contact', [ContactController::class, 'showUserContact'])->name('contact');
+
+// User Gallery
+Route::get('/gallery', [UserGalleryController::class, 'index'])->name('gallery');
+
+
+
+

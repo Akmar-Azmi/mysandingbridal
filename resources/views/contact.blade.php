@@ -22,16 +22,20 @@
             
             <div class="rounded-xl shadow-2xl overflow-hidden">
                 <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3975.796290595752!2d101.395!3d3.908!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31cd99ba11234567%3A0xabcdef1234567890!2sSlim%20River!5e0!3m2!1sen!2smy!4v1688888888888!5m2!1sen!2smy"
+                    src="{{ $contact->location_embed }}"
                     width="100%" height="400" frameborder="0" style="border:0;" allowfullscreen="" loading="lazy"
                     referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>
+    
+        </div>
         </div>
 
 
         <!-- Get in Touch Section (Right Side) -->
         <div class="bg-white shadow-2xl rounded-xl p-6 space-y-6" data-aos="fade-left">
-            <p class="text-xl text-[#000000] font-jacques mb-2">Open Hours: <span class="text-[#b98421] font-medium">10AM - 6PM</span></p>
+            <p class="text-xl text-[#000000] font-jacques mb-2">
+                Open Hours: 
+                <span class="text-[#b98421] font-medium">{{ $contact->open_time }} - {{ $contact->close_time }}</span>
+            </p>
 
             @php
                 use Carbon\Carbon;
@@ -71,6 +75,9 @@
                         class="p-2 border border-[#b98421] bg-[#b98421] rounded-full text-white shadow-md hover:bg-white hover:text-[#b98421] transition duration-300 aspect-square flex items-center justify-center">
                             <i class="fas fa-map-marker-alt text-2xl"></i>
                     </a>
+                        <h3 class="text-sm font-bold">Location</h3>
+                          <p class="text-sm text-gray-800">{{ $contact->address }}</p>
+
                         <h3 class="text-base font-jacques font-bold">Location</h3>
                           <p class="text-[#b98421] mb-1">23B Jalan Perdana 6,
                             Pusat Perniagaan<br>
@@ -85,7 +92,8 @@
                         <i class="fas fa-envelope text-2xl"></i>    
                     </a>
                          <p class="text-base font-jacques font-bold text-gray-800 mt-1">Email Address</p>
-                        <p class="text-[#b98421] mb-1">linamysanding@gmail.com</p>
+                        <p class="text-[#b98421] mb-1">{{ $contact->email }}</p>
+
                 </div>
 
                 <!-- Phone -->
@@ -96,7 +104,11 @@
                     </a>
                         <p class="text-base font-jacques font-bold text-gray-800">Phone Number</p>
                         <p class="text-[#b98421] mb-1">
-                            +60 17-5771004<br>+60 11-3903 3522
+                            <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $contact->whatsapp_number) }}" target="_blank">
+                                {{ $contact->whatsapp_number }}
+                            </a>
+                        </p>
+
                     </p>
                 </div>
             </div>
