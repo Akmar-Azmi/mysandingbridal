@@ -32,7 +32,7 @@ class TeamController extends Controller
         $data = $request->validate([
             'name' => 'required|string',
             'role' => 'required|string',
-            'photo' => 'nullable|file|image|max:2048',    
+            'photo' => 'nullable|string|url|max:2048',    
         ]);
 
         if ($request->hasFile('photo')) {

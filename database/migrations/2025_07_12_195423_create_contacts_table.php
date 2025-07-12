@@ -1,0 +1,34 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('contacts', function (Blueprint $table) {
+            $table->id();
+            $table->string('whatsapp_code')->nullable();
+            $table->string('whatsapp_number')->nullable();
+            $table->string('email')->nullable();
+            $table->text('address')->nullable();
+            $table->string('open_time')->nullable(); // e.g., "08:00 AM"
+            $table->string('close_time')->nullable(); // e.g., "06:00 PM"
+            $table->string('location_embed')->nullable(); // iframe embed URL
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('contacts');
+    }
+};
