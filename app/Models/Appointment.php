@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Appointment extends Model
 {
     protected $table = 'appointments'; 
+     protected $connection = 'pgsql';
     protected $fillable = [
         'name',
         'phone',

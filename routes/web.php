@@ -13,7 +13,11 @@ use App\Http\Controllers\UserGalleryController;
 use App\Http\Controllers\AdminGalleryController;
 
 use App\Http\Controllers\ContactController;
-USE App\Filament\Pages\Contact;
+use App\Filament\Pages\Contact;
+
+
+
+
 
 
 /*
@@ -27,10 +31,13 @@ Route::redirect('/admin', '/admin/admin-dashboard');
 
 // Dashboard
 Route::get('/dashboard', fn () => redirect()->route('filament.admin.admin.dashboard'))->name('dashboard');
+Route::get('/dashboard', fn () => redirect()->route('filament.admin.admin.dashboard'))->name('dashboard');
 
 // Admin Profile
 Route::get('/about', fn () => redirect()->route('filament.admin.admin.about'))->name('about');
+Route::get('/about', fn () => redirect()->route('filament.admin.admin.about'))->name('about');
 
+Route::get('/contact', fn () => redirect()->route('filament.admin.contact'))->name('contact');
 Route::get('/contact', fn () => redirect()->route('filament.admin.contact'))->name('contact');
 // Admin Team Form
 Route::get('/admin/team/form', fn () => view('team-form'))->name('team.form');
@@ -88,6 +95,32 @@ Route::get('/clients', [PublicClientController::class, 'index'])->name('clients'
 
 //Admin About (TEAM) 
 Route::get('/about', [PageController::class, 'about'])->name('about');
+
+
+// Admin Gallery (Events)
+// Admin Gallery (Events)
+Route::get('/', [EventController::class, 'index' ])->name('events. index');
+Route::post('/', [EventController::class, 'store'])->name('events.store');
+Route::delete('/{id}', [EventController::class, 'destroy'])->name('events.destroy');
+Route::get('/{id}/edit', [EventController::class, 'edit'])->name('events.edit');
+Route::put('/{id}',[EventController::class, 'update'])->name('events. update');
+
+
+
+Route::prefix('admin/gallery')->group(function () {
+    Route::put('/{id}', [EventController::class, 'update'])->name('events.update');
+});
+
+// Admin GalleryPhotos
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/galleryphoto', [AdminGalleryController::class, 'index'])->name('gallery.index');
+    Route::post('/galleryphoto', [AdminGalleryController::class, 'store'])->name('gallery.store');
+    Route::delete('/galleryphoto/{gallery}', [AdminGalleryController::class, 'destroy'])->name('gallery.destroy');  
+});
+Route::delete('/admin/gallery-photo/{id}', [AdminGalleryController::class, 'destroy'])->name('admin.gallery.destroy');
+
+
+
 
 
 // Admin Gallery (Events)

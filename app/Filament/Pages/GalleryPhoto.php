@@ -14,6 +14,7 @@ class GalleryPhoto extends Page
     protected static ?string $navigationGroup = 'Gallery';
 
     protected static ?int $navigationSort = 4;
+    protected static ?string $navigationGroup = 'Gallery';
 
     public $images;
 
@@ -28,7 +29,6 @@ class GalleryPhoto extends Page
             'images' => $this->images,
         ];
     }
-
 
 }
 
