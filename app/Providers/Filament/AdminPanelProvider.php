@@ -47,9 +47,8 @@ class AdminPanelProvider extends PanelProvider
                 \App\Filament\Widgets\TotalAppointmentsStat::class,
                 \App\Filament\Widgets\AppointmentCalendarWidget::class,
             ])
-            ->plugins([
-                FilamentFullCalendarPlugin::make(),
-            ])
+            ->plugins([FilamentFullCalendarPlugin::make()])
+            
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
