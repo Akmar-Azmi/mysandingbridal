@@ -4,16 +4,16 @@
 
 @section('content')
 
-{{-- Hero Banner --}}
-<section class="bg-[#D8B57F] py-16 text-center">
-    <h1 class="text-4xl font-bold text-black mb-2 font-header">Contact Us</h1>
-    <p class="text-lg italic text-black/80">
+    {{-- Hero Banner --}}
+    <section class="bg-gradient-to-l from-[#f6f5f0] to-[#f1e7e5] text-center py-10" data-aos="fade-up">
+        <h1 class="text-4xl font-jacques font-semibold text-black mb-2">Contact Us</h1>
+        <p class="text-lg italic text-black/80">
         We'd love to hear from you and help make your dream wedding a reality! <br>
         Feel free to reach out to us through any of the options below.
     </p>
 </section>
 
-<div class="py-12 px-4 sm:px-6 lg:px-8 bg-[#FFFBF0]">
+<div class="py-12 px-4 sm:px-6 lg:px-8 bg-[#ffffff]">
     <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12">
 
         <!-- Map Section (Left Side) -->

@@ -1,6 +1,14 @@
 @extends('layouts.base')
 
 @section('content')
+
+    {{-- Hero Banner --}}
+    <section class="bg-gradient-to-l from-[#f6f5f0] to-[#f1e7e5] text-center py-12" data-aos="fade-up">
+        <h1 class="text-4xl font-jacques font-semibold text-black mb-2">Available Slot</h1>
+        <p class="text-lg italic text-black/80">
+        Planning your big day? Use this page to check if your preferred wedding date is available!</p>
+    </section>
+
 <style>
     .calendar-day {
         aspect-ratio: 1 / 1;
@@ -63,20 +71,16 @@
 </style>
 
 <!-- Page Wrapper -->
-<div class="bg-[#FFFAF0] py-10">
+<div class="bg-[#ffffff] py-10">
     <div class="max-w-6xl mx-auto px-4 fade-in">
 
         <!-- Page Header & Description -->
-        <div class="md:flex md:items-start md:justify-between mb-8">
+        <div class="md:flex md:items-start md:justify-between mb-8 text-left">
             <div class="md:w-1/2">
-                <h2 class="font-bold text-2xl md:text-4xl text-[#1f150e] tracking-wide leading-snug"
-                    style="font-family: 'Inria Serif', serif; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.15);">
+                <h2 class="text-3xl font-jacques font-normal text-black mb-2">
                     Check Wedding Date Availability
                 </h2>
-                <p class="text-sm text-gray-600 mt-2" style="font-family: 'Inika', serif;">
-                    Planning your big day? Use this page to check if your preferred wedding date is available!
-                </p>
-                <p class="text-sm text-gray-600" style="font-family: 'Inika', serif;">
+                <p class="text-lg italic text-black/80">
                     Before booking an appointment, check if your desired wedding date is still available.
                 </p>
             </div>
