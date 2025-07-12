@@ -11,6 +11,11 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\PublicClientController;
 use App\Http\Controllers\UserGalleryController;
 use App\Http\Controllers\AdminGalleryController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminProfileController;
+use App\Http\Controllers\AdminDashboardController;
+use App\Http\Controllers\AdminContactController;
+use App\Http\Controllers\AdminAboutController;
 
 use App\Http\Controllers\ContactController;
 use App\Filament\Pages\Contact;
@@ -64,6 +69,7 @@ Route::get('/admin/teams', function () {$teams = \App\Models\Team::all();return 
 Route::middleware(['auth'])->group(function () {
     Route::get('/admin/profile', [App\Http\Controllers\AdminProfileController::class, 'edit'])->name('admin.profile');
     Route::post('/admin/profile', [App\Http\Controllers\AdminProfileController::class, 'update'])->name('admin.profile.update');
+    Route::post('/admin/profile/password', [App\Http\Controllers\AdminProfileController::class, 'updatePassword'])->name('admin.profile.password.update');
 });
 
 
