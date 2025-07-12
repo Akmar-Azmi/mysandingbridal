@@ -4,52 +4,47 @@ namespace App\Http\Controllers;
 
 use App\Models\Team;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class TeamController extends Controller
 {
     public function store(Request $request)
-    {
+    {   
+        // Validate the request data
         $data = $request->validate([
             'name' => 'required|string|max:255',
             'role' => 'required|string|max:255',
-            'photo' => 'nullable|image|max:2048',
+            'photo' => 'nullable|string|url|max:2048', // ✅ Expect a Cloudinary URL
         ]);
-
-        // For store()
+        
         if ($request->hasFile('photo')) {
-            $path = $request->file('photo')->store('team_photos', 'public');
-            $data['photo'] = $path; // only store the path!
-        }
-
-        Team::create($data);
+        $uploadedFile = $request->file('photo');
+        $cloudinaryUpload = Cloudinary::upload($uploadedFile->getRealPath())->getSecurePath();
+        $data['photo'] = $cloudinaryUpload; // store Cloudinary image URL
+    }
+        \App\Models\Team::create($data);
         return redirect()->back()->with('success', 'Team member added!');
     }
 
     public function update(Request $request, $id)
     {
         $team = Team::findOrFail($id);
-
         $data = $request->validate([
-            'name' => 'required|string|max:255',
-            'role' => 'required|string|max:255',
-            'photo' => 'nullable|image|max:2048',
+            'name' => 'required|string',
+            'role' => 'required|string',
+            'photo' => 'nullable|file|image|max:2048',    
         ]);
 
-        // For update()
         if ($request->hasFile('photo')) {
-            if ($team->photo) {
-                Storage::disk('public')->delete($team->photo);
-            }
-
-            $path = $request->file('photo')->store('team_photos', 'public');
-            $data['photo'] = $path; // only store the path
+            $uploadedFile = $request->file('photo');
+            $cloudinaryUpload = Cloudinary::upload($uploadedFile->getRealPath())->getSecurePath();
+            $data['photo'] = $cloudinaryUpload;
         }
 
         $team->update($data);
-
-        return redirect()->back()->with('success', 'Team member updated!');
+        return back()->with('success', 'Team updated!');
     }
+
 
     public function destroy($id)
     {
@@ -66,7 +61,7 @@ class TeamController extends Controller
 
     public function about()
     {
-        $teams = Team::all(); 
-        return view('about', compact('teams')); 
+        $teams = Team::all();
+        return view('about', compact('teams'));
     }
 }

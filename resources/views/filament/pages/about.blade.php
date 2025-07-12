@@ -1,4 +1,8 @@
+@php use Illuminate\Support\Facades\Storage; @endphp
+
 <x-filament-panels::page>
+    
+
     <div class="px-6 py-6 space-y-10"  x-data="{ showModal: false, isEdit: false, teamId: null, teamName: '', teamRole: '' }">
 
 
@@ -106,11 +110,22 @@
         @foreach(\App\Models\Team::all() as $member)
             <div class="bg-white p-4 rounded-lg shadow text-center">
                 <div class="flex justify-center mb-2">
+                @php
+                    $photoUrl = 'https://placehold.co/200x200?text=No+Image';
+
+                    if (!empty($member->photo)) {
+                        $photoUrl = filter_var($member->photo, FILTER_VALIDATE_URL)
+                            ? $member->photo
+                            : Storage::disk('s3')->url($member->photo);
+                    }
+                @endphp
+
                 <img
-                    src="{{ $member->photo ? asset('storage/' . $member->photo) : 'https://placehold.co/50x50?text=No+Image' }}"
+                    src="{{ $member->photo? $photoUrl : 'https://placehold.co/200x200?text=No+Image' }}"
                     alt="{{ $member->name }}"
                     class="team-photo w-full object-cover rounded-t-md"
                 />
+
                 </div>
                 <h4 class="font-bold text-lg">{{ $member->name }}</h4>
                 <p class="text-sm text-gray-500">{{ $member->role }}</p>
@@ -129,7 +144,7 @@
                             teamId = {{ $member->id }};
                             teamName = '{{ $member->name }}';
                             teamRole = '{{ $member->role }}';
-                            photoUrl = '{{ $member->photo ? asset('storage/' . $member->photo) : '' }}';
+                            photoUrl = '{{ filter_var($member->photo, FILTER_VALIDATE_URL) ? $member->photo : ($member->photo ? Storage::disk('s3')->url($member->photo) : '') }}';
                         "
                         class="custom-btn">
                         Edit
@@ -146,17 +161,20 @@
 
         <!-- Form -->
         <form
+            id="addTeamForm"
             :action="isEdit ? '{{ url('/admin/teams') }}/' + teamId : '{{ route('teams.store') }}'"
             method="POST"
             enctype="multipart/form-data"
         >
             @csrf
+            <input type="hidden" name="photo" :value="photoUrl">
+
             <template x-if="isEdit">
                 <input type="hidden" name="_method" value="PUT">
             </template>
 
             <!-- Hidden file input -->
-            <input type="file" name="photo" id="photoInput" class="hidden"
+            <input type="file" id="photoInput" class="hidden"
                 x-ref="photoInput"
                 @change="photoUrl = URL.createObjectURL($event.target.files[0])"
             />
@@ -164,18 +182,16 @@
             <!-- Image Preview -->
             <div class="relative flex justify-center mb-6">
                 <div class="w-full max-w-xs mx-auto">
-<img id="previewImage"
-     :src="photoUrl || 'https://placehold.co/200x200?text=Upload+Image'"
-     alt="Preview"
-     class="rounded-xl shadow-md border object-cover"
-/>
+                    <img id="previewImage"
+                        :src="photoUrl || 'https://placehold.co/200x200?text=Upload+Image'"
+                        alt="Preview"
+                        class="rounded-xl shadow-md border object-cover"/>
                 </div>
 
                 <button type="button"
                     @click.prevent="$refs.photoInput.click()"
                     class="absolute left-1/2 -translate-x-1/2 bottom-0 w-10 h-10 custom-btn border-4 border-white rounded-full flex items-center justify-center shadow-lg"
-                    title="Upload Image"
-                >
+                    title="Upload Image">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" fill="none"
                         viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -208,61 +224,124 @@
 
 <!-- JS Resize Script -->
 <script>
-function resizeImage(file, maxWidth, callback) {
-    const reader = new FileReader();
-    reader.onload = function (event) {
-        const img = new Image();
-        img.onload = function () {
-            const canvas = document.createElement('canvas');
-            const scale = maxWidth / img.width;
-            canvas.width = maxWidth;
-            canvas.height = img.height * scale;
-            const ctx = canvas.getContext('2d');
-            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-            canvas.toBlob(callback, 'image/jpeg', 0.9);
+    function resizeImage(file, maxWidth, callback) {
+        const reader = new FileReader();
+        reader.onload = function (event) {
+            const img = new Image();
+            img.onload = function () {
+                const canvas = document.createElement('canvas');
+                const scale = maxWidth / img.width;
+                canvas.width = maxWidth;
+                canvas.height = img.height * scale;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                canvas.toBlob(callback, 'image/jpeg', 0.9);
+            };
+            img.src = event.target.result;
         };
-        img.src = event.target.result;
-    };
-    reader.readAsDataURL(file);
-}
-
-document.addEventListener('DOMContentLoaded', function () {
-    const images = document.querySelectorAll('.team-photo');
-
-    images.forEach(img => {
-        const width = 200; // Ambil current width
-        img.style.height = width + 'px'; // Set height ikut width → square
-        img.style.objectFit = 'cover'; // Crop gambar supaya tak herot
-    });
-
-    // OPTIONAL: Responsive resize bila window resize
-    window.addEventListener('resize', () => {
-        images.forEach(img => {
-            const width = 150;
-            img.style.height = width + 'px';
-        });
-    });
-
-        const preview = document.getElementById('previewImage');
-    if (preview) {
-        preview.style.width = '180px';         // ✅ ubah ikut cita rasa
-        preview.style.height = '180px';        // ✅ square
-        preview.style.objectFit = 'cover';     // ✅ crop gambar cantik
-        preview.style.borderRadius = '12px';   // ✅ rounded
-        preview.style.display = 'block';
-        preview.style.margin = '0 auto';
+        reader.readAsDataURL(file);
     }
 
-    // Bila upload baru, pastikan saiz tetap juga
-    document.getElementById('photoInput')?.addEventListener('change', () => {
-        if (preview) {
-            preview.style.width = '180px';
-            preview.style.height = '180px';
-        }
-    });
+    document.addEventListener('DOMContentLoaded', function () {
+        const images = document.querySelectorAll('.team-photo');
 
-});
+        images.forEach(img => {
+            const width = 200; // Ambil current width
+            img.style.height = width + 'px'; // Set height ikut width → square
+            img.style.objectFit = 'cover'; // Crop gambar supaya tak herot
+        });
+
+        // OPTIONAL: Responsive resize bila window resize
+        window.addEventListener('resize', () => {
+            images.forEach(img => {
+                const width = 150;
+                img.style.height = width + 'px';
+            });
+        });
+
+            const preview = document.getElementById('previewImage');
+        if (preview) {
+            preview.style.width = '180px';         // ✅ ubah ikut cita rasa
+            preview.style.height = '180px';        // ✅ square
+            preview.style.objectFit = 'cover';     // ✅ crop gambar cantik
+            preview.style.borderRadius = '12px';   // ✅ rounded
+            preview.style.display = 'block';
+            preview.style.margin = '0 auto';
+        }
+
+        // Bila upload baru, pastikan saiz tetap juga
+        document.getElementById('photoInput')?.addEventListener('change', () => {
+            if (preview) {
+                preview.style.width = '180px';
+                preview.style.height = '180px';
+            }
+        });
+
+    });
+    // Intercept the form submission
+   
 </script>
 
     </div>
+    
+    <script>
+    const cloudinaryCloudName = 'dynonizve';
+    const cloudinaryUploadPreset = 'mysanding_preset';
+
+    const form = document.querySelector('#addTeamForm'); // ✅ fixed selector
+
+    if (form) {
+        form.addEventListener('submit', async function(e) {
+            const fileInput = document.getElementById('photoInput');
+            const file = fileInput?.files?.[0];
+
+            if (!file) return; // No image? Just let Laravel handle it
+
+            e.preventDefault(); // Stop original form
+
+            const formData = new FormData();
+            formData.append('file', file);
+            formData.append('upload_preset', cloudinaryUploadPreset);
+
+            const response = await fetch(`https://api.cloudinary.com/v1_1/${cloudinaryCloudName}/image/upload`, {
+                method: 'POST',
+                body: formData
+            });
+
+            const data = await response.json();
+
+            if (!data.secure_url) {
+                alert('Image upload failed');
+                return;
+            }
+
+            const imageUrl = data.secure_url;
+
+            // ✅ Update the hidden input
+            let hiddenInput = document.querySelector('input[name="photo"]');
+            if (!hiddenInput) {
+                hiddenInput = document.createElement('input');
+                hiddenInput.type = 'hidden';
+                hiddenInput.name = 'photo';
+                form.appendChild(hiddenInput);
+            }
+
+            hiddenInput.value = imageUrl;
+
+            // ✅ Update Alpine.js photoUrl to show the real image preview
+            if (typeof photoUrl !== 'undefined') {
+                photoUrl = imageUrl;
+            }
+
+            fileInput.removeAttribute('name');
+            console.log("Submitting with Cloudinary image:", imageUrl); // Avoid Laravel file conflict
+            form.submit(); // ✅ Submit with Cloudinary URL
+            });
+        }
+    </script>
+
+
+
+
+
 </x-filament-panels::page>

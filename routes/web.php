@@ -6,6 +6,7 @@ use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\Admin\WeddingServiceController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\ClientController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,7 +51,14 @@ Route::middleware(['auth'])->group(function () {
 });
 
 
+//Admin Clients
+Route::get('/clients', [ClientController::class, 'index'])->name('clients');
+Route::post('/admin/clients/store', [\App\Http\Controllers\ClientController::class, 'store'])->name('clients.store');
 
+
+
+
+//Admin About (TEAM) 
 Route::get('/about', [PageController::class, 'about'])->name('about');
 
 
