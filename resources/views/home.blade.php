@@ -92,8 +92,12 @@
     </section>
 
     {{-- Gallery --}}
-    <section class="bg-gradient-to-r from-[#fffdfc] to-[#f1e7e5] py-16" data-aos="fade-up>
-        <h2 class="text-center text-2xl font-semibold mb-10 text-[#000000]">Gallery</h2>
+    <section class="bg-gradient-to-r from-[#fffdfc] to-[#f1e7e5] py-16" data-aos="fade-up">
+        <h2 class="text-center text-3xl font-jacques font-normal mb-8 text-[#000000]">
+            <a href="{{ route('gallery') }}" class="hover:text-[#b98421] transition duration-300">
+                Gallery
+            </a>
+        </h2>
 
         <div class="max-w-6xl mx-auto grid grid-cols-4 gap-4 px-6 items-stretch">
             {{-- Column 1 --}}
@@ -116,7 +120,7 @@
 
             {{-- Column 3 --}}
             <div>
-                <img src="images/gallery1.jpg" class="rounded-md shadow object-cover h-full w-full" alt="">
+                <img src="images/gallery2.jpg" class="rounded-md shadow object-cover h-full w-full" alt="">
             </div>
 
             {{-- Column 4 --}}
@@ -140,7 +144,7 @@
     <section class="bg-white py-16 px-6" data-aos="fade-right">
         <div class="container mx-auto grid md:grid-cols-2 gap-8 items-center">
             <div>
-                <h2 class="text-3xl font-jacques  font-medium mb-4 text-[#000000]">
+                <h2 class="text-3xl font-jacques  font-medium mb-4 text-[#5d3c33]">
                     <a href="{{ route('clients') }}" class="hover:text-[#b98421] transition duration-300">
                         What Clients Say...
                     </a>
@@ -164,10 +168,10 @@
 
     {{-- Call to Action --}}
     <section class="bg-gradient-to-l from-[#f6f5f0] to-[#f1e7e5] text-center py-16" data-aos="fade-up">
-        <h2 class="text-xl font-jacques font-medium text-[#000000] mb-2">Let's Design Your Dream Wedding Together</h2>
+        <h2 class="text-xl font-jacques font-medium text-[#5d3c33] mb-2">Let's Design Your Dream Wedding Together</h2>
         <p class="text-[#83365a] mb-6">– Chat with Our Bridal Consultant Today! –</p>
         <button @click="openBooking = true"
-                class="bg-white text-[#2F2F2F] font-semibold px-6 py-2 rounded-full border border-[#2F2F2F] hover:bg-[#2F2F2F] hover:text-white transition duration-300">
+                class="bg-white text-[#b98421] font-semibold px-6 py-2 rounded-full border border-[#b98421] hover:bg-[#b98421] hover:text-white transition duration-300">
             Book Appointment
         </button>
     </section>

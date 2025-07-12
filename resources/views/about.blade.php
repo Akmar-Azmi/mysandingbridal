@@ -5,15 +5,15 @@
 @section('content')
 
     {{-- Hero Banner --}}
-    <section class="bg-[#D8B57F] py-16 text-center">
-        <h1 class="text-4xl font-bold text-black mb-2">About Us</h1>
+    <section class="bg-gradient-to-l from-[#f6f5f0] to-[#f1e7e5] text-center py-12" data-aos="fade-up">
+        <h1 class="text-4xl font-jacques font-semibold text-black mb-2">About Us</h1>
         <p class="text-lg italic text-black/80">
             More than planners — we are storytellers, crafting weddings that reflect your love.
         </p>
     </section>
 
     {{-- About Section --}}
-    <section class="py-16 bg-[#FFFBF0] px-6 md:px-12">
+    <section class="py-16 bg-[#ffffff] px-6 md:px-12">
         <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-start">
             {{-- Images Grid --}}
             <div class="grid grid-cols-2 gap-4">

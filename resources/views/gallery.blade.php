@@ -3,15 +3,18 @@
 @section('title', 'Gallery')
 
 @section('content')
-<!-- Hero Section -->
-<div class="bg-[#d1af7c] py-16 text-center text-white">
-    <h1 class="text-4xl font-bold text-gray-800 drop-shadow-md">Gallery</h1>
-    <p class="text-lg italic text-gray-700 mt-2">Let's tell your story</p>
-</div>
+
+    {{-- Hero Banner --}}
+    <section class="bg-gradient-to-l from-[#f6f5f0] to-[#f1e7e5] text-center py-12" data-aos="fade-up">
+        <h1 class="text-4xl font-jacques font-semibold text-black mb-2">Gallery</h1>
+        <p class="text-lg italic text-black/80">
+            Let's tell your story.
+        </p>
+    </section>
 
 
 <!-- Gallery Grid Section -->
-<div class="bg-[#f9f6f2] py-12 px-6">
+<div class="bg-[#ffffff] py-12 px-6">
     <div class="max-w-7xl mx-auto justify-center">
         <div class="w-full">
         <div class="grid grid-cols-5 gap-6 max-w-[1200px] mx-auto scale-[0.85] md:scale-[0.9] lg:scale-[0.95] px-2">
@@ -38,12 +41,12 @@
 </div>
 
 <!-- Past Events Header -->
-<div class="bg-[#d1af7c] py-10 text-center mt-16">
-    <h2 class="text-3xl font-semibold text-gray-800 drop-shadow">Past Events</h2>
+<div class="bg-[#f6f5f0] py-10 text-center mt-16">
+    <h2 class="text-3xl font-jacques font-semibold text-black-800 drop-shadow">Past Events</h2>
 </div>
 
 <!-- Past Events Grid -->
-<div class="bg-[#f9f6f2] py-12 px-4 sm:px-6 lg:px-8">
+<div class="bg-[#f6f5f0] py-12 px-4 sm:px-6 lg:px-8">
     <div class="w-full">
         <div class="grid grid-cols-5 gap-6 max-w-[1200px] mx-auto scale-[0.85] md:scale-[0.9] lg:scale-[0.95] px-2">
 
