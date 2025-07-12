@@ -10,7 +10,10 @@ class Gallery extends Page
 {
     protected static ?string $navigationIcon = 'heroicon-o-photo';
     protected static string $view = 'filament.pages.gallery';
-    protected static ?int $navigationSort = 4;
+    protected static ?int $navigationSort = -5;
+    protected static ?string $navigationGroup = 'Gallery';
+    protected static ?string $navigationLabel = 'Gallery Photo'; 
+
     
     protected function getViewData(): array
     {
