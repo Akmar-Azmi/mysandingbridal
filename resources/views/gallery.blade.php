@@ -19,22 +19,14 @@
         <div class="w-full">
         <div class="grid grid-cols-5 gap-6 max-w-[1200px] mx-auto scale-[0.85] md:scale-[0.9] lg:scale-[0.95] px-2">
 
-                <!-- Example Image Blocks -->
-                <div class="swiper-slide !w-auto">
-                    <img src="https://placehold.co/200x300" class="w-full h-full object-cover rounded-xl shadow-md" >
-                </div>
-                <div class="swiper-slide !w-auto">
-                    <img src="https://placehold.co/200x300" class="w-full h-full object-cover rounded-xl shadow-md">
-                </div>
-                <div class="swiper-slide !w-auto">
-                    <img src="https://placehold.co/200x300" class="w-full h-full object-cover rounded-xl shadow-md">
-                </div>
-                <div class="swiper-slide !w-auto">
-                    <img src="https://placehold.co/200x300" class="w-full h-full object-cover rounded-xl shadow-md">
-                </div>
-                <div class="swiper-slide !w-auto">
-                    <img src="https://placehold.co/200x300" class="w-full h-full object-cover rounded-xl shadow-md">
-                </div>
+                <!-- Loop through gallery images -->
+                    @foreach($images as $img)
+                        <div class="swiper-slide !w-auto">
+                            <img src="{{ $img->url }}"
+                                alt="Gallery image"
+                                class="w-full h-full object-cover rounded-xl shadow-md">
+                        </div>
+                    @endforeach
             </div>
         </div>
     </div>

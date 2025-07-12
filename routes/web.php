@@ -9,7 +9,8 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\PublicClientController;
-
+use App\Http\Controllers\UserGalleryController;
+use App\Http\Controllers\AdminGalleryController;
 
 
 /*
@@ -85,6 +86,14 @@ Route::prefix('admin/gallery')->group(function () {
     Route::put('/{id}', [EventController::class, 'update'])->name('events.update');
 });
 
+// Admin GalleryPhotos
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/galleryphoto', [AdminGalleryController::class, 'index'])->name('gallery.index');
+    Route::post('/galleryphoto', [AdminGalleryController::class, 'store'])->name('gallery.store');
+    Route::delete('/galleryphoto/{gallery}', [AdminGalleryController::class, 'destroy'])->name('gallery.destroy');  
+});
+Route::delete('/admin/gallery-photo/{id}', [AdminGalleryController::class, 'destroy'])->name('admin.gallery.destroy');
+
 
 
 
@@ -115,3 +124,9 @@ Route::view('/gallery', 'gallery')->name('gallery');
 
 Route::view('/slots', 'slots')->name('slots');
 Route::view('/contact', 'contact')->name('contact');
+
+// User Gallery
+Route::get('/gallery', [UserGalleryController::class, 'index'])->name('gallery');
+
+
+
