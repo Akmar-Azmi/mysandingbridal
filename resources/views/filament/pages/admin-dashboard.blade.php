@@ -36,9 +36,10 @@
         </div>
     </div>
 
-    <!-- 📆 Calendar Widget Box -->
+    <!-- 📆 Calendar Widget -->
     <div class="bg-white rounded-2xl shadow p-6 w-full max-w-7xl mx-auto">
         <h2 class="text-xl font-semibold text-gray-800 mb-4 text-center">📆 Appointment Calendar</h2>
-        @livewire(\App\Filament\Widgets\AppointmentCalendarWidget::class)
+
+        @livewire(\App\Filament\Widgets\AppointmentCalendarWidget::class)    
     </div>
 </x-filament::page>

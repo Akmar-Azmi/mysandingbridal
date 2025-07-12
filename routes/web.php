@@ -37,7 +37,7 @@ Route::prefix('admin/services')->name('admin.services.')->group(function () {
     Route::delete('/wedding-services/{id}', [WeddingServiceController::class, 'destroy'])->name('wedding-services.destroy');
 });
 
-//Admin/Team
+// Admin/Team routes
 Route::post('/admin/teams', [TeamController::class, 'store'])->name('teams.store');
 Route::put('/admin/teams/{id}', [TeamController::class, 'update'])->name('teams.update');
 Route::delete('/admin/teams/{id}', [TeamController::class, 'destroy'])->name('teams.destroy');
