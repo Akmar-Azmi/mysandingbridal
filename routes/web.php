@@ -7,6 +7,8 @@ use App\Http\Controllers\Admin\WeddingServiceController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\PublicClientController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -54,7 +56,12 @@ Route::middleware(['auth'])->group(function () {
 //Admin Clients
 Route::get('/clients', [ClientController::class, 'index'])->name('clients');
 Route::post('/admin/clients/store', [\App\Http\Controllers\ClientController::class, 'store'])->name('clients.store');
+Route::get('/admin/clients/{client}/edit', [ClientController::class, 'edit'])->name('clients.edit');
+Route::put('/admin/clients/{client}', [ClientController::class, 'update'])->name('clients.update');
+Route::delete('/admin/clients/{client}', [ClientController::class, 'destroy'])->name('clients.destroy');
 
+//client (admin to user side)
+Route::get('/clients', [PublicClientController::class, 'index'])->name('clients');
 
 
 
@@ -85,6 +92,6 @@ Route::view('/', 'home')->name('home');
 
 Route::view('/services', 'services')->name('services');
 Route::view('/gallery', 'gallery')->name('gallery');
-Route::view('/clients', 'clients')->name('clients');
+
 Route::view('/slots', 'slots')->name('slots');
 Route::view('/contact', 'contact')->name('contact');

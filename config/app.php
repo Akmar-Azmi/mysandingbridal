@@ -14,6 +14,8 @@ return [
     */
 
     'name' => env('APP_NAME', 'Laravel'),
+    'Cloudinary' => CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary::class,
+
 
     /*
     |--------------------------------------------------------------------------
@@ -53,6 +55,7 @@ return [
     */
 
     'url' => env('APP_URL', 'http://localhost'),
+    
 
     /*
     |--------------------------------------------------------------------------

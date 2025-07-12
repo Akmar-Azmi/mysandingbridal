@@ -1,112 +1,154 @@
 <x-filament::page>
-    <section class="max-w-6xl mx-auto py-10">
-        {{-- Header --}}
-        <div class="bg-gradient-to-r from-indigo-500 to-blue-600 text-black p-6 rounded-t-xl">
-            <p class="text-sm mt-1">Fill in the details for your new client project</p>
+    <section class="max-w-6xl mx-auto py-10" x-data="{ showModal: false, editingClient: null }">
+        {{-- Add Button --}}
+        <div class="flex items-center justify-end mb-6">
+            <button @click="showModal = true; editingClient = null" class="custom-btn">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                </svg>
+                Add Client
+            </button>
         </div>
 
-        {{-- FORM --}}
-        <form method="POST" action="{{ route('clients.store') }}" enctype="multipart/form-data"
-            class="bg-white rounded-b-xl p-6 shadow-md">
-            @csrf
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {{-- Image Upload --}}
-                <div>
-                    <label class="block text-sm font-semibold mb-2">Client Image</label>
-                    <div class="image-upload-container" onclick="document.getElementById('imageInput').click()">
-                        <input type="file" name="image" id="imageInput" accept="image/*" style="display: none;"
-                            onchange="handleImageUpload(event)" required>
-                        <img id="previewImage" alt="Preview" class="preview-image">
-                        <div class="upload-placeholder" id="uploadPlaceholder">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="upload-icon" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M4 16l4.5-4.5m0 0l4.5-4.5m-4.5 4.5H20" />
-                            </svg>
-                            <div class="upload-text">Upload Image</div>
-                            <div class="upload-subtext">Click to browse</div>
-                        </div>
-                        <div class="image-overlay">
-                            <span>Change Image</span>
+        {{-- Client Cards --}}
+        @php $clients = \App\Models\Client::where('is_visible', true)->latest()->get(); @endphp
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            @foreach ($clients as $client)
+                <div class="bg-white rounded-xl shadow p-4 relative">
+                    {{-- 3-dot Dropdown --}}
+                    <div class="absolute top-2 right-2">
+                        <div x-data="{ open: false }" class="relative">
+                            <button @click="open = !open"
+                                class="w-8 h-8 flex items-center justify-center rounded-full transition focus:outline-none"
+                                style="background-color: #fbbf24;">
+                                <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        d="M6 10a2 2 0 11-4 0 2 2 0 014 0zm6-2a2 2 0 100 4 2 2 0 000-4zm6 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                                </svg>
+                            </button>
+                            <div x-show="open" @click.away="open = false"
+                                class="absolute right-0 mt-2 w-40 bg-white rounded-md shadow z-50 text-sm py-1">
+                                <button @click="showModal = true; editingClient = {{ $client->toJson() }}; open = false"
+                                    class="flex items-center gap-2 px-4 py-2 text-gray-700 hover:bg-gray-100 w-full">
+                                    <i class="fa-solid fa-pen"></i> Edit
+                                </button>
+                                <form method="POST" action="{{ route('clients.destroy', $client->id) }}"
+                                    onsubmit="return confirm('Are you sure?')">
+                                    @csrf @method('DELETE')
+                                    <button
+                                        class="flex items-center gap-2 px-4 py-2 text-red-600 hover:bg-red-100 w-full">
+                                        <i class="fa-solid fa-trash"></i> Delete
+                                    </button>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                {{-- Name --}}
-                <div>
-                    <label class="block text-sm font-semibold mb-2">Client Name</label>
-                    <input type="text" name="name" placeholder="e.g. Name" class="w-full border rounded-md p-2"
-                        required>
-                </div>
-
-                {{-- Theme --}}
-                <div>
-                    <label class="block text-sm font-semibold mb-2">Theme</label>
-                    <input type="text" name="theme" placeholder="e.g. Modern, Minimalist"
-                        class="w-full border rounded-md p-2" required>
-                </div>
-
-                {{-- Venue --}}
-                <div>
-                    <label class="block text-sm font-semibold mb-2">Venue</label>
-                    <input type="text" name="venue" placeholder="e.g. The Majestic Hall"
-                        class="w-full border rounded-md p-2" required>
-                </div>
-
-                {{-- Feedback --}}
-                <div class="md:col-span-2">
-                    <label class="block text-sm font-semibold mb-2">Feedback</label>
-                    <textarea name="feedback" placeholder="Add notes, praise, or suggestions..."
-                        class="w-full border rounded-md p-2 resize-none" rows="4" required></textarea>
-                </div>
-            </div>
-
-            {{-- Buttons --}}
-            <div class="mt-6 flex justify-end gap-3">
-                <button type="reset" onclick="clearForm()"
-                    class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-6 py-2 rounded-md font-medium text-sm transition">
-                    Clear
-                </button>
-
-                <button type="submit" class="custom-btn flex items-center gap-2">
-                    Add Client
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-                    </svg>
-                </button>
-            </div>
-        </form>
-
-        {{-- LIST --}}
-        @php
-            $clients = \App\Models\Client::where('is_visible', true)->latest()->get();
-        @endphp
-
-        @if ($clients->count())
-            <div class="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                @foreach ($clients as $client)
-                    <div class="bg-white rounded-xl shadow p-4 hover:shadow-lg transition">
-                        <div class="w-full aspect-square overflow-hidden rounded-lg">
-                            <img src="{{ $client->image }}" alt="{{ $client->name }}"
-                                class="w-full h-full object-cover">
-                        </div>
-                        <h3 class="text-lg font-bold mt-3">{{ $client->name }}</h3>
-                        <p class="text-sm text-purple-600">🎨 {{ $client->theme }}</p>
-                        <p class="text-sm text-blue-600">📍 {{ $client->venue }}</p>
-                        <p class="text-gray-600 italic mt-2 text-sm">“{{ $client->feedback }}”</p>
+                    {{-- Card Content --}}
+                    <div class="w-full aspect-square overflow-hidden rounded-lg">
+                        <img src="{{ $client->image }}" alt="{{ $client->name }}" class="w-full h-full object-cover" />
                     </div>
-                @endforeach
+                    <h3 class="text-lg font-bold mt-3 text-gray-800">{{ $client->name }}</h3>
+                    <p class="text-sm text-gray-700">{{ $client->theme }}</p>
+                    <p class="text-sm text-gray-600">{{ $client->venue }}</p>
+                    <p class="text-gray-500 text-sm mt-2">Feedback</p>
+                    <div class="mt-1 bg-gray-100 p-2 rounded-md text-sm text-gray-800">{{ $client->feedback }}</div>
+                </div>
+            @endforeach
+        </div>
+
+        {{-- Toast --}}
+        @if (session('success'))
+            <div x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 4000)"
+                class="fixed top-6 right-6 z-50 flex items-center gap-3 bg-green-500 text-white px-5 py-3 rounded-lg shadow-lg shadow-green-300/50">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+                <span class="font-medium">{{ session('success') }}</span>
             </div>
         @endif
+        {{-- MODAL --}}
+        <div x-show="showModal" x-cloak
+            class="fixed inset-0 z-50 bg-black/40 flex items-center justify-center px-4 overflow-y-auto">
+            <div @click.away="showModal = false" class="bg-white w-full max-w-md rounded-xl p-6 my-8 shadow-lg">
+                <h2 class="text-xl font-bold mb-1" x-text="editingClient ? 'Edit Client' : 'Add Client'"></h2>
+                <form :action="editingClient ? `/admin/clients/${editingClient.id}` : '{{ route('clients.store') }}'"
+                    method="POST" enctype="multipart/form-data" id="clientForm">
+                    @csrf
+                    <template x-if="editingClient">@method('PUT')</template>
+                    <input type="hidden" name="image" id="cloudinaryImageUrl">
+
+                    {{-- Upload --}}
+                    <div class="flex justify-center mb-4" x-data="{ hovered: false }" @mouseenter="hovered = true"
+                        @mouseleave="hovered = false">
+                        <div class="image-upload-container" @click="$refs.imageInput.click()">
+                            <input type="file" x-ref="imageInput" accept="image/*" style="display: none"
+                                @change="handleUploadImage($event)">
+                            <img id="previewImage" :src="editingClient?.image || ''"
+                                :class="editingClient?.image ? 'preview-image block' : 'preview-image'" />
+                            <div class="upload-placeholder" id="uploadPlaceholder">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="upload-icon" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M4 16l4.5-4.5m0 0l4.5-4.5m-4.5 4.5H20" />
+                                </svg>
+                                <div class="upload-text">Upload Image</div>
+                                <div class="upload-subtext">Click to browse</div>
+                            </div>
+                            <div class="image-overlay" x-show="hovered"><span>Change Image</span></div>
+                        </div>
+                    </div>
+
+                    {{-- Fields --}}
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium">Client Name</label>
+                            <input type="text" name="name" class="w-full border rounded-md p-2"
+                                :value="editingClient?.name || ''" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium">Theme</label>
+                            <input type="text" name="theme" class="w-full border rounded-md p-2"
+                                :value="editingClient?.theme || ''" required>
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-medium">Venue</label>
+                            <input type="text" name="venue" class="w-full border rounded-md p-2"
+                                :value="editingClient?.venue || ''" required>
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-medium">Feedback</label>
+                            <textarea name="feedback" rows="3" class="w-full border rounded-md p-2" x-text="editingClient?.feedback || ''"
+                                required></textarea>
+                        </div>
+                    </div>
+
+                    {{-- Buttons --}}
+                    <div class="mt-6 flex justify-end gap-3">
+                        <button type="button" @click="showModal = false"
+                            class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-md text-sm">
+                            Cancel
+                        </button>
+                        <button type="submit" class="custom-btn flex items-center gap-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 4v16m8-8H4" />
+                            </svg>
+                            <span x-text="editingClient ? 'Update Client' : 'Add Client'"></span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </section>
 
-    {{-- STYLE --}}
+    {{-- Styles --}}
     <style>
         .image-upload-container {
             position: relative;
             width: 100%;
             aspect-ratio: 1 / 1;
-            max-width: 280px;
+            max-width: 220px;
             border: 2px dashed #d1d5db;
             border-radius: 0.75rem;
             background: #f9fafb;
@@ -114,7 +156,6 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            margin: 0 auto;
             overflow: hidden;
         }
 
@@ -152,6 +193,9 @@
             display: none;
         }
 
+        .preview-image.block {
+            display: block;
+        }
         .image-overlay {
             position: absolute;
             top: 0;
@@ -167,13 +211,8 @@
             font-weight: 500;
         }
 
-        .image-upload-container:hover .image-overlay {
-            display: flex;
-        }
-
         .custom-btn {
             background-color: #fbbf24;
-            /* yellow-400 */
             color: white;
             font-weight: 600;
             padding: 0.5rem 1.25rem;
@@ -186,67 +225,47 @@
 
         .custom-btn:hover {
             background-color: #f59e0b;
-            /* yellow-500 */
         }
     </style>
 
-    {{-- SCRIPT --}}
+    {{-- Script --}}
     <script>
-        function handleImageUpload(event) {
+        const cloudName = "dynonizve";
+        const uploadPreset = "mysanding_preset";
+
+        function handleUploadImage(event) {
             const file = event.target.files[0];
-            const previewImage = document.getElementById('previewImage');
-            const placeholder = document.getElementById('uploadPlaceholder');
-            const container = document.querySelector('.image-upload-container');
-
-            if (file) {
-                if (file.size > 2 * 1024 * 1024) {
-                    alert("Image size must be less than 2MB");
-                    event.target.value = '';
-                    return;
-                }
-
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    previewImage.src = e.target.result;
-                    previewImage.style.display = 'block';
-                    placeholder.style.display = 'none';
-                    container.classList.add('has-image');
-                };
-                reader.readAsDataURL(file);
-            }
-        }
-
-        function clearForm() {
-            const form = document.querySelector('form');
-            form.reset();
+            if (!file) return;
 
             const previewImage = document.getElementById('previewImage');
             const placeholder = document.getElementById('uploadPlaceholder');
-            const container = document.querySelector('.image-upload-container');
 
-            previewImage.src = '';
-            previewImage.style.display = 'none';
-            placeholder.style.display = 'block';
-            container.classList.remove('has-image');
-        }
+            // 1. Show local preview instantly
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                previewImage.src = e.target.result;
+                previewImage.classList.add('block');
+                placeholder.style.display = 'none';
+            };
+            reader.readAsDataURL(file);
 
-        function clearForm() {
-            const form = document.querySelector('form');
-            form.reset();
+            // 2. Upload to Cloudinary
+            const formData = new FormData();
+            formData.append("file", file);
+            formData.append("upload_preset", uploadPreset);
 
-            const previewImage = document.getElementById('previewImage');
-            const placeholder = document.getElementById('uploadPlaceholder');
-            const container = document.querySelector('.image-upload-container');
-            const fileInput = document.getElementById('imageInput');
-
-            // Reset image preview
-            previewImage.src = '';
-            previewImage.style.display = 'none';
-            placeholder.style.display = 'block';
-            container.classList.remove('has-image');
-
-            // Reset file input (in case user selects the same file again)
-            fileInput.value = '';
+            fetch(`https://api.cloudinary.com/v1_1/${cloudName}/upload`, {
+                    method: "POST",
+                    body: formData
+                })
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById('cloudinaryImageUrl').value = data.secure_url;
+                })
+                .catch(err => {
+                    alert("Image upload failed.");
+                    console.error(err);
+                });
         }
     </script>
 </x-filament::page>

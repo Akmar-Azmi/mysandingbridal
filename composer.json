@@ -8,7 +8,7 @@
     "require": {
         "php": "^8.2",
         "blade-ui-kit/blade-heroicons": "^2.6",
-        "cloudinary-labs/cloudinary-laravel": "^3.0",
+        "cloudinary-labs/cloudinary-laravel": "*",
         "filament/filament": "^3.3",
         "laravel/framework": "*",
         "laravel/tinker": "^2.10.1",
