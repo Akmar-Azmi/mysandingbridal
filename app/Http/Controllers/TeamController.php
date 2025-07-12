@@ -45,7 +45,6 @@ class TeamController extends Controller
         return back()->with('success', 'Team updated!');
     }
 
-
     public function destroy($id)
     {
         $team = Team::findOrFail($id);
