@@ -43,6 +43,11 @@ Route::put('/admin/teams/{id}', [TeamController::class, 'update'])->name('teams.
 Route::delete('/admin/teams/{id}', [TeamController::class, 'destroy'])->name('teams.destroy');
 Route::get('/admin/teams', function () {$teams = \App\Models\Team::all();return view('admin.teams.index', compact('teams'));})->name('teams.index');
 
+//Admin Profile 
+Route::middleware(['auth'])->group(function () {
+    Route::get('/admin/profile', [App\Http\Controllers\AdminProfileController::class, 'edit'])->name('admin.profile');
+    Route::post('/admin/profile', [App\Http\Controllers\AdminProfileController::class, 'update'])->name('admin.profile.update');
+});
 
 
 

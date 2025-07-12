@@ -13,6 +13,7 @@ export default {
         extend: {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                jacques: ['"Jacques Francois"', 'serif'],
             },
             animation: {
                 'fade-in': 'fadeIn 1s ease-out',
