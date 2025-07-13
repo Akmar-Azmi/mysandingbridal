@@ -4,6 +4,8 @@ namespace App\Filament\Pages;
 
 use Filament\Pages\Page;
 use App\Models\Event;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 
 
 class Gallery extends Page

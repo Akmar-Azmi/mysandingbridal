@@ -5,12 +5,7 @@ namespace App\Filament\Widgets;
 use App\Models\Appointment;
 use Illuminate\Database\Eloquent\Model;
 use Saade\FilamentFullCalendar\Widgets\FullCalendarWidget;
-use Filament\Forms;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Textarea;
-use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Components\TimePicker;
-use Filament\Notifications\Notification;
+use Illuminate\Support\Facades\Log;
 
 class AppointmentCalendarWidget extends FullCalendarWidget
 {
@@ -18,94 +13,64 @@ class AppointmentCalendarWidget extends FullCalendarWidget
 
     public function fetchEvents(array $fetchInfo): array
     {
-        return Appointment::whereBetween('appointment_date', [$fetchInfo['start'], $fetchInfo['end']])
-            ->get()
-            ->map(function (Appointment $appt) {
-                $startDateTime = $appt->appointment_date . 'T' . $appt->appointment_time;
+        $appointments = Appointment::whereBetween('appointment_date', [$fetchInfo['start'], $fetchInfo['end']])->get();
 
-                return [
-                    'id'    => $appt->id,
-                    'title' => $appt->name . ' (' . $appt->event_type . ')',
-                    'start' => $startDateTime,
-                    'end'   => $startDateTime,
-                    'color' => '#da4a80',
-                    'extendedProps' => [
-                        'email'     => $appt->email,
-                        'phone'     => $appt->phone,
-                        'eventType' => $appt->event_type,
-                        'notes'     => $appt->notes,
-                    ],
-                ];
-            })
-            ->toArray();
+        return $appointments->map(function (Appointment $appt) {
+            $startDateTime = $appt->appointment_date . 'T' . $appt->appointment_time;
+
+            $colorMap = [
+                'Engagement' => '#da4a80',
+                'Wedding' => '#c8a97e',
+                'Birthday' => '#a3d9a5',
+                'Meeting' => '#91c5f2',
+                'Default' => '#cccccc',
+            ];
+
+            return [
+                'id' => $appt->id,
+                'title' => $appt->name . ' (' . $appt->event_type . ')',
+                'start' => $startDateTime,
+                'end' => $startDateTime,
+                'color' => $colorMap[$appt->event_type] ?? $colorMap['Default'],
+                'extendedProps' => [
+                    'email'     => $appt->email,
+                    'phone'     => $appt->phone,
+                    'budget'    => $appt->budget,
+                    'eventType' => $appt->event_type,
+                    'notes'     => $appt->notes,
+                    'date'      => $appt->appointment_date,
+                    'time'      => $appt->appointment_time,
+                ],
+            ];
+        })->toArray();
     }
 
+    // ✅ Buang default modal
     protected function modalContent(array $event): string
     {
-        $appointment = \App\Models\Appointment::find($event['id']);
-
-        if (!$appointment) {
-            \Log::error('Appointment not found', ['id' => $event['id']]);
-            return "<p class='text-red-600'>Appointment not found (ID: {$event['id']})</p>";
-        }
-
-        return view('calendar.appointment-modal', [
-            'appointment' => $appointment,
-        ])->render();
+        return '';
     }
 
+    // ✅ Buang create modal
+    public function isCreateModalDisplayed(): bool
+    {
+        return true;
+    }
 
-
-    protected function modalFormSchema(): array
+    // ✅ Buang button "New appointment"
+    protected function getHeaderToolbar(): ?array
     {
         return [
-            TextInput::make('name')->required(),
-            TextInput::make('email')->email(),
-            TextInput::make('phone')->tel(),
-            TextInput::make('event_type')->label('Event Type')->required(),
-            TextInput::make('budget')->numeric()->minValue(0),
-            DatePicker::make('appointment_date')->required(),
-            TimePicker::make('appointment_time')->required(),
-            Textarea::make('notes')->rows(3)->label('Special Notes'),
+            'left'   => 'prev,next today',
+            'center' => '', // ❌ Empty = no "New appointment" or title override
+            'right'  => 'dayGridMonth,timeGridWeek,timeGridDay',
         ];
-    }
-
-    protected function onCreateEvent(array $data): ?Model
-    {
-        $appt = Appointment::create($data);
-
-        Notification::make()
-            ->title('New Appointment Added')
-            ->success()
-            ->send();
-
-        return $appt;
-    }
-
-    protected function onUpdateEvent(Model $record, array $data): Model
-    {
-        $record->update($data);
-
-        Notification::make()
-            ->title('Appointment Updated')
-            ->success()
-            ->send();
-
-        return $record;
-    }
-
-    protected function onDeleteEvent(Model $record): void
-    {
-        $record->delete();
-
-        Notification::make()
-            ->title('Appointment Deleted')
-            ->success()
-            ->send();
     }
 
     public static function canView(): bool
     {
         return true;
     }
+
+    
 }

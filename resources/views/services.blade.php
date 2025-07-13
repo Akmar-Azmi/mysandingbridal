@@ -11,9 +11,9 @@
     .wedding-wrapper {
         min-height: 100vh;
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         justify-content: center;
-        padding: 40px 20px;
+        padding: 10px 20px 40px;
     }
 
     .wedding-grid-container {
@@ -128,42 +128,63 @@
     });
 </script>
 
-<div class="container">
+    {{-- Hero Banner --}}
+    <section class="bg-gradient-to-l from-[#f6f5f0] to-[#f1e7e5] text-center py-12" data-aos="fade-up">
+        <h1 class="text-4xl font-jacques font-semibold text-black mb-2">Services</h1>
+        <p class="text-lg italic text-black/80">
+            Discover all that we offer to help you plan the perfect wedding experience.
+        </p>
+    </section>
+
+    <!-- Page Header (Centered with gap only) -->
+    <div class="text-center mt-8 mb-2" data-aos="fade-up">
+        <h2 class="text-center text-3xl font-jacques font-normal mb-8 text-[#000000]">
+            Wedding Services
+        </h2>
+    </div>
 
     {{-- Wedding Services --}}
     <div class="wedding-wrapper">
-        <div class="wedding-grid-container">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-7xl mx-auto" data-aos="fade-up">
+            
+            <!-- Wedding Packages -->
+            <div class="bg-white shadow-md rounded-lg overflow-hidden transition-transform hover:scale-105 cursor-pointer service-trigger"
+                data-title="Wedding Packages"
+                data-description="Complete wedding packages with decoration, coordination, and photography."
+                data-img="https://placehold.co/600x600/png">
+                <img src="https://placehold.co/600x600/png" alt="Wedding Packages" class="w-full h-64 object-cover">
+                <div class="p-4 text-center font-jacques text-lg text-[#5c4430] font-semibold">
+                    Wedding Packages
+                </div>
+            </div>
 
-            <div class="wedding-grid" data-aos="fade-up">
-                <div class="service-text-box font-jacques service-trigger cursor-pointer"
-                    data-title="Wedding Packages"
-                    data-description="Complete wedding packages with decoration, coordination, and photography."
-                    data-img="https://placehold.co/600x600/png">Wedding Packages</div>
-                <img src="https://placehold.co/600x600/png" class="service-img" alt="Venue">
+            <!-- Catering Packages -->
+            <div class="bg-white shadow-md rounded-lg overflow-hidden transition-transform hover:scale-105 cursor-pointer service-trigger"
+                data-title="Catering Packages"
+                data-description="Buffet & fine dining options tailored for all wedding sizes."
+                data-img="https://placehold.co/600x600/png">
+                <img src="https://placehold.co/600x600/png" alt="Catering Packages" class="w-full h-64 object-cover">
+                <div class="p-4 text-center font-jacques text-lg text-[#5c4430] font-semibold">
+                    Catering Packages
+                </div>
+            </div>
 
-                <div class="service-text-box font-jacques service-trigger cursor-pointer"
-                    data-title="Catering Packages"
-                    data-description="Buffet & fine dining options tailored for all wedding sizes."
-                    data-img="https://placehold.co/600x600/png">Catering Packages</div>
-                <img src="https://placehold.co/600x600/png" class="service-img" alt="Wedding Couple">
-
-                <div class="wedding-center-text">Wedding Services</div>
-                <img src="https://placehold.co/600x600/png" class="service-img" alt="Catering">
-
-                <div class="service-text-box font-jacques service-trigger cursor-pointer"
-                    data-title="Wedding Attire"
-                    data-description="Modern and traditional bridal outfits available for rental and custom order."
-                    data-img="https://placehold.co/600x600/png">Wedding Attire</div>
-                <img src="https://placehold.co/600x600/png" class="service-img" alt="Emcee">
-
-                <div class="service-text-box font-jacques service-trigger cursor-pointer"
-                    data-title="Emcee & Entertainment"
-                    data-description="Professional emcees, live bands, DJs, and cultural performers for your event."
-                    data-img="https://placehold.co/600x600/png">Emcee & Entertainment</div>
+            <!-- Wedding Attire -->
+            <div class="bg-white shadow-md rounded-lg overflow-hidden transition-transform hover:scale-105 cursor-pointer service-trigger"
+                data-title="Wedding Attire"
+                data-description="Modern and traditional bridal outfits available for rental and custom order."
+                data-img="https://placehold.co/600x600/png">
+                <img src="https://placehold.co/600x600/png" alt="Wedding Attire" class="w-full h-64 object-cover">
+                <div class="p-4 text-center font-jacques text-lg text-[#5c4430] font-semibold">
+                    Wedding Attire
+                </div>
             </div>
 
         </div>
     </div>
+
+</div>
+
     
 
     {{-- Soft divider --}}

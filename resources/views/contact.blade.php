@@ -1,3 +1,4 @@
+
 @extends('layouts.base')
 
 @section('title', 'Contact Us')
@@ -21,13 +22,18 @@
             <h2 class="text-3xl font-jacques font-normal mb-2 font-header">Find us on the map</h2>
             
             <div class="rounded-xl shadow-2xl overflow-hidden">
-                <iframe 
-                    src="{{ $contact->location_embed }}"
-                    width="100%" height="400" frameborder="0" style="border:0;" allowfullscreen="" loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade"></iframe>
-    
+                <iframe
+                    src="{{ $contact->location_embed ?? 'https://www.google.com/maps?q=4.2105,101.9758&hl=es;z=14&output=embed' }}"
+                    width="600"
+                    height="450"
+                    style="border:0;"
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
         </div>
-        </div>
+
 
 
         <!-- Get in Touch Section (Right Side) -->
@@ -75,14 +81,10 @@
                         class="p-2 border border-[#b98421] bg-[#b98421] rounded-full text-white shadow-md hover:bg-white hover:text-[#b98421] transition duration-300 aspect-square flex items-center justify-center">
                             <i class="fas fa-map-marker-alt text-2xl"></i>
                     </a>
-                        <h3 class="text-sm font-bold">Location</h3>
-                          <p class="text-sm text-gray-800">{{ $contact->address }}</p>
-
                         <h3 class="text-base font-jacques font-bold">Location</h3>
-                          <p class="text-[#b98421] mb-1">23B Jalan Perdana 6,
-                            Pusat Perniagaan<br>
-                            Slim Perdana,<br>
-                            Slim River, PERAK</p>
+                          <p class="text-[#b98421] mb-1">{{ $contact->address }}</p>
+
+
                 </div>
 
                 <!-- Email -->
