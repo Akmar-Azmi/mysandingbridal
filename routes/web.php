@@ -66,12 +66,6 @@ Route::put('/admin/teams/{id}', [TeamController::class, 'update'])->name('teams.
 Route::delete('/admin/teams/{id}', [TeamController::class, 'destroy'])->name('teams.destroy');
 Route::get('/admin/teams', function () {$teams = \App\Models\Team::all();return view('admin.teams.index', compact('teams'));})->name('teams.index');
 
-//Admin Profile 
-Route::get('/login', function () {
-    return view('auth.login');
-})->name('login');
-
-
 
 //Admin Clients
 Route::get('/clients', [ClientController::class, 'index'])->name('clients');
