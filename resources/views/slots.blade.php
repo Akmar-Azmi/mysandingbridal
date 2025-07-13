@@ -98,17 +98,6 @@
             <div id="calendar"></div>
         </div>
 
-        <!-- Slot Info Popup -->
-        <div id="slotModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 hidden">
-            <div id="modalCard" class="bg-white rounded-2xl shadow-2xl p-8 text-center max-w-xs border border-yellow-300 scale-95 opacity-0 transition-all duration-300">
-                <h3 id="slotDate" class="font-semibold text-lg mb-4 text-[#8B5E3C]"></h3>
-                <p id="slotCount" class="text-xl text-gray-600 italic">2 Slot Available</p>
-                <button onclick="closeSlotModal()" class="mt-6 px-5 py-2 bg-yellow-500 text-white rounded-full hover:bg-yellow-600 hover:scale-105 transition-all duration-200 shadow-md">
-                    Close
-                </button>
-            </div>
-        </div>
-
         <!-- Add spacing before footer -->
         <div class="mb-20"></div>
     </div>
@@ -130,46 +119,26 @@
                 right: 'next'
             },
             selectable: true,
-            dateClick: function (info) {
-                const clickedDate = new Date(info.dateStr);
-                const options = { day: 'numeric', month: 'long', year: 'numeric', weekday: 'long' };
-                const formattedDate = clickedDate.toLocaleDateString('en-GB', options);
-
-                // Set the date in the modal
-                document.getElementById('slotDate').innerText = formattedDate;
-
-                // Fetch slot info
-                fetch('/api/slot-count?date=' + info.dateStr)
-                    .then(response => response.json())
-                    .then(data => {
-                        document.getElementById('slotCount').innerText = data.slots + ' Slot Available';
-                    })
-                    .catch(() => {
-                        document.getElementById('slotCount').innerText = 'Unable to fetch slots';
-                    });
-
-                // Show modal with animation
-                modal.classList.remove('hidden');
-                requestAnimationFrame(() => {
-                    modalCard.classList.remove('scale-95', 'opacity-0');
-                    modalCard.classList.add('scale-100', 'opacity-100');
-                });
-            }
         });
 
         calendar.render();
+
+        // Fetch available slot dates and highlight them
+    fetch('/api/slot-dates')
+        .then(response => response.json())
+        .then(slots => {
+            const events = slots.map(slot => {
+                return {
+                    title: slot.available_slots + ' Slots',
+                    start: slot.date,
+                    backgroundColor: '#c8a97e',
+                    borderColor: '#c8a97e'
+                };
+            });
+
+            calendar.addEventSource(events);
+        });
+
     });
 
-    function closeSlotModal() {
-        const modal = document.getElementById('slotModal');
-        const modalCard = document.getElementById('modalCard');
-
-        // Animate close
-        modalCard.classList.remove('scale-100', 'opacity-100');
-        modalCard.classList.add('scale-95', 'opacity-0');
-
-        setTimeout(() => {
-            modal.classList.add('hidden');
-        }, 300);
-    }
 </script>

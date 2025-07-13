@@ -17,6 +17,13 @@ use App\Http\Controllers\AdminContactController;
 use App\Http\Controllers\AdminAboutController;
 use App\Http\Controllers\ContactController;
 use App\Filament\Pages\Contact;
+use App\Http\Controllers\SlotController;
+use App\Filament\Pages\Slots;
+use App\Http\Controllers\SlotApiController;
+
+
+
+
 use App\Http\Controllers\OtherServicesController;
 use App\Http\Controllers\WeddingServiceController;
 
@@ -78,6 +85,11 @@ Route::get('/admin/clients/{client}/edit', [ClientController::class, 'edit'])->n
 Route::put('/admin/clients/{client}', [ClientController::class, 'update'])->name('clients.update');
 Route::delete('/admin/clients/{client}', [ClientController::class, 'destroy'])->name('clients.destroy');
 
+
+//declare in contact
+Route::get('/admin/contact', Contact::class)->name('filament.admin.pages.contact');
+//admin side contact to user side
+Route::get('/contact', [ContactController::class, 'showUserContact'])->name('contact');
 // Admin Contact
 Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::get('/contact', [ContactController::class, 'edit'])->name('admin.contact.edit');
@@ -90,6 +102,8 @@ Route::get('/admin/contact', Contact::class)->name('filament.admin.pages.contact
 
 // Admin-to-user contact view
 Route::get('/contact', [ContactController::class, 'showUserContact'])->name('contact');
+    Route::get('/contact', Contact::class)->name('filament.admin.pages.contact');
+});
 
 
 //client (admin to user side)
@@ -144,6 +158,17 @@ Route::prefix('admin')->name('admin.')->group(function () {
 });
 
 Route::delete('/admin/gallery-photo/{id}', [AdminGalleryController::class, 'destroy'])->name('admin.gallery.destroy');
+
+
+
+
+Route::post('/admin/slots/fetch', [SlotController::class, 'getSlotByDate']);
+Route::post('/admin/slots/fetch', [SlotController::class, 'fetch']);
+Route::post('/admin/slots/save', [SlotController::class, 'save']);
+
+
+Route::get('/api/slot-count', [SlotApiController::class, 'getSlotCount']);
+Route::get('/api/slot-dates', [SlotApiController::class, 'getSlotDates']);
 
 
 // Admin Event Routes (Past Events)
