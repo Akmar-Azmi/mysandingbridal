@@ -20,10 +20,7 @@ use App\Filament\Pages\Contact;
 use App\Http\Controllers\SlotController;
 use App\Filament\Pages\Slots;
 use App\Http\Controllers\SlotApiController;
-
-
-
-use App\Http\Controllers\OtherServicesController;
+use App\Http\Controllers\OtherServiceController;
 use App\Http\Controllers\WeddingServiceController;
 
 /*
@@ -185,9 +182,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
 Route::delete('/admin/gallery-photo/{id}', [AdminGalleryController::class, 'destroy'])->name('admin.gallery.destroy');
 
 
-//wedding services
+//wedding services (Admin)
 Route::put('/admin/weddingservices/update/{id}', [WeddingServiceController::class, 'update'])->name('admin.wedding-services.update');
 
+//Other Services (Admin)
+Route::get('/admin/otherservices', [OtherServiceController::class, 'index'])->name('admin.other-services.index');
+Route::post('/admin/otherservices/store', [OtherServiceController::class, 'store'])->name('admin.other-services.store');
+Route::put('/admin/otherservices/update/{id}', [OtherServiceController::class, 'update'])->name('admin.other-services.update');
+Route::delete('/admin/otherservices/delete/{id}', [OtherServiceController::class, 'destroy'])->name('admin.other-services.destroy');
 
 
 
