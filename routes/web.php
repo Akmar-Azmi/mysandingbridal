@@ -66,11 +66,10 @@ Route::delete('/admin/teams/{id}', [TeamController::class, 'destroy'])->name('te
 Route::get('/admin/teams', function () {$teams = \App\Models\Team::all();return view('admin.teams.index', compact('teams'));})->name('teams.index');
 
 //Admin Profile 
-Route::middleware(['auth'])->group(function () {
-    Route::get('/admin/profile', [App\Http\Controllers\AdminProfileController::class, 'edit'])->name('admin.profile');
-    Route::post('/admin/profile', [App\Http\Controllers\AdminProfileController::class, 'update'])->name('admin.profile.update');
-    Route::post('/admin/profile/password', [App\Http\Controllers\AdminProfileController::class, 'updatePassword'])->name('admin.profile.password.update');
-});
+Route::get('/login', function () {
+    return view('auth.login');
+})->name('login');
+
 
 
 //Admin Clients

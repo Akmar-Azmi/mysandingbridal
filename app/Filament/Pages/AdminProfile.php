@@ -10,6 +10,7 @@ use Filament\Forms;
 use Filament\Forms\Components\{TextInput, Section, Placeholder};
 use Filament\Actions\Action;
 use Filament\Notifications\Notification;
+use App\Models\User;
 
 class AdminProfile extends Page implements Forms\Contracts\HasForms
 {
@@ -24,7 +25,6 @@ class AdminProfile extends Page implements Forms\Contracts\HasForms
     public $email;
     public $password;
     public $password_confirmation;
-    public $old_password;
 
     public function mount(): void
     {
@@ -60,22 +60,14 @@ class AdminProfile extends Page implements Forms\Contracts\HasForms
                 ])
                 ->columns(2),
 
-            Section::make('Change Password')
+            Section::make('Change Password (optional)')
                 ->schema([
-                    TextInput::make('old_password')
-                        ->label('Old Password')
-                        ->password()
-                        ->required()
-                        ->revealable()
-                        ->helperText('Enter your current password to confirm identity.')
-                        ->dehydrated(false),
-
                     TextInput::make('password')
                         ->label('New Password')
                         ->password()
                         ->revealable()
-                        ->helperText('Minimum 6 characters. Leave blank to keep current password.')
                         ->minLength(6)
+                        ->helperText('Leave blank to keep current password.')
                         ->dehydrated(fn ($state) => filled($state))
                         ->required(false),
 
@@ -94,55 +86,36 @@ class AdminProfile extends Page implements Forms\Contracts\HasForms
     public function submit()
     {
         $data = $this->form->getState();
-
-        if (!Hash::check($data['old_password'] ?? '', Auth::user()->password)) {
-            Notification::make()
-                ->title('Old password is incorrect.')
-                ->danger()
-                ->send();
-            return;
-        }
-
-        $user = Auth::user();
-        $isSensitiveChange = false;
-
-        if ($data['email'] !== $user->email) {
-            $user->email = $data['email'];
-            $isSensitiveChange = true;
-        }
+        $user = User::find(Auth::id());
 
         if (!empty($data['password'])) {
             $user->password = Hash::make($data['password']);
-            $isSensitiveChange = true;
         }
 
         $user->name = $data['name'];
+        $user->email = $data['email'];
         $user->save();
-
-        if ($isSensitiveChange) {
-            Auth::logout();
-            session()->invalidate();
-            session()->regenerateToken();
-
-            Session::flash('message', 'You have been logged out due to profile changes. Please log in again.');
-
-            return redirect('/login');
-        }
 
         Notification::make()
             ->title('Profile updated successfully.')
             ->success()
             ->send();
+
+        return redirect()->route('filament.admin.pages.admin-profile');
     }
 
     public function deleteAccount()
     {
-        Auth::user()->delete();
-        Auth::logout();
-        session()->invalidate();
-        session()->regenerateToken();
+        $user = \App\Models\User::find(Auth::id());
 
-        return redirect('/');
+        if ($user) {
+            $user->delete();
+            Auth::logout();
+            session()->invalidate();
+            session()->regenerateToken();
+        }
+
+        return redirect()->route('login')->with('message', 'Account deleted successfully.');
     }
 
     protected function getFormActions(): array
@@ -153,7 +126,7 @@ class AdminProfile extends Page implements Forms\Contracts\HasForms
                 ->submit('submit')
                 ->requiresConfirmation()
                 ->modalHeading('Confirm Changes')
-                ->modalSubheading('Are you sure you want to update your profile information?')
+                ->modalSubheading('Are you sure you want to save these changes?')
                 ->modalButton('Yes, Save'),
 
             Action::make('cancel')
@@ -161,17 +134,16 @@ class AdminProfile extends Page implements Forms\Contracts\HasForms
                 ->color('gray')
                 ->requiresConfirmation()
                 ->modalHeading('Cancel Changes')
-                ->modalSubheading('Are you sure you want to cancel? Unsaved changes will be lost.')
+                ->modalSubheading('Unsaved changes will be lost.')
                 ->modalButton('Yes, Cancel')
-                ->url(route('filament.admin.pages.admin-profile')),
+                ->url(static::getUrl()),
 
-            // ✅ FIXED: comma above!
             Action::make('delete')
                 ->label('Delete Account')
                 ->color('danger')
                 ->requiresConfirmation()
                 ->modalHeading('Delete Account Permanently')
-                ->modalSubheading('Are you sure? This action is irreversible!')
+                ->modalSubheading('This action is irreversible. Are you sure?')
                 ->modalButton('Yes, Delete')
                 ->action(fn () => $this->deleteAccount()),
         ];
