@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\AppointmentController;
-use App\Http\Controllers\Admin\WeddingServiceController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\EventController;
@@ -18,6 +17,8 @@ use App\Http\Controllers\AdminContactController;
 use App\Http\Controllers\AdminAboutController;
 use App\Http\Controllers\ContactController;
 use App\Filament\Pages\Contact;
+use App\Http\Controllers\OtherServicesController;
+use App\Http\Controllers\WeddingServiceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,14 +46,6 @@ Route::get('/admin/team/form', fn () => view('team-form'))->name('team.form');
 // Appointments
 Route::post('/appointment', [AppointmentController::class, 'store'])->name('appointment.store');
 
-// Admin Wedding Services (CRUD)
-Route::prefix('admin/services')->name('admin.services.')->group(function () {
-    Route::get('/wedding-services', [WeddingServiceController::class, 'index'])->name('wedding-services.index');
-    Route::post('/wedding-services/store', [WeddingServiceController::class, 'store'])->name('wedding-services.store');
-    Route::get('/wedding-services/{id}/edit', [WeddingServiceController::class, 'edit'])->name('wedding-services.edit');
-    Route::put('/wedding-services/{id}', [WeddingServiceController::class, 'update'])->name('wedding-services.update');
-    Route::delete('/wedding-services/{id}', [WeddingServiceController::class, 'destroy'])->name('wedding-services.destroy');
-});
 
 // Admin/Team routes
 Route::post('/admin/teams', [TeamController::class, 'store'])->name('teams.store');
@@ -92,11 +85,6 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 });
 
 
-
-
-
-
-
 // Filament Custom Page Route
 Route::get('/admin/contact', Contact::class)->name('filament.admin.pages.contact');
 
@@ -114,7 +102,7 @@ Route::get('/about', [PageController::class, 'about'])->name('about');
 
 // Admin Gallery (Events)
 // Admin Gallery (Events)
-Route::prefix('admin/past-event')->group(function () {
+Route::prefix('admin/pastevent')->group(function () {
 Route::get('/', [EventController::class, 'index' ])->name('events. index');
 Route::post('/', [EventController::class, 'store'])->name('events.store');
 Route::delete('/{id}', [EventController::class, 'destroy'])->name('events.destroy');
@@ -134,9 +122,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::delete('/galleryphoto/{gallery}', [AdminGalleryController::class, 'destroy'])->name('gallery.destroy');  
 });
 Route::delete('/admin/gallery-photo/{id}', [AdminGalleryController::class, 'destroy'])->name('admin.gallery.destroy');
-
-
-
 
 // Admin Event Routes (Past Events)
 Route::prefix('admin')->name('admin.')->group(function () {
@@ -159,8 +144,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
 });
 
 Route::delete('/admin/gallery-photo/{id}', [AdminGalleryController::class, 'destroy'])->name('admin.gallery.destroy');
-
-
 
 
 // Admin Event Routes (Past Events)
@@ -184,6 +167,28 @@ Route::prefix('admin')->name('admin.')->group(function () {
 });
 
 Route::delete('/admin/gallery-photo/{id}', [AdminGalleryController::class, 'destroy'])->name('admin.gallery.destroy');
+
+
+// Admin Other Services
+Route::prefix('admin')->group(function () {
+    Route::get('/otherservices', [OtherServiceController::class, 'index'])->name('admin.otherservices.index');
+    Route::post('/otherservices', [OtherServiceController::class, 'store'])->name('admin.otherservices.store');
+    Route::put('/otherservices/{id}', [OtherServiceController::class, 'update'])->name('admin.otherservices.update');
+    Route::delete('/otherservices/{id}', [OtherServiceController::class, 'destroy'])->name('admin.otherservices.destroy');
+});
+
+
+// Admin Wedding Services 
+Route::prefix('admin/weddingservices')->name('admin.wedding-services.')->group(function () {
+    Route::get('/', [WeddingServiceController::class, 'index'])->name('index');
+    Route::post('/store', [WeddingServiceController::class, 'store'])->name('store');
+    Route::post('/update/{id}', [WeddingServiceController::class, 'update'])->name('update');
+    Route::delete('/destroy/{id}', [WeddingServiceController::class, 'destroy'])->name('destroy');
+    Route::post('/update/{id}', [WeddingServiceController::class, 'update'])->name('admin.weddingservices.update');
+});
+
+
+
 
 /*
 |--------------------------------------------------------------------------

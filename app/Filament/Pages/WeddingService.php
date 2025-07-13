@@ -4,12 +4,12 @@ namespace App\Filament\Pages;
 
 use Filament\Pages\Page;
 
-class Services extends Page
+class WeddingService extends Page
 {
     protected static ?string $navigationIcon = 'heroicon-o-briefcase';
     protected static ?string $navigationLabel = 'Wedding Services';
     protected static ?string $navigationGroup = 'Services';
-    protected static string $view = 'filament.pages.services';
+    protected static string $view = 'filament.pages.weddingservice';
     protected static ?int $navigationSort = -3;
 
 

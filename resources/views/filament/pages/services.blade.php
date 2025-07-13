@@ -6,12 +6,9 @@
             <div class="mb-4 flex items-center justify-between">
                 <h3 class="text-lg font-semibold text-gray-900">Wedding Service</h3>
 
-                <button onclick="document.getElementById('addForm').classList.toggle('hidden')" class="custom-btn">
-                    + Add Wedding Services
-                </button>
             </div>
 
-            <!-- Add Form -->
+            <!-- Edit Form-->
             <div id="addForm" class="hidden bg-gray-100 p-4 rounded-lg">
                 <form method="POST" action="{{ route('admin.services.wedding-services.store') }}" enctype="multipart/form-data" class="space-y-4">
                     @csrf
@@ -57,8 +54,6 @@
                                     <div class="inline-flex gap-2">
                                         <a href="#" class="custom-btn">Update</a>
                                         <form action="{{ route('admin.services.wedding-services.destroy', $service['id']) }}" method="POST">
-                                            @csrf @method('DELETE')
-                                            <button class="delete-btn" type="submit">Delete</button>
                                         </form>
                                     </div>
                                 </td>
@@ -68,46 +63,9 @@
                 </table>
             </div>
         </div>
-
-        {{-- Section: Other Services --}}
-        <div class="space-y-4">
-            <h3 class="text-lg font-semibold text-gray-900">Other Services</h3>
-
-            <div class="w-full bg-white shadow rounded-lg overflow-x-auto">
-                <table class="w-full border border-gray-400 text-sm text-left">
-                    <thead class="bg-gray-100">
-                        <tr>
-                            <th class="px-4 py-2 border border-gray-300">Bil</th>
-                            <th class="px-4 py-2 border border-gray-300">Services</th>
-                            <th class="px-4 py-2 border border-gray-300">Image</th>
-                            <th class="px-4 py-2 border border-gray-300">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($otherServices as $index => $service)
-                            <tr class="hover:bg-gray-50">
-                                <td class="px-4 py-3 border border-gray-300">{{ $index + 1 }}</td>
-                                <td class="px-4 py-3 border border-gray-300">{{ $service['name'] ?? '' }}</td>
-                                <td class="px-4 py-3 border border-gray-300 text-center">
-                                    <img src="{{ $service['image'] ?? '' }}" alt="Service Image" class="w-24 h-16 object-cover mx-auto rounded" />
-                                </td>
-                                <td class="px-4 py-3 border border-gray-300 text-center">
-                                    <div class="inline-flex gap-2">
-                                        <a href="#" class="custom-btn">Update</a>
-                                        <form action="#" method="POST">
-                                            @csrf @method('DELETE')
-                                            <button class="delete-btn" type="submit">Delete</button>
-                                        </form>
-                                    </div>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
         </div>
 
-    </div>
+       
 
     <style>
         .custom-btn {
