@@ -4,29 +4,26 @@
 
 @section('content')
 
-    {{-- Hero Banner --}}
-    <section class="bg-gradient-to-l from-[#f6f5f0] to-[#f1e7e5] text-center py-12" data-aos="fade-up">
-        <h1 class="text-4xl font-jacques font-semibold text-black mb-2">Gallery</h1>
-        <p class="text-lg italic text-black/80">
-            Let's tell your story.
-        </p>
-    </section>
-
+{{-- Hero Banner --}}
+<section class="bg-gradient-to-l from-[#f6f5f0] to-[#f1e7e5] text-center py-12" data-aos="fade-up">
+    <h1 class="text-4xl font-jacques font-semibold text-black mb-2">Gallery</h1>
+    <p class="text-lg italic text-black/80">
+        Let's tell your story.
+    </p>
+</section>
 
 <!-- Gallery Grid Section -->
 <div class="bg-[#ffffff] py-12 px-6">
     <div class="max-w-7xl mx-auto justify-center">
         <div class="w-full">
-        <div class="grid grid-cols-5 gap-6 max-w-[1200px] mx-auto scale-[0.85] md:scale-[0.9] lg:scale-[0.95] px-2">
-
-                <!-- Loop through gallery images -->
-                    @foreach($images as $img)
-                        <div class="swiper-slide !w-auto">
-                            <img src="{{ $img->url }}"
-                                alt="Gallery image"
-                                class="w-full h-full object-cover rounded-xl shadow-md">
-                        </div>
-                    @endforeach
+            <div class="grid grid-cols-5 gap-6 max-w-[1200px] mx-auto scale-[0.85] md:scale-[0.9] lg:scale-[0.95] px-2">
+                @foreach($images as $img)
+                    <div class="swiper-slide !w-auto">
+                        <img src="{{ $img->url }}"
+                             alt="Gallery image"
+                             class="w-full h-full object-cover rounded-xl shadow-md">
+                    </div>
+                @endforeach
             </div>
         </div>
     </div>
@@ -41,99 +38,30 @@
 <div class="bg-[#f6f5f0] py-12 px-4 sm:px-6 lg:px-8">
     <div class="w-full">
         <div class="grid grid-cols-5 gap-6 max-w-[1200px] mx-auto scale-[0.85] md:scale-[0.9] lg:scale-[0.95] px-2">
-
-        <!-- Column 1 -->
-        <div class="col-span-1 row-span-1  rounded-xl overflow-hidden relative">
-            <div class="event-thumbnail cursor-pointer" data-title="Buffet Ramadhan 2025" data-description="Buffet Ramadhan 2025 was hosted with 500+ guests. It featured traditional dishes, live music, and a cozy festive vibe.">
-                <img src="https://placehold.co/200x200?text=buffet" class="w-full h-full object-cover">
-                    <div class="absolute bottom-2 left-2 text-white text-sm font-semibold bg-black/40 px-2 py-1 rounded">
-                    Buffet Ramadhan 2025
+            @foreach ($pastEvents as $event)
+                <div class="col-span-1 row-span-1 rounded-xl overflow-hidden relative aspect-[4/3]">
+                    <div class="event-thumbnail cursor-pointer w-full h-full"
+                         data-title="{{ $event->title }}"
+                         data-description="{{ $event->description }}">
+                        <img src="{{ $event->image }}" 
+                             class="w-full h-full object-cover rounded-xl shadow-md" 
+                             alt="{{ $event->title }}">
+                        <div class="absolute bottom-2 left-2 text-white text-sm font-semibold bg-black/40 px-2 py-1 rounded">
+                            {{ $event->title }}
+                        </div>
                     </div>
-            </div>
-        </div>
-
-        <div class="col-span-1 row-span-2 rounded-xl overflow-hidden relative">
-            <div class="event-thumbnail cursor-pointer" data-title="Wedding Reception 2025" data-description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin et nisl lobortis, tincidunt nisl non">
-                <img src="https://placehold.co/200x400?text=Wedding" class="w-full h-full object-cover">
-                    <div class="absolute bottom-2 left-2 text-white text-sm font-semibold bg-black/40 px-2 py-1 rounded">
-                    Wedding Reception 2025
-                    </div>
-            </div>
-        </div>
-
-        <div class="col-span-1 row-span-1 rounded-xl overflow-hidden relative">
-            <div class="event-thumbnail cursor-pointer" data-title="Graduation Ceremony 2025" data-description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin et nisl lobortis, tincidunt nisl non">
-                <img src="https://placehold.co/200x200?text=Graduation" class="w-full h-full object-cover">
-                <div class="absolute bottom-2 left-2 text-white text-sm font-semibold bg-black/40 px-2 py-1 rounded">
-                Graduation Ceremony 2025
                 </div>
-            </div>
-        </div>
-
-        <div class="col-span-1 row-span-1 rounded-xl overflow-hidden relative">
-            <img src="https://placehold.co/200x200?text=Birthday" class="w-full h-full object-cover">
-            <div class="absolute bottom-2 left-2 text-white text-sm font-semibold bg-black/40 px-2 py-1 rounded">
-                Birthday Celebration 2025
-            </div>
-        </div>
-
-        <div class="col-start-5 col-span-1 row-span-3 rounded-xl overflow-hidden relative">
-            <img src="https://placehold.co/400x200?text=Corporate" class="w-full h-full object-cover">
-            <div class="absolute bottom-2 left-2 text-white text-sm font-semibold bg-black/40 px-2 py-1 rounded">
-                Corporate Event 2025
-            </div>
-        </div>
-
-        <div class="row-start-2 col-span-1 row-span-1 rounded-xl overflow-hidden relative">
-            <div class="event-thumbnail cursor-pointer" data-title="Pelamin" data-description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin et nisl lobortis, tincidunt nisl non">    
-                <img src="https://placehold.co/200x200?text=Pelamin" class="w-full h-full object-cover">
-                    <div class="absolute bottom-2 left-2 text-white text-sm font-semibold bg-black/40 px-2 py-1 rounded">
-                        Pelamin
-                    </div>
-            </div>
-        </div>
-        
-        <div class="col-start-3 col-span-2 row-span-1 rounded-xl overflow-hidden relative">
-            <img src="https://placehold.co/400x200?text=Anniversary" class="w-full h-full object-cover">
-            <div class="absolute bottom-2 left-2 text-white text-sm font-semibold bg-black/40 px-2 py-1 rounded">
-                Anniversary Celebration 2025
-            </div>
-        </div>
-
-        <div class="row-start-3 col-span-2 row-span-1 rounded-xl overflow-hidden relative">
-            <div class="event-thumbnail cursor-pointer" data-title="Catering" data-description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin et nisl lobortis, tincidunt nisl non">
-                <img src="https://placehold.co/400x200?text=Catering" class="w-full h-full object-cover">
-                    <div class="absolute bottom-2 left-2 text-white text-sm font-semibold bg-black/40 px-2 py-1 rounded">
-                        Catering
-                    </div>
-            </div>
-        </div>
-
-        <div class="col-start-3 col-span-1 row-span-1 rounded-xl overflow-hidden relative">
-            <img src="https://placehold.co/200x200?text=Food" class="w-full h-full object-cover">
-            <div class="absolute bottom-2 left-2 text-white text-sm font-semibold bg-black/40 px-2 py-1 rounded">
-                Food
-            </div>
-        </div>
-
-        <div class="col-start-4 col-span-1 row-span-1 rounded-xl overflow-hidden relative">
-            <img src="https://placehold.co/200x200?text=Concert" class="w-full h-full object-cover">
-            <div class="absolute bottom-2 left-2 text-white text-sm font-semibold bg-black/40 px-2 py-1 rounded">
-                Concert Event 2025
-            </div>
-        </div>
-
+            @endforeach
         </div>
     </div>
 </div>
-
 
 <!-- Modal Structure -->
 <div id="event-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 hidden transition-opacity duration-300">
     <div class="bg-white rounded-2xl shadow-2xl p-6 w-[90%] max-w-lg relative animate-fade-in">
         <!-- Close Button -->
         <button id="close-modal" class="absolute top-3 right-3 text-gray-500 hover:text-pink-500 text-xl font-bold">&times;</button>
-        
+
         <!-- Image -->
         <img id="modal-image" src="" alt="Event Image" class="w-full h-52 sm:h-60 object-cover rounded-xl mb-4 shadow-md">
 
@@ -145,7 +73,34 @@
     </div>
 </div>
 
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const thumbnails = document.querySelectorAll('.event-thumbnail');
+        const modal = document.getElementById('event-modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalDesc = document.getElementById('modal-desc');
+        const modalImage = document.getElementById('modal-image');
+        const closeModal = document.getElementById('close-modal');
+
+        thumbnails.forEach(thumb => {
+            thumb.addEventListener('click', () => {
+                modalTitle.textContent = thumb.getAttribute('data-title');
+                modalDesc.textContent = thumb.getAttribute('data-description');
+                modalImage.src = thumb.querySelector('img').src;
+                modal.classList.remove('hidden');
+            });
+        });
+
+        closeModal.addEventListener('click', () => {
+            modal.classList.add('hidden');
+        });
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                modal.classList.add('hidden');
+            }
+        });
+    });
+</script>
 
 @endsection
- 
-
