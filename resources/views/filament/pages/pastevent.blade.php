@@ -75,6 +75,7 @@
                             class="bg-gray-300 px-4 py-2 rounded">Cancel</button>
                         <button type="button" onclick="handleAddEvent()" class="custom-btn">Submit</button>
                     </div>
+                    
                 </form>
             </div>
 
