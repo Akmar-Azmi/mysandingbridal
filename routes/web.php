@@ -36,14 +36,15 @@ Route::redirect('/admin', '/admin/admin-dashboard');
 
 // Dashboard
 Route::get('/dashboard', fn () => redirect()->route('filament.admin.admin.dashboard'))->name('dashboard');
-Route::get('/dashboard', fn () => redirect()->route('filament.admin.admin.dashboard'))->name('dashboard');
+
 
 // Admin Profile
 Route::get('/about', fn () => redirect()->route('filament.admin.admin.about'))->name('about');
-Route::get('/about', fn () => redirect()->route('filament.admin.admin.about'))->name('about');
 
+
+//Admin Contact
 Route::get('/contact', fn () => redirect()->route('filament.admin.contact'))->name('contact');
-Route::get('/contact', fn () => redirect()->route('filament.admin.contact'))->name('contact');
+
 // Admin Team Form
 Route::get('/admin/team/form', fn () => view('team-form'))->name('team.form');
 
