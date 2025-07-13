@@ -94,9 +94,10 @@ Route::get('/admin/contact', Contact::class)->name('filament.admin.pages.contact
 
 //admin side contact to user side
 Route::get('/contact', [ContactController::class, 'showUserContact'])->name('contact');
+
+
 //client (admin to user side)
 Route::get('/clients', [PublicClientController::class, 'index'])->name('clients');
-
 
 
 //Admin About (TEAM) 
