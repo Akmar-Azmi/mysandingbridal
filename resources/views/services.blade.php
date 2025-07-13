@@ -80,29 +80,16 @@
 {{-- Wedding Services --}}
 <div class="wedding-wrapper">
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-7xl mx-auto" data-aos="fade-up">
-        <div class="bg-white shadow-md rounded-lg overflow-hidden transition-transform hover:scale-105 cursor-pointer service-trigger"
-            data-title="House Packages"
-            data-description="Complete home-based wedding setup for up to 1,000 guests with VIP dome, buffet, canopy, and pelamin included."
-            data-img="https://placehold.co/600x600/png">
-            <img src="https://placehold.co/600x600/png" alt="House" class="w-full h-64 object-cover">
-            <div class="p-4 text-center font-jacques text-lg text-[#5c4430] font-semibold">House Packages</div>
-        </div>
-
-        <div class="bg-white shadow-md rounded-lg overflow-hidden transition-transform hover:scale-105 cursor-pointer service-trigger"
-            data-title="Hall Packages"
-            data-description="Elegant wedding arrangement in spacious halls with dome seating, decorative setup, buffet lines, and VIP seating."
-            data-img="https://placehold.co/600x600/png">
-            <img src="https://placehold.co/600x600/png" alt="Hall" class="w-full h-64 object-cover">
-            <div class="p-4 text-center font-jacques text-lg text-[#5c4430] font-semibold">Hall Packages</div>
-        </div>
-
-        <div class="bg-white shadow-md rounded-lg overflow-hidden transition-transform hover:scale-105 cursor-pointer service-trigger"
-            data-title="Canopy Packages"
-            data-description="Outdoor canopy wedding setup with scallops, tables, buffet stations, pelamin, and door gifts for a stylish celebration."
-            data-img="https://placehold.co/600x600/png">
-            <img src="https://placehold.co/600x600/png" alt="Canopy" class="w-full h-64 object-cover">
-            <div class="p-4 text-center font-jacques text-lg text-[#5c4430] font-semibold">Canopy Packages</div>
-        </div>
+        @foreach ($weddingServices as $service)
+            <div class="bg-white shadow-md rounded-lg overflow-hidden transition-transform hover:scale-105 cursor-pointer service-trigger"
+                data-title="{{ $service->name }}"
+                data-description="{{ $service->description ?? 'No description available' }}"
+                data-img="{{ $service->image ?? 'https://placehold.co/600x600/png' }}">
+                <img src="{{ $service->image ?? 'https://placehold.co/600x600/png' }}" alt="{{ $service->name }}"
+                    class="w-full h-64 object-cover">
+                <div class="p-4 text-center font-jacques text-lg text-[#5c4430] font-semibold">{{ $service->name }}</div>
+            </div>
+        @endforeach
     </div>
 </div>
 
@@ -142,14 +129,23 @@
 </section>
 
 {{-- Wedding Modal --}}
-<div id="service-modal" class="fixed inset-0 bg-black/60 flex items-center justify-center z-50 hidden">
-    <div class="bg-white rounded-lg p-6 max-w-md w-full relative shadow-xl">
-        <button id="service-close" class="absolute top-2 right-2 text-gray-500 hover:text-red-500 text-2xl">&times;</button>
-        <img id="service-modal-image" src="" class="w-full h-48 object-cover rounded mb-4" />
-        <h2 id="service-modal-title" class="text-xl font-bold mb-2"></h2>
-        <p id="service-modal-desc" class="text-gray-700 text-sm leading-relaxed"></p>
+<!-- Modal -->
+<!-- Modal Container -->
+<div id="service-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+    <div class="bg-white p-6 rounded-lg w-full max-w-5xl relative">
+        <button id="service-close" class="absolute top-3 right-3 text-gray-500 hover:text-black text-2xl">&times;</button>
+        <h2 id="service-modal-title" class="text-2xl font-bold text-[#5c4430] mb-4"></h2>
+        
+        <!-- 🖼️ Full-size Responsive Image -->
+        <img id="service-modal-image" src="" alt="Service Image"
+             class="w-full h-auto max-h-[80vh] object-contain rounded-md shadow">
+
+        <!-- 📝 Description -->
+        <p id="service-modal-desc" class="mt-4 text-[#5c4430] text-base"></p>
     </div>
 </div>
+
+
 
 {{-- Other Services Modal --}}
 <div id="other-service-modal" class="fixed inset-0 bg-black/60 flex items-center justify-center z-50 hidden">

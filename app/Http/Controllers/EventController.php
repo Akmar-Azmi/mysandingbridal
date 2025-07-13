@@ -43,6 +43,15 @@ class EventController extends Controller
     return redirect()->back()->with('success', 'Updated successfully!');
 }
 
+public function destroy($id)
+{
+    $event = Event::findOrFail($id);
 
+    // If using Cloudinary, and want to delete image from there, you can do it here
+
+    $event->delete();
+
+    return redirect()->back()->with('success', 'Event deleted successfully.');
+}
 
 }

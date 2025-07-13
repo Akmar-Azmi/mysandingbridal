@@ -20,6 +20,7 @@ use App\Filament\Pages\Contact;
 use App\Http\Controllers\SlotController;
 use App\Filament\Pages\Slots;
 use App\Http\Controllers\SlotApiController;
+use App\Http\Controllers\UserWedController;
 use App\Http\Controllers\OtherServiceController;
 use App\Http\Controllers\WeddingServiceController;
 
@@ -191,6 +192,9 @@ Route::post('/admin/otherservices/store', [OtherServiceController::class, 'store
 Route::put('/admin/otherservices/update/{id}', [OtherServiceController::class, 'update'])->name('admin.other-services.update');
 Route::delete('/admin/otherservices/delete/{id}', [OtherServiceController::class, 'destroy'])->name('admin.other-services.destroy');
 
+//User Wedding Services
+Route::get('/services', [UserWedController::class, 'showWeddingServices'])->name('services');
+
 
 
 
@@ -212,7 +216,7 @@ Route::post('/book', [AppointmentController::class, 'submit'])->name('appointmen
 */
 
 Route::view('/', 'home')->name('home');
-Route::view('/services', 'services')->name('services');
+//Route::view('/services', 'services')->name('services');
 Route::get('/gallery', [PageController::class, 'gallery'])->name('gallery'); // ✅ This is the correct gallery route
 Route::view('/slots', 'slots')->name('slots');
 
