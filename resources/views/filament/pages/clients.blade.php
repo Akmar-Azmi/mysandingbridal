@@ -134,7 +134,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M12 4v16m8-8H4" />
                             </svg>
-                            <span x-text="editingClient ? 'Update Client' : 'Add Client'"></span>
+                            <span x-text="editingClient ? 'Update' : 'Add Client'"></span>
                         </button>
                     </div>
                 </form>

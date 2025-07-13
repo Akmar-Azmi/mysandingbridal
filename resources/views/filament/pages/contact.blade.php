@@ -1,5 +1,42 @@
 <x-filament-panels::page>
-    
+    <style>
+        .custom-btn {
+            background-color: #F6B83D !important;
+            border: none;
+            color: white !important;
+            padding: 0.3rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .custom-btn:hover {
+            background-color: #e5a734 !important;
+        }
+
+        .delete-btn {
+            background-color: #e74c3c !important;
+            border: none;
+            color: white !important;
+            padding: 0.3rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .delete-btn:hover {
+            background-color: #c0392b !important;
+        }
+    </style>
+
    
 
 
@@ -166,7 +203,7 @@
                             Cancel
                         </a>
                         <button type="submit"
-                           class="w-full sm:w-auto px-6 py-3 border border-gray-300 text-gray-700 rounded-lg font-medium hover:bg-gray-50 text-center">
+                           class="custom-btn w-full sm:w-auto px-6 py-3 text-white font-medium text-center flex items-center justify-center hover:bg-gray-50">
                             Save Changes
                         </button>
                     </div>
