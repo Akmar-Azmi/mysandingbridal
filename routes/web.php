@@ -71,13 +71,6 @@ Route::prefix('admin')->group(function () {
     })->name('teams.index');
 });
 
-// Admin Profile
-Route::middleware(['auth'])->group(function () {
-    Route::get('/admin/profile', [AdminProfileController::class, 'edit'])->name('admin.profile');
-    Route::post('/admin/profile', [AdminProfileController::class, 'update'])->name('admin.profile.update');
-    Route::post('/admin/profile/password', [AdminProfileController::class, 'updatePassword'])->name('admin.profile.password.update');
-});
-
 // Admin Clients
 Route::get('/clients', [ClientController::class, 'index'])->name('clients');
 Route::post('/admin/clients/store', [ClientController::class, 'store'])->name('clients.store');
@@ -97,13 +90,12 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 });
 
 
-// Filament Custom Page Route
+// ✅ Public-facing Contact Page (User Side)
+Route::get('/contact', [ContactController::class, 'showUserContact'])->name('contact');
+
+// ✅ Filament Admin Custom Page (Admin Side)
 Route::get('/admin/contact', Contact::class)->name('filament.admin.pages.contact');
 
-// Admin-to-user contact view
-Route::get('/contact', [ContactController::class, 'showUserContact'])->name('contact');
-    Route::get('/contact', Contact::class)->name('filament.admin.pages.contact');
-});
 
 
 //client (admin to user side)
@@ -192,16 +184,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
 });
 
 Route::delete('/admin/gallery-photo/{id}', [AdminGalleryController::class, 'destroy'])->name('admin.gallery.destroy');
-
-
-// Admin Other Services
-Route::prefix('admin')->group(function () {
-    Route::get('/otherservices', [OtherServiceController::class, 'index'])->name('admin.otherservices.index');
-    Route::post('/otherservices', [OtherServiceController::class, 'store'])->name('admin.otherservices.store');
-    Route::put('/otherservices/{id}', [OtherServiceController::class, 'update'])->name('admin.otherservices.update');
-    Route::delete('/otherservices/{id}', [OtherServiceController::class, 'destroy'])->name('admin.otherservices.destroy');
-});
-
 
 // Admin Wedding Services 
 Route::prefix('admin/weddingservices')->name('admin.wedding-services.')->group(function () {
