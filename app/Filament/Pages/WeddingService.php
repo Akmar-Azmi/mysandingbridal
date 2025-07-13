@@ -3,6 +3,7 @@
 namespace App\Filament\Pages;
 
 use Filament\Pages\Page;
+use App\Models\WedService;
 
 class WeddingService extends Page
 {
@@ -12,23 +13,30 @@ class WeddingService extends Page
     protected static string $view = 'filament.pages.weddingservice';
     protected static ?int $navigationSort = -3;
 
-
-    // ✅ Add this method to pass $services to Blade
-   protected function getViewData(): array
+    protected function getViewData(): array
 {
+    if (WedService::count() < 3) {
+        $default = [
+            'Wedding Packages',
+            'Catering Packages',
+            'Wedding Attire'
+        ];
+
+        foreach ($default as $name) {
+            if (!WedService::where('name', $name)->exists()) {
+                WedService::create([
+                    'name' => $name,
+                    'description' => null,
+                    'image' => null,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+            }
+        }
+    }
+
     return [
-        'weddingServices' => [
-            ['id' => 1, 'name' => 'Wedding Packages', 'image' => 'https://placehold.co/200x200'],
-            ['id' => 2, 'name' => 'Catering Packages', 'image' => 'https://placehold.co/200x200'],
-            ['id' => 3, 'name' => 'Wedding Attire', 'image' => 'https://placehold.co/200x200'],
-            ['id' => 4, 'name' => 'Emcee & Entertainment', 'image' => 'https://placehold.co/200x200'],
-        ],
-        'otherServices' => [
-            ['id' => 1, 'name' => 'Ramadhan Buffet', 'image' => 'https://placehold.co/200x200'],
-            ['id' => 2, 'name' => 'Engagement', 'image' => 'https://placehold.co/200x200'],
-            ['id' => 3, 'name' => 'Aqeeqah', 'image' => 'https://placehold.co/200x200'],
-            ['id' => 4, 'name' => 'Party', 'image' => 'https://placehold.co/200x200'],
-        ],
+        'weddingServices' => WedService::orderBy('id')->get(),
     ];
 }
 
