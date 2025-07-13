@@ -47,22 +47,32 @@
         });
         document.getElementById('service-close').addEventListener('click', () => modal.classList.add('hidden'));
         modal.addEventListener('click', e => { if (e.target === modal) modal.classList.add('hidden'); });
+     });
 
-        // Other Services modal
-        const otherModal = document.getElementById('other-service-modal');
-        const otherTitle = document.getElementById('other-service-modal-title');
-        const otherDesc = document.getElementById('other-service-modal-desc');
-        const otherImage = document.getElementById('other-service-modal-image');
+    
+        document.addEventListener('DOMContentLoaded', function () {
+        const modal = document.getElementById('other-service-modal');
+        const modalTitle = document.getElementById('other-service-modal-title');
+        const modalDesc = document.getElementById('other-service-modal-desc');
+        const modalImage = document.getElementById('other-service-modal-image');
+
         document.querySelectorAll('.other-service-trigger').forEach(el => {
             el.addEventListener('click', () => {
-                otherTitle.textContent = el.dataset.title;
-                otherDesc.textContent = el.dataset.description;
-                otherImage.src = el.dataset.img;
-                otherModal.classList.remove('hidden');
+                modalTitle.textContent = el.dataset.title;
+                modalDesc.textContent = el.dataset.description;
+                modalImage.src = el.dataset.img;
+                modal.classList.remove('hidden');
+                document.body.classList.add('overflow-hidden');
             });
         });
-        document.getElementById('other-service-close').addEventListener('click', () => otherModal.classList.add('hidden'));
-        otherModal.addEventListener('click', e => { if (e.target === otherModal) otherModal.classList.add('hidden'); });
+
+        const closeModal = () => {
+            modal.classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+        };
+
+        document.getElementById('other-service-close').addEventListener('click', closeModal);
+        modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
     });
 </script>
 
@@ -102,26 +112,17 @@
         <a href="#" class="hover:text-[#b98421] transition duration-300">Other Services</a>
     </h2>
 
-    @php
-        $services = [
-            ['name' => 'Ramadhan Buffet', 'image' => 'wedding.jpg', 'desc' => 'Delicious buffet for buka puasa with variety of traditional dishes.'],
-            ['name' => 'Catering', 'image' => 'catering.jpg', 'desc' => 'Custom catering for all types of events, big or small.'],
-            ['name' => 'Decoration', 'image' => 'deco.jpg', 'desc' => 'Stylish decoration packages to match your dream theme.'],
-            ['name' => 'Other event', 'image' => 'event.jpg', 'desc' => 'From engagement to birthday parties – we’ve got it covered.'],
-        ];
-    @endphp
-
     <div class="container mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 px-6">
-        @foreach ($services as $service)
+        @foreach ($otherServices as $service)
             <div class="text-center block cursor-pointer other-service-trigger"
-                data-title="{{ $service['name'] }}"
-                data-description="{{ $service['desc'] }}"
-                data-img="{{ asset('images/' . $service['image']) }}">
-                <img src="{{ asset('images/' . $service['image']) }}"
+                data-title="{{ $service->title }}"
+                data-description="{{ $service->description }}"
+                data-img="{{ $service->image }}">
+                <img src="{{ $service->image }}"
                     class="rounded shadow mb-2 w-full h-48 object-cover"
-                    alt="{{ $service['name'] }}">
+                    alt="{{ $service->title }}">
                 <div class="text-xl font-jacques text-[#5d3c33] font-semibold hover:text-[#b98421] transition duration-300">
-                    {{ $service['name'] }}
+                    {{ $service->title }}
                 </div>
             </div>
         @endforeach
@@ -129,8 +130,6 @@
 </section>
 
 {{-- Wedding Modal --}}
-<!-- Modal -->
-<!-- Modal Container -->
 <div id="service-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
     <div class="bg-white p-6 rounded-lg w-full max-w-5xl relative">
         <button id="service-close" class="absolute top-3 right-3 text-gray-500 hover:text-black text-2xl">&times;</button>
@@ -146,7 +145,6 @@
 </div>
 
 
-
 {{-- Other Services Modal --}}
 <div id="other-service-modal" class="fixed inset-0 bg-black/60 flex items-center justify-center z-50 hidden">
     <div class="bg-white rounded-lg p-6 max-w-md w-full relative shadow-xl">
@@ -156,5 +154,4 @@
         <p id="other-service-modal-desc" class="text-gray-700 text-sm leading-relaxed"></p>
     </div>
 </div>
-
 @endsection

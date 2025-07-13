@@ -21,9 +21,9 @@ use App\Http\Controllers\SlotController;
 use App\Filament\Pages\Slots;
 use App\Http\Controllers\SlotApiController;
 use App\Http\Controllers\UserWedController;
-use App\Http\Controllers\UserWedController;
 use App\Http\Controllers\OtherServiceController;
 use App\Http\Controllers\WeddingServiceController;
+use App\Http\Controllers\UserOtherServiceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -196,8 +196,11 @@ Route::delete('/admin/otherservices/delete/{id}', [OtherServiceController::class
 //User Wedding Services
 Route::get('/services', [UserWedController::class, 'showWeddingServices'])->name('services');
 
-//User Wedding Services
-Route::get('/services', [UserWedController::class, 'showWeddingServices'])->name('services');
+// User Other Services
+Route::get('/other-services', [UserOtherServiceController::class, 'show'])->name('other-services');
+
+
+
 
 
 
