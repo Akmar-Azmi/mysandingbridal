@@ -21,7 +21,6 @@ use App\Http\Controllers\SlotController;
 use App\Filament\Pages\Slots;
 use App\Http\Controllers\SlotApiController;
 use App\Http\Controllers\UserWedController;
-use App\Http\Controllers\UserWedController;
 use App\Http\Controllers\OtherServiceController;
 use App\Http\Controllers\WeddingServiceController;
 
