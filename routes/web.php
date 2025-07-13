@@ -114,7 +114,7 @@ Route::get('/about', [PageController::class, 'about'])->name('about');
 
 // Admin Gallery (Events)
 // Admin Gallery (Events)
-Route::prefix('admin/past-event')->group(function () {
+Route::prefix('admin/pastevent')->group(function () {
 Route::get('/', [EventController::class, 'index' ])->name('events. index');
 Route::post('/', [EventController::class, 'store'])->name('events.store');
 Route::delete('/{id}', [EventController::class, 'destroy'])->name('events.destroy');
