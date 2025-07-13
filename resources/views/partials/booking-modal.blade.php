@@ -145,7 +145,7 @@
                 </button>
                 <button x-show="step === 4" @click="submit"
                     class="bg-green-600 text-white px-6 py-2 rounded-md hover:bg-green-700 transition ml-auto">
-                    Send to WhatsApp
+                    Submit Booking
                 </button>
             </div>
         </div>
