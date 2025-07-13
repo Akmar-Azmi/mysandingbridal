@@ -100,6 +100,16 @@
                 <div class="p-4 text-center font-jacques text-lg text-[#5c4430] font-semibold">{{ $service->name }}</div>
             </div>
         @endforeach
+        @foreach ($weddingServices as $service)
+            <div class="bg-white shadow-md rounded-lg overflow-hidden transition-transform hover:scale-105 cursor-pointer service-trigger"
+                data-title="{{ $service->name }}"
+                data-description="{{ $service->description ?? 'No description available' }}"
+                data-img="{{ $service->image ?? 'https://placehold.co/600x600/png' }}">
+                <img src="{{ $service->image ?? 'https://placehold.co/600x600/png' }}" alt="{{ $service->name }}"
+                    class="w-full h-64 object-cover">
+                <div class="p-4 text-center font-jacques text-lg text-[#5c4430] font-semibold">{{ $service->name }}</div>
+            </div>
+        @endforeach
     </div>
 </div>
 
@@ -143,6 +153,8 @@
         <p id="service-modal-desc" class="mt-4 text-[#5c4430] text-base"></p>
     </div>
 </div>
+
+
 
 
 {{-- Other Services Modal --}}

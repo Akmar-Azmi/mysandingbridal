@@ -201,6 +201,23 @@ Route::get('/other-services', [UserOtherServiceController::class, 'show'])->name
 
 
 
+//Other Services (Admin)
+Route::get('/admin/otherservices', [OtherServiceController::class, 'index'])->name('admin.other-services.index');
+Route::post('/admin/otherservices/store', [OtherServiceController::class, 'store'])->name('admin.other-services.store');
+Route::put('/admin/otherservices/update/{id}', [OtherServiceController::class, 'update'])->name('admin.other-services.update');
+Route::delete('/admin/otherservices/delete/{id}', [OtherServiceController::class, 'destroy'])->name('admin.other-services.destroy');
+
+//User Wedding Services
+Route::get('/services', [UserWedController::class, 'showWeddingServices'])->name('services');
+
+// User Other Services
+Route::get('/other-services', [UserOtherServiceController::class, 'show'])->name('other-services');
+
+
+
+
+//User Wedding Services
+Route::get('/services', [UserWedController::class, 'showWeddingServices'])->name('services');
 
 
 
@@ -223,6 +240,7 @@ Route::post('/book', [AppointmentController::class, 'submit'])->name('appointmen
 */
 
 Route::view('/', 'home')->name('home');
+//Route::view('/services', 'services')->name('services');
 //Route::view('/services', 'services')->name('services');
 Route::get('/gallery', [PageController::class, 'gallery'])->name('gallery'); // ✅ This is the correct gallery route
 Route::view('/slots', 'slots')->name('slots');
