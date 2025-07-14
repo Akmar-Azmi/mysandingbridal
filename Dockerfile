@@ -2,8 +2,8 @@ FROM php:8.2-fpm
 
 RUN apt-get update && apt-get install -y \
     git curl zip unzip libonig-dev libxml2-dev libpng-dev libjpeg-dev libfreetype6-dev \
-    libzip-dev libpq-dev libcurl4-openssl-dev \
-    && docker-php-ext-install pdo pdo_mysql zip mbstring exif pcntl bcmath gd
+    libzip-dev libpq-dev libcurl4-openssl-dev libicu-dev \
+    && docker-php-ext-install pdo pdo_mysql zip mbstring exif pcntl bcmath gd intl
 
 RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
     && apt-get install -y nodejs
