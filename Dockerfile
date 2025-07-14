@@ -10,8 +10,6 @@ COPY vite.config.js ./
 COPY public ./public
 RUN npm run build
 
----
-
 ### 🐘 Step 2: PHP with PostgreSQL for Laravel backend
 FROM php:8.2-fpm
 
