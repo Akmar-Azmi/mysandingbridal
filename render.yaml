@@ -11,6 +11,8 @@ services:
         - render.yaml
         - composer.json
         - package.json
+    startCommand: |
+      php artisan migrate --force && php-fpm
     envVars:
       - key: APP_ENV
         value: production
