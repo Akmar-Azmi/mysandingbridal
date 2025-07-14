@@ -47,10 +47,10 @@
             <ul class="space-y-4 text-brown-600 text-sm">
                 <!-- WhatsApp -->
                 <li class="flex items-center justify-center md:justify-start gap-2">
-                    <a href="https://wa.me/60198446545" target="_blank" aria-label="WhatsApp">
+                    <a href="https://wa.me/60175771004" target="_blank" aria-label="WhatsApp">
                         <i class="fab fa-whatsapp text-black hover:text-[#b98421] transition text-base"></i>
                     </a>
-                    <span>+60 19-8446545 (Lina)</span>
+                    <span>+60 17-5771004 (Lina)</span>
                 </li>
                 <!-- Email -->
                 <li class="flex items-center justify-center md:justify-start gap-2">
