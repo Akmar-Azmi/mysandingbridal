@@ -27,7 +27,7 @@ COPY --chown=www-data:www-data . /var/www
 COPY --from=node-builder /app/public/build /var/www/public/build
 
 RUN composer install
-COPY .env.example .env
+COPY .env
 RUN php artisan key:generate
 
 EXPOSE 8000
