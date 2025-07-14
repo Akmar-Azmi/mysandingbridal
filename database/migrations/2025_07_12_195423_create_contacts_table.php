@@ -11,17 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('contacts', function (Blueprint $table) {
-            $table->id();
-            $table->string('whatsapp_code')->nullable();
-            $table->string('whatsapp_number')->nullable();
-            $table->string('email')->nullable();
-            $table->text('address')->nullable();
-            $table->string('open_time')->nullable(); // e.g., "08:00 AM"
-            $table->string('close_time')->nullable(); // e.g., "06:00 PM"
-            $table->string('location_embed')->nullable(); // iframe embed URL
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('contacts')) {
+            Schema::create('contacts', function (Blueprint $table) {
+                $table->id();
+                $table->string('whatsapp_code')->nullable();
+                $table->string('whatsapp_number')->nullable();
+                $table->string('email')->nullable();
+                $table->text('address')->nullable();
+                $table->string('open_time')->nullable();
+                $table->string('close_time')->nullable();
+                $table->string('location_embed')->nullable();
+                $table->timestamps();
+            });
+        }
     }
 
     /**

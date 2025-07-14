@@ -11,13 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('slots', function (Blueprint $table) {
-            $table->id();
-            $table->date('date')->unique();
-            $table->integer('total_slots')->default(0);
-            $table->integer('available_slots')->default(0);
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('slots')) {
+            Schema::create('slots', function (Blueprint $table) {
+                $table->id();
+                $table->date('date');
+                $table->integer('total_slots')->default(0);
+                $table->integer('available_slots')->default(0);
+                $table->timestamps();
+            });
+        }
     }
 
     /**
