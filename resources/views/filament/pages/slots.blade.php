@@ -81,12 +81,15 @@
             <div @click.away="showModal = false"
                  class="bg-white border border-gray-300 rounded-2xl shadow-lg p-6 w-full max-w-md mx-4 relative transition-all duration-300 ease-out">
 
-                <button @click="showModal = false"
-                        class="absolute top-3 right-4 text-gray-400 hover:text-red-500 text-2xl leading-none font-bold">&times;</button>
-
                 <h3 class="text-xl font-bold text-gray-800 mb-4">
                     Manage Slots for <span class="text-yellow-600" x-text="selectedDate"></span>
                 </h3>
+
+                <button @click="showModal = false"
+                        class="absolute top-3 right-4 text-gray-400 hover:text-red-500 text-2xl leading-none font-bold">&times;
+                </button>
+
+                
 
                 <form @submit.prevent="saveSlot">
                     <div class="space-y-4">
@@ -106,8 +109,8 @@
                                     class="px-4 py-2 bg-yellow-500 hover:bg-yellow-600 text-black font-semibold rounded-lg border border-black shadow transition">
                                 Cancel
                             </button>
-                            <button type="submit"
-                                    class="px-4 py-2 bg-yellow-500 hover:bg-yellow-600 text-black font-semibold rounded-lg border border-black shadow transition">
+                            <button type="submit" style="background-color: #facc15; color: black;"
+                                    class="px-4 py-2 font-semibold rounded-lg border border-black shadow transition">
                                 Save
                             </button>
                         </div>
