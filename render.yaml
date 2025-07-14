@@ -1,8 +1,0 @@
-services:
-  - type: web
-    name: mysandingbridal
-    plan: free
-    envVars:
-      - fromGroup: mysanding-env
-    dockerfilePath: Dockerfile
-    autoDeploy: true
