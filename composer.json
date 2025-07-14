@@ -10,7 +10,7 @@
         "blade-ui-kit/blade-heroicons": "^2.6",
         "cloudinary-labs/cloudinary-laravel": "^3.0",
         "filament/filament": "^3.3",
-        "laravel/framework": "*",
+        "laravel/framework": "^10.0",
         "laravel/tinker": "^2.10.1",
         "league/flysystem-aws-s3-v3": "3.0",
         "saade/filament-fullcalendar": "^3.2"
@@ -51,9 +51,7 @@
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
         ],
         "post-create-project-cmd": [
-            "@php artisan key:generate --ansi",
-            "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\"",
-            "@php artisan migrate --graceful --ansi"
+            "@php artisan key:generate --ansi"
         ],
         "dev": [
             "Composer\\Config::disableProcessTimeout",
@@ -73,6 +71,7 @@
         "optimize-autoloader": true,
         "preferred-install": "dist",
         "sort-packages": true,
+        "process-timeout": 900,
         "allow-plugins": {
             "pestphp/pest-plugin": true,
             "php-http/discovery": true

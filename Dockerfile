@@ -38,7 +38,8 @@ COPY --from=node-builder /app/public/build /var/www/public/build
 RUN chown -R www-data:www-data /var/www && chmod -R 755 /var/www
 
 # Install Laravel deps
-RUN composer install --no-dev --optimize-autoloader
+RUN composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist --verbose
+
 
 # Generate Laravel key (will fail if no .env, so skip if handled by Render)
 RUN php artisan config:clear
