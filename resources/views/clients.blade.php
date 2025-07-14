@@ -12,14 +12,14 @@
     </section>
 
     <!-- Testimonials Section -->
-    <div class="bg-[#ffffff] py-16 px-6 text-center">
+    <div class="bg-[#ffffff] py-16 px-6 text-center" data-aos="fade-right">
         <h2 class="text-3xl font-jacques font-normal text-gray-800 mb-12">What client says...</h2>
 
         @foreach ($clients as $index => $client)
             <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-start mb-16 text-left">
                @if ((int) $index % 2 === 0)
                     {{-- Text then Image --}}
-                    <div class="space-y-4">
+                    <div class="space-y-4" data-aos="fade-left">
                         <p class="text-lg italic text-black/80">
                             <span class="text-xl text-gray-500 font-serif">❝</span>
                             {{ $client['feedback'] }}
@@ -31,15 +31,15 @@
                     </div>
                     <div>
                         <img src="{{ $client['image'] }}" alt="{{ $client['name'] }}"
-                            class="rounded-xl shadow-lg w-full object-cover">
+                            class="rounded-xl shadow-lg w-full object-cover" data-aos="fade-bottom">
                     </div>
                 @else
                     {{-- Image then Text --}}
                     <div>
                         <img src="{{ $client['image'] }}" alt="{{ $client['name'] }}"
-                            class="rounded-xl shadow-lg w-full object-cover">
+                            class="rounded-xl shadow-lg w-full object-cover" data-aos="fade-up">
                     </div>
-                    <div class="space-y-4">
+                    <div class="space-y-4" data-aos="fade-right">
                         <p class="text-lg italic text-black/80">
                             <span class="text-xl text-gray-500 font-serif">❝</span>
                             {{ $client['feedback'] }}

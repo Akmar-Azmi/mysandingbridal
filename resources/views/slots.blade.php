@@ -84,10 +84,10 @@
         <!-- Page Header & Description -->
         <div class="md:flex md:items-start md:justify-between mb-8 text-left">
             <div class="md:w-1/2">
-                <h2 class="text-3xl font-jacques font-normal text-black mb-2">
+                <h2 class="text-3xl font-jacques font-normal text-black mb-2" data-aos="fade-right">
                     Check Wedding Date Availability
                 </h2>
-                <p class="text-lg italic text-black/80">
+                <p class="text-lg italic text-black/80" data-aos="fade-right">
                     Before booking an appointment, check if your desired wedding date is still available.
                 </p>
             </div>

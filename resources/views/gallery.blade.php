@@ -18,7 +18,7 @@
         <div class="w-full">
             <div class="grid grid-cols-5 gap-6 max-w-[1200px] mx-auto scale-[0.85] md:scale-[0.9] lg:scale-[0.95] px-2">
                 @foreach($images as $img)
-                    <div class="swiper-slide !w-auto">
+                    <div class="swiper-slide !w-auto" data-aos="fade-right">
                         <img src="{{ $img->url }}"
                              alt="Gallery image"
                              class="w-full h-full object-cover rounded-xl shadow-md">
@@ -35,7 +35,7 @@
 </div>
 
 <!-- Past Events Grid -->
-<div class="bg-[#f6f5f0] py-12 px-4 sm:px-6 lg:px-8">
+<div class="bg-[#f6f5f0] py-12 px-4 sm:px-6 lg:px-8" data-aos="fade-up">
     <div class="w-full">
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 max-w-[1200px] mx-auto scale-[0.80] md:scale-[0.1] lg:scale-[1.00] px-2">
             @foreach ($pastEvents as $event)
