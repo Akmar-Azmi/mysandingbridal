@@ -37,7 +37,7 @@
 <!-- Past Events Grid -->
 <div class="bg-[#f6f5f0] py-12 px-4 sm:px-6 lg:px-8">
     <div class="w-full">
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 max-w-[1200px] mx-auto scale-[1.05] md:scale-[1.1] lg:scale-[1.15] px-2">
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 max-w-[1200px] mx-auto scale-[0.80] md:scale-[0.1] lg:scale-[1.00] px-2">
             @foreach ($pastEvents as $event)
                 <div class="col-span-1 row-span-1 rounded-xl overflow-hidden relative aspect-[4/3.5]">
                     <div class="event-thumbnail cursor-pointer w-full h-full"
