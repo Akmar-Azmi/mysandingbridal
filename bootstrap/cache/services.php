@@ -36,14 +36,19 @@
     32 => 'Filament\\Tables\\TablesServiceProvider',
     33 => 'Filament\\Widgets\\WidgetsServiceProvider',
     34 => 'Kirschbaum\\PowerJoins\\PowerJoinsServiceProvider',
-    35 => 'Laravel\\Tinker\\TinkerServiceProvider',
-    36 => 'Livewire\\LivewireServiceProvider',
-    37 => 'Carbon\\Laravel\\ServiceProvider',
-    38 => 'Termwind\\Laravel\\TermwindServiceProvider',
-    39 => 'RyanChandler\\BladeCaptureDirective\\BladeCaptureDirectiveServiceProvider',
-    40 => 'Saade\\FilamentFullCalendar\\FilamentFullCalendarServiceProvider',
-    41 => 'App\\Providers\\AppServiceProvider',
-    42 => 'App\\Providers\\Filament\\AdminPanelProvider',
+    35 => 'Laravel\\Breeze\\BreezeServiceProvider',
+    36 => 'Laravel\\Pail\\PailServiceProvider',
+    37 => 'Laravel\\Sail\\SailServiceProvider',
+    38 => 'Laravel\\Tinker\\TinkerServiceProvider',
+    39 => 'Livewire\\LivewireServiceProvider',
+    40 => 'Carbon\\Laravel\\ServiceProvider',
+    41 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
+    42 => 'Termwind\\Laravel\\TermwindServiceProvider',
+    43 => 'Pest\\Laravel\\PestServiceProvider',
+    44 => 'RyanChandler\\BladeCaptureDirective\\BladeCaptureDirectiveServiceProvider',
+    45 => 'Saade\\FilamentFullCalendar\\FilamentFullCalendarServiceProvider',
+    46 => 'App\\Providers\\AppServiceProvider',
+    47 => 'App\\Providers\\Filament\\AdminPanelProvider',
   ),
   'eager' => 
   array (
@@ -69,13 +74,16 @@
     19 => 'Filament\\Tables\\TablesServiceProvider',
     20 => 'Filament\\Widgets\\WidgetsServiceProvider',
     21 => 'Kirschbaum\\PowerJoins\\PowerJoinsServiceProvider',
-    22 => 'Livewire\\LivewireServiceProvider',
-    23 => 'Carbon\\Laravel\\ServiceProvider',
-    24 => 'Termwind\\Laravel\\TermwindServiceProvider',
-    25 => 'RyanChandler\\BladeCaptureDirective\\BladeCaptureDirectiveServiceProvider',
-    26 => 'Saade\\FilamentFullCalendar\\FilamentFullCalendarServiceProvider',
-    27 => 'App\\Providers\\AppServiceProvider',
-    28 => 'App\\Providers\\Filament\\AdminPanelProvider',
+    22 => 'Laravel\\Pail\\PailServiceProvider',
+    23 => 'Livewire\\LivewireServiceProvider',
+    24 => 'Carbon\\Laravel\\ServiceProvider',
+    25 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
+    26 => 'Termwind\\Laravel\\TermwindServiceProvider',
+    27 => 'Pest\\Laravel\\PestServiceProvider',
+    28 => 'RyanChandler\\BladeCaptureDirective\\BladeCaptureDirectiveServiceProvider',
+    29 => 'Saade\\FilamentFullCalendar\\FilamentFullCalendarServiceProvider',
+    30 => 'App\\Providers\\AppServiceProvider',
+    31 => 'App\\Providers\\Filament\\AdminPanelProvider',
   ),
   'deferred' => 
   array (
@@ -229,6 +237,9 @@
     'validator' => 'Illuminate\\Validation\\ValidationServiceProvider',
     'validation.presence' => 'Illuminate\\Validation\\ValidationServiceProvider',
     'Illuminate\\Contracts\\Validation\\UncompromisedVerifier' => 'Illuminate\\Validation\\ValidationServiceProvider',
+    'Laravel\\Breeze\\Console\\InstallCommand' => 'Laravel\\Breeze\\BreezeServiceProvider',
+    'Laravel\\Sail\\Console\\InstallCommand' => 'Laravel\\Sail\\SailServiceProvider',
+    'Laravel\\Sail\\Console\\PublishCommand' => 'Laravel\\Sail\\SailServiceProvider',
     'command.tinker' => 'Laravel\\Tinker\\TinkerServiceProvider',
   ),
   'when' => 
@@ -270,6 +281,12 @@
     array (
     ),
     'Illuminate\\Validation\\ValidationServiceProvider' => 
+    array (
+    ),
+    'Laravel\\Breeze\\BreezeServiceProvider' => 
+    array (
+    ),
+    'Laravel\\Sail\\SailServiceProvider' => 
     array (
     ),
     'Laravel\\Tinker\\TinkerServiceProvider' => 
