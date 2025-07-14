@@ -20,9 +20,9 @@ class EventController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-        'title' => 'required|string',
-        'description' => 'required|string',
-        'image' => 'required|url'
+            'title' => 'required|string',
+            'description' => 'required|string',
+            'image' => 'required|url'
         ]);
 
         Event::create($validated); // stored into Supabase if configured
@@ -30,28 +30,33 @@ class EventController extends Controller
         return redirect()->back()->with('success', 'Event added!');
     }
 
-   public function update(Request $request, $id)
-{
-    $event = Event::findOrFail($id);
+    public function update(Request $request, $id)
+    {
+        $event = Event::findOrFail($id);
 
-    $event->title = $request->title;
-    $event->description = $request->description;
-    $event->image = $request->image; // already a Cloudinary URL
+        $validated = $request->validate([
+            'title' => 'required|string',
+            'description' => 'required|string',
+            'image' => 'nullable|url',
+        ]);
 
-    $event->save();
+        // fallback image logic
+        $validated['image'] = $request->image ?? $event->image;
 
-    return redirect()->back()->with('success', 'Updated successfully!');
-}
+        $event->update($validated);
 
-public function destroy($id)
-{
-    $event = Event::findOrFail($id);
+        return redirect()->back()->with('success', 'Updated successfully!');
+    }
 
-    // If using Cloudinary, and want to delete image from there, you can do it here
 
-    $event->delete();
+    public function destroy($id)
+    {
+        $event = Event::findOrFail($id);
 
-    return redirect()->back()->with('success', 'Event deleted successfully.');
-}
 
+
+        $event->delete();
+
+        return redirect()->back()->with('success', 'Event deleted successfully.');
+    }
 }
