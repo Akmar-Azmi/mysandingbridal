@@ -1,14 +1,19 @@
 #!/usr/bin/env bash
 set -o errexit
 
-# Install PHP dependencies
+# --- INSTALL PHP & COMPOSER IN NODE ENV ---
+curl -sSL https://getcomposer.org/installer | php
+mv composer.phar /usr/local/bin/composer
+
+# --- INSTALL PHP DEPENDENCIES ---
 composer install --no-dev --optimize-autoloader
 
-# Install Node dependencies & build frontend with Vite
+# --- INSTALL NODE + VITE ---
 npm install
 npm run build
 
-# Laravel setup
+# --- LARAVEL CACHE SETUP ---
 php artisan config:cache
 php artisan route:cache
 php artisan view:cache
+php artisan storage:link || true
