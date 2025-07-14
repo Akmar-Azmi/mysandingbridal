@@ -4,6 +4,7 @@ namespace App\Filament\Pages;
 
 use Filament\Pages\Page;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class Slots extends Page
 {
@@ -25,8 +26,23 @@ class Slots extends Page
 
     public function getViewData(): array
     {
+        $year = $this->date->year;
+        $month = $this->date->month;
+
+        $slotData = DB::table('slots')
+            ->whereYear('date', $year)
+            ->whereMonth('date', $month)
+            ->get()
+            ->mapWithKeys(function ($slot) {
+                return [
+                    $slot->date => $slot->available_slots
+                ];
+            })
+            ->toArray();
+
         return [
             'date' => $this->date,
+            'slotData' => $slotData, // ✅ send to Blade
         ];
     }
 }

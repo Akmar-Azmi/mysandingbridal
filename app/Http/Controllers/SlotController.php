@@ -31,7 +31,7 @@ class SlotController extends Controller
 
         return view('filament.pages.slots', [
             'date' => $date,
-            'slots' => $slots,
+            'slotData' => $slots,
         ]);
     }
 
