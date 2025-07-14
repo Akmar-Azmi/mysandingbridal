@@ -19,7 +19,8 @@ WORKDIR /var/www
 COPY . .
 
 # Install Laravel and Vite dependencies
-RUN composer install --no-dev --optimize-autoloader
+RUN composer install --no-dev --optimize-autoloader || { echo "Composer failed"; cat storage/logs/laravel.log || true; exit 1; }
+
 RUN npm install && npm run build
 
 # Permissions
