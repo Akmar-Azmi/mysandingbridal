@@ -131,13 +131,15 @@
 
 {{-- Wedding Modal --}}
 <div id="service-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
-    <div class="bg-white p-6 rounded-lg w-full max-w-5xl relative">
+    <div class="bg-white p-6 rounded-lg w-full max-w-5xl relative max-h-[90vh] overflow-y-auto">
         <button id="service-close" class="absolute top-3 right-3 text-gray-500 hover:text-black text-2xl">&times;</button>
         <h2 id="service-modal-title" class="text-2xl font-bold text-[#5c4430] mb-4"></h2>
         
-        <!-- 🖼️ Full-size Responsive Image -->
-        <img id="service-modal-image" src="" alt="Service Image"
-             class="w-full h-auto max-h-[80vh] object-contain rounded-md shadow">
+        <!-- 🖼️ Scrollable Image Container -->
+        <div class="max-h-200 overflow-y-auto rounded-md shadow mb-4">
+            <img id="service-modal-image" src="" alt="Service Image"
+                 class="w-full h-auto object-contain rounded-md">
+        </div>
 
         <!-- 📝 Description -->
         <p id="service-modal-desc" class="mt-4 text-[#5c4430] text-base"></p>
@@ -145,15 +147,19 @@
 </div>
 
 
-
-
 {{-- Other Services Modal --}}
 <div id="other-service-modal" class="fixed inset-0 bg-black/60 flex items-center justify-center z-50 hidden">
     <div class="bg-white rounded-lg p-6 max-w-md w-full relative shadow-xl">
         <button id="other-service-close" class="absolute top-2 right-2 text-gray-500 hover:text-red-500 text-2xl">&times;</button>
-        <img id="other-service-modal-image" src="" class="w-full h-48 object-cover rounded mb-4" />
+        
+        <!-- Scrollable Image Container -->
+        <div class="w-full h-80 overflow-y-auto mb-4 rounded">
+            <img id="other-service-modal-image" src="" class="w-full object-cover rounded" />
+        </div>
+        
         <h2 id="other-service-modal-title" class="text-xl font-bold mb-2"></h2>
         <p id="other-service-modal-desc" class="text-gray-700 text-sm leading-relaxed"></p>
     </div>
 </div>
 @endsection
+

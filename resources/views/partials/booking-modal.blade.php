@@ -6,7 +6,7 @@
 
         <!-- Header -->
         <div class="bg-gradient-to-r from-[#f1e7e5] to-[#ebd2b0] text-[#4d3a4c] py-5 px-6 text-center">
-            <h2 class="text-xl font-bold tracking-wide">Book Your Wedding Appointment</h2>
+            <h2 class="text-xl font-bold tracking-wide">Book Your Appointment</h2>
             <div class="mt-4 flex justify-center gap-3">
                 <template x-for="i in 4">
                     <div :class="{
@@ -72,7 +72,7 @@
                 <div class="mb-2">
                     <label class="text-sm text-[#4d3a4c] font-medium block mb-1">Estimated Budget: RM <span
                             x-text="form.budget"></span></label>
-                    <input type="range" min="3000" max="200000" step="100" x-model="form.budget"
+                    <input type="range" min="1000" max="800000" step="1000" x-model="form.budget"
                         class="w-full accent-[#80725d] rounded-full overflow-hidden appearance-none h-2 bg-[#e9e9ec]">
                 </div>
             </div>
@@ -235,7 +235,7 @@
                     phone: '',
                     email: '',
                     eventType: '',
-                    budget: 2000,
+                    budget: 1000,
                     date: '',
                     time: '',
                     notes: '',
@@ -317,7 +317,7 @@
                                     phone: '',
                                     email: '',
                                     eventType: '',
-                                    budget: 2000,
+                                    budget:1000,
                                     date: '',
                                     time: '',
                                     notes: ''
