@@ -4,6 +4,13 @@ services:
     env: docker
     plan: free
     dockerfilePath: ./Dockerfile
+    buildFilter:
+      paths:
+        - Dockerfile
+        - .dockerignore
+        - render.yaml
+        - composer.json
+        - package.json
     envVars:
       - key: APP_ENV
         value: production
@@ -28,6 +35,6 @@ services:
       - key: SUPABASE_URL
         value: https://ubamipcdottoorjzmnfd.supabase.co
       - key: SUPABASE_API_KEY
-        value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InViYW1pcGNkb3R0b29yanptbmZkIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc0OTIwNDE2MywiZXhwIjoyMDY0NzgwMTYzfQ.Xphbw8KvCe2Db94PYpzLPj_fm_ruoMYKN6zGExxmVTw
+        value: your_supabase_key
       - key: VITE_APP_URL
         value: https://mysandingbridal.onrender.com
