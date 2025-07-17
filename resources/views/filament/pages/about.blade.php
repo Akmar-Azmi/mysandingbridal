@@ -84,7 +84,7 @@
         <!-- Success Toast -->
         @if (session('success'))
             <div x-data="{ show: true }" x-show="show" x-init="setTimeout(() => show = false, 2000)" x-transition
-                class="fixed top-4 right-4 z-50 bg-green-500 text-white px-4 py-2 rounded shadow-lg">
+                class="fixed top-4 right-4 z-50 bg-green-500 text-black px-4 py-2 rounded shadow-lg">
                 {{ session('success') }}
             </div>
         @endif
